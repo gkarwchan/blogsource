@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Advanced HTTP" />
+    <meta property="og:title" content="Advanced HTTP" />
+    <meta property="twitter:title" content="Advanced HTTP" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Advanced HTTP | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2017_09_26_advanced_https/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                    </div>
+                    <h1>Advanced HTTP</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Ghassan&#39;s page
+                             
+                            on 
+                            Tuesday, September 26, 2017
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>Adding an SSL Certificate and enabling HTTPS on your web site is not the end of the road for securing your website, and securing the communication to your website.<br>
+It is just the start, and you need to do more steps related to HTTPS to guarantee your site safety, and your visitor safety.<br>
+In this post I am going to describe:</p>
+<ol>
+<li>TLS and its algorithms in more depth.</li>
+<li>Insecure protocols, and algorithm.</li>
+<li>Best algorithm combination.</li>
+<li>Redirect from HTTP using HSTS.</li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+<p>If you want to learn more about HTTPS and its basic concepts, I wrote two posts about:</p>
+<ol>
+<li>
+<p><a href="/post/2016_03_11_secure_your_application_with_ssl/">Creating an SSL Certificate</a>.</p>
+</li>
+<li>
+<p><a href="/post/2016_04_18_making_sense_of_ssl_rsa_x509_and_csr/">SSL/TLS terminologies</a> that cover lots of basic knowledge on that subject.<br>
+I recommend reading them to know the basic and how to implement HTTPS on your web site.<br>
+After enabling HTTPS on your web site, you should do the following:</p>
+</li>
+<li>
+<p>disable insecure protocol SSL 3.0.</p>
+</li>
+<li>
+<p>either disable TLS 1.0 or disable all insecure algorithms.</p>
+</li>
+<li>
+<p>disable ciphers that are insecure.</p>
+</li>
+<li>
+<p>redirect from http to https using HSTS.</p>
+</li>
+</ol>
+<h2 id="tls-releases">TLS Releases</h2>
+<p>TLS protocol keeps developing and enhancing its security. The newer versions are better and more secure and more difficult to break than the older ones, and older versions become less secure or even insecure.<br>
+Old versions like TLS 1.0 and all SSL are considered insecure nowadays.<br>
+This is a table of TLS releases and its status.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Protocol Version</th>
+          <th>Security Status</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SSL 2.0</td>
+          <td>Insecure</td>
+      </tr>
+      <tr>
+          <td>SSL 3.0</td>
+          <td>Insecure</td>
+      </tr>
+      <tr>
+          <td>TLS 1.0</td>
+          <td>Depends on configuration</td>
+      </tr>
+      <tr>
+          <td>TLS 1.1</td>
+          <td>Depends on algorithm</td>
+      </tr>
+      <tr>
+          <td>TLS 1.2</td>
+          <td>Depends on algorithm</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="what-tls-version-my-website-support">What TLS version my website support?</h3>
+<p>How do you know what TLS protocols your website is supporting?<br>
+If you are developing on Windows/IIS, then (as my knowledge goes back only to Windows Server 2008), as long as you have Windows Server 2008 Service Pack 1, and higer, then you are having up-to-date TLS 1.2.<br>
+If you are developing NodeJs, or Go language website, on a Linux operating system, then NodeJs, and Go are using OpenSSL software, and if you have if you are updating your server regularly (as you should), then you have TLS 1.2.</p>
+<h3 id="which-protocol-version-is-being-used">Which protocol version is being used?</h3>
+<p>When a browser visit your website, there is a process called TLS handshake, where the web server and the browser will find what is the highest TLS protocols that both support, and they will use it.</p>
+<h3 id="disable-ssl-protocols-2--3">Disable SSL protocols 2 &amp; 3</h3>
+<p>As we mentioned SSL 2.0 and 3.0 are insecure, and we should disable them permenantly.<br>
+SSL insecurity was very serious, that triggered Web servers, and browsers to disable it permenantly.<br>
+Here is a list of when major web browsers disabled SSL 3.0:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Web Browser</th>
+          <th>Version</th>
+          <th>Release Date</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Chrome</td>
+          <td>40</td>
+          <td>January 2015</td>
+      </tr>
+      <tr>
+          <td>Firefox</td>
+          <td>35</td>
+          <td>January 2015</td>
+      </tr>
+      <tr>
+          <td>Explorer</td>
+          <td>11 (patches)</td>
+          <td>January 2015</td>
+      </tr>
+  </tbody>
+</table>
+<p>For the web server side, I am covering NodeJS or Go language on Linux server, and IIS solutions on Windows Servers. If your solution is not one of these, refer to <a href="http://disablessl3.com/">this website</a> to find a solution.</p>
+<h4 id="nodejs--go-on-linux">NodeJS &amp; Go on Linux</h4>
+<p>if you are doing NodeJs or Go language website, then you are using <code>OpenSSL</code>.<br>
+Even your Linux regular update should take care of it, but double check that you have the proper OpenSSL version:</p>
+<ul>
+<li>OpenSSL 1.0.1 users should upgrade to 1.0.1j.</li>
+<li>OpenSSL 1.0.0 users should upgrade to 1.0.0o.</li>
+<li>OpenSSL 0.9.8 users should upgrade to 0.9.8zc.</li>
+<li>OpenSSL 1.0.2 users are laughing.</li>
+</ul>
+<p>But still you can have this line of code to make sure your web server won’t fallback to SSL if the browser (a melicious user) requested that.</p>
+<h4 id="iis-and-windows-server">IIS and Windows Server</h4>
+<p>Edit the Windows Registry as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ff79c6">[</span>HKEY_LOCAL_MACHINE<span style="color:#f1fa8c">\S</span>YSTEM<span style="color:#f1fa8c">\C</span>urrentControlSet<span style="color:#f1fa8c">\C</span>ontrol<span style="color:#f1fa8c">\S</span>ecurityProviders<span style="color:#f1fa8c">\S</span>CHANNEL<span style="color:#f1fa8c">\P</span>rotocols<span style="color:#f1fa8c">\S</span>SL 3.0<span style="color:#f1fa8c">\S</span>erver<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;Enabled&#34;</span><span style="color:#ff79c6">=</span>dword:00000000
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">[</span>HKEY_LOCAL_MACHINE<span style="color:#f1fa8c">\S</span>YSTEM<span style="color:#f1fa8c">\C</span>urrentControlSet<span style="color:#f1fa8c">\C</span>ontrol<span style="color:#f1fa8c">\S</span>ecurityProviders<span style="color:#f1fa8c">\S</span>CHANNEL<span style="color:#f1fa8c">\P</span>rotocols<span style="color:#f1fa8c">\S</span>SL 2.0<span style="color:#f1fa8c">\S</span>erver<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;Enabled&#34;</span><span style="color:#ff79c6">=</span>dword:00000000
+</span></span></code></pre></div><h3 id="what-about-tls-10">What about TLS 1.0?</h3>
+<p>Some consider TLS 1.0 is insecure, and it is better to disable it, but there is one problem with disabling TLS 1.0, which is IE before 11, and I mean IE 8 to 10 have TLS 1.1 disabled by default, and only TLS 1.0 is enabled by default.<br>
+If you don’t care to support IE before 11, then it is better to disable it on your website, and in case you have to support old IE, then you have no choice but to disable all vulnerable ciphers in TLS 1.0.</p>
+<h3 id="how-bad-tls-10">How bad TLS 1.0?</h3>
+<p>I am not a security expert, but according from my modest knowledge, the biggest weakness of TLS 1.0 is that it include a means by which can downgrade to SSL 3.0, and that TLS 1.0 cryptographic initialization being predictable in some implementation, which means if someone with millions of dollars will dedicate to crack your HTTPS to force it to downgrade.</p>
+<h3 id="tls-algorithms">TLS algorithms</h3>
+<p>TLS protocols define suite of algorithms to encrypt the data, and these algorithms can be categorized in three categories:</p>
+<ol>
+<li>Key exchange or key agreement.</li>
+<li>Ciphers.</li>
+<li>Data integrity.</li>
+</ol>
+<h3 id="key-exchange">Key exchange</h3>
+<p>Key exchange are the inialize the handshake to decide on the next phase of cipher that will be used.<br>
+Some of the secure algorithms:</p>
+<ul>
+<li>RSA</li>
+<li>DHE-RSA</li>
+<li>ECDHE-RSA</li>
+<li>ECDHE-ECDSA</li>
+<li>Kerberos.</li>
+</ul>
+<p>And some of insecure algorithms:</p>
+<ul>
+<li>DH-ANON</li>
+<li>ECDH-ANON.</li>
+</ul>
+<h3 id="chiphers">Chiphers</h3>
+<p>Ciphers are the main encryption algorithms.<br>
+Some of the secure algorithms:</p>
+<ul>
+<li>AES</li>
+<li>Camellia</li>
+<li>SEED.</li>
+</ul>
+<p>And some of insecure algorithms:</p>
+<ul>
+<li>IDES</li>
+<li>3DES</li>
+<li>DES</li>
+<li>RC4.</li>
+</ul>
+<h3 id="data-integrity">Data Integrity</h3>
+<p>Secure algorithms: SHA256/384.<br>
+Insecure algorithms: MD5, SHA1.</p>
+<h3 id="disable-insecure-algorithms-in-nodejs">Disable insecure algorithms in NodeJs</h3>
+<p>To disable insecure algorithms in nodejs, we specify the list when we initialize the https server.
+We pass the options <code>ciphers</code> as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> server <span style="color:#ff79c6">=</span> https.createServer({
+</span></span><span style="display:flex;"><span>    key<span style="color:#ff79c6">:</span> privateKey,
+</span></span><span style="display:flex;"><span>    cert<span style="color:#ff79c6">:</span> certificate,
+</span></span><span style="display:flex;"><span>    ca<span style="color:#ff79c6">:</span> certificateAuthority,
+</span></span><span style="display:flex;"><span>    ciphers<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;ECDHE-RSA-AES128-SHA256:!RC4:!HIGH!MD5&#34;</span>,
+</span></span><span style="display:flex;"><span>    app);
+</span></span></code></pre></div><p>The ciphers is a string of sub-strings separated by colon <strong><code>:</code></strong> which enable or disable an algorithm.<br>
+If the sub-string start with <strong><code>!</code></strong>, then it means disable.<br>
+So, in the previous example I am disabling MD5, RC4, and HIGH.
+A common practice is to specify the three types of algorithms (key exchange, cipher and data integrity) in one string seperated by <strong><code>-</code></strong>.</p>
+<p>So, in the previous example: “ECDHE-RSA-AES128-SHA256” means use ECDHE-RSA for key exchange, and AES128 for cipher, and SHA256 for data integrity.</p>
+<p>This is a list that will let you pass <a href="https://www.ssllabs.com/ssltest/">SSL labs</a> test with A+:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>[ <span style="color:#f1fa8c">&#39;ECDHE-RSA-AES128-GCM-SHA256&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;ECDHE-ECDSA-AES128-GCM-SHA256&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;ECDHE-RSA-AES256-GCM-SHA384&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;ECDHE-ECDSA-AES256-GCM-SHA384&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;DHE-RSA-AES128-GCM-SHA256&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;ECDHE-RSA-AES128-SHA256&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;DHE-RSA-AES128-SHA256&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;ECDHE-RSA-AES256-SHA384&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;DHE-RSA-AES256-SHA384&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;ECDHE-RSA-AES256-SHA256&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;DHE-RSA-AES256-SHA256&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;HIGH&#39;</span>, <span style="color:#f1fa8c">&#39;!aNULL&#39;</span>, <span style="color:#f1fa8c">&#39;!eNULL&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;!EXPORT&#39;</span>, <span style="color:#f1fa8c">&#39;!DES&#39;</span>, <span style="color:#f1fa8c">&#39;!RC4&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#39;!MD5&#39;</span>, <span style="color:#f1fa8c">&#39;!PSK&#39;</span>, <span style="color:#f1fa8c">&#39;!SRP&#39;</span>, <span style="color:#f1fa8c">&#39;!CAMELLIA&#39;</span>, <span style="color:#f1fa8c">&#39;!3DES&#39;</span>
+</span></span><span style="display:flex;"><span>  ].join(<span style="color:#f1fa8c">&#39;:&#39;</span>)
+</span></span></code></pre></div><h2 id="redirect-from-http-to-https--hsts">Redirect from HTTP to HTTPS &amp; HSTS</h2>
+<p>You need to provide a redirection from your website from http to https, so when the user visit your website without specifying the https, will be directed to https.<br>
+The more traditional way, is to build an HTTP redirect (301), either in your application, or through the web server.<br>
+All web servers: IIS, Apache, NGINX.. have a way to do that indirection.</p>
+<h3 id="hsts">HSTS</h3>
+<p>There is a new way emerging, and it is more secure than the 301-redirect: HSTS (HTTP Strict Transport Security).<br>
+The only complication with it that it requires both Browsers, and web servers to support it.<br>
+As most modern browsers support it, so you can count on it.<br>
+When an agent visit an http address, it respond with a result with a header field named <strong><code>Strict-Transport-Security</code></strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span>Strict-Transport-Security: max-age=31536000
+</span></span></code></pre></div>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2016_12_08_send_email_with_attachments_using_aws_ses/" data-toggle="tooltip" data-placement="top" title="Build emails with attachments using SMTP, MIME standard (AWS SES Case)">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2020_05_06_advanced_regular_expression_by_examples/" data-toggle="tooltip" data-placement="top" title="Advanced Regular Expression Recipes - Introduction.">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2017_09_26_advanced_https\/',
+        pageTitle: 'Advanced HTTP',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

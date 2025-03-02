@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Regular expression: Extract Domain Names" />
+    <meta property="og:title" content="Regular expression: Extract Domain Names" />
+    <meta property="twitter:title" content="Regular expression: Extract Domain Names" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Regular expression: Extract Domain Names | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2020_05_08_regular_expression_extract_domain_names/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                    </div>
+                    <h1>Regular expression: Extract Domain Names</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Ghassan Karwchan
+                             
+                            on 
+                            Friday, May 8, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>Explain advanced concepts of Regular Expressions through practical recipes:<br>
+In this recipe we are going to cover:</p>
+<ul>
+<li>Anchors</li>
+<li>Non-capturing group</li>
+<li>Python&rsquo;s <code>findall</code>, and JavaScript&rsquo;s <code>exec</code></li>
+</ul>
+<h2 id="problem-description">Problem Description</h2>
+<p>HTML Scraping or Web Scraping is widely used, and we need to build a scrapper to extract the URLs in a web page, and to extract the domain names in those URL.</p>
+<p>An example of the data input</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;reflist&#34;</span> <span style="color:#50fa7b">style</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;list-style-type: decimal;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">ol</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;references&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">li</span> <span style="color:#50fa7b">id</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;cite_note-1&#34;</span>&gt;&lt;<span style="color:#ff79c6">span</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;mw-cite-backlink&#34;</span>&gt;&lt;<span style="color:#ff79c6">b</span>&gt; 
+</span></span><span style="display:flex;"><span>[&#34;Train (noun)&#34;](http://www.askoxford.com/concise_oed/train?view=uk). 
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">i</span>&gt;(definition – Compact OED)&lt;/<span style="color:#ff79c6">i</span>&gt;. Oxford University Press
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">span</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;reference-accessdate&#34;</span>&gt;. 
+</span></span><span style="display:flex;"><span>.....
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">ol</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span></code></pre></div><p>The output we need is</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span>askoxford.com;bnsf.com;hydrogencarsnow.com;mrvc.indianrail.gov.<span style="color:#ff79c6">in</span>;web.archive.org
+</span></span></code></pre></div><p>The url have variant formats, and the domain name can have different formats. Examples of Url in the text as follow:</p>
+<pre tabindex="0"><code class="language-code" data-lang="code">http://www.domain.com
+https://ww2.anotherdomain.com
+https://mydomain.com
+</code></pre><h2 id="code">Code</h2>
+<p>The final code in JavaScript:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">function</span> domainExtract(inputLines){
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">let</span> exp <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">/\bhttps?:/</span><span style="color:#ff79c6">/</span>(<span style="color:#ff79c6">?:</span>www\.<span style="color:#ff79c6">|</span>ww2\.)<span style="color:#ff79c6">?</span>((<span style="color:#ff79c6">?:</span>[\w<span style="color:#ff79c6">-</span>]<span style="color:#ff79c6">+</span>\.){<span style="color:#bd93f9">1</span>,}\w<span style="color:#ff79c6">+</span>)\b<span style="color:#ff79c6">/</span>g
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> entries <span style="color:#ff79c6">=</span> inputLines.map(x =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">let</span> rslt
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">let</span> d <span style="color:#ff79c6">=</span> []
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">while</span> ((rslt <span style="color:#ff79c6">=</span> exp.exec(x)) <span style="color:#ff79c6">!==</span> <span style="color:#ff79c6">null</span>)
+</span></span><span style="display:flex;"><span>        d.push(rslt[<span style="color:#bd93f9">1</span>])
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">return</span> d
+</span></span><span style="display:flex;"><span>  }).filter(x =&gt; x).reduce((a, b) =&gt; a.concat(b), [])
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">Array</span>.from(<span style="color:#ff79c6">new</span> Set(entries)).sort().join(<span style="color:#f1fa8c">&#39;;&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>And Python</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> re
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">extract_domains</span>(lines):
+</span></span><span style="display:flex;"><span>    exp <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;\bhttps?://(?:www\.|ww2\.)?((?:[\w-]+\.){1,}\w+)\b&#39;</span>
+</span></span><span style="display:flex;"><span>    r <span style="color:#ff79c6">=</span> re<span style="color:#ff79c6">.</span>compile(exp, re<span style="color:#ff79c6">.</span>M)
+</span></span><span style="display:flex;"><span>    domains <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;;&#39;</span><span style="color:#ff79c6">.</span>join(<span style="color:#8be9fd;font-style:italic">sorted</span>(<span style="color:#8be9fd;font-style:italic">set</span>([ f <span style="color:#ff79c6">for</span> s <span style="color:#ff79c6">in</span> lines <span style="color:#ff79c6">for</span> f <span style="color:#ff79c6">in</span> r<span style="color:#ff79c6">.</span>findall(s) ])))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> domains
+</span></span><span style="display:flex;"><span>    
+</span></span></code></pre></div><h2 id="code-description">Code Description</h2>
+<p>Let us explain the code.</p>
+<p>For Python:</p>
+<ol>
+<li>we start by writing the pattern in a string and prefix it with <strong><code>r</code></strong> prefix, which treat the rest as <code>Raw</code> string, which means ignore the escape character <strong><code>\</code></strong> and treat it as normal character.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;the pattern string&#39;</span>
+</span></span></code></pre></div></li>
+<li>The Url code appears anywhere in the string, and we can match it anywhere in the string, and to do that we use special characters called <code>Anchors</code> and specifically we use the <strong><code>word boundary anchor</code></strong>: <code>\b</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;\b patter to match \b&#39;</span>
+</span></span></code></pre></div></li>
+<li>Then we specify the url schema part (http:// or https://), where (s) is optional.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;\bhttps?://\b&#39;</span>
+</span></span></code></pre></div></li>
+<li>Then we need to ignore the <strong>(www or ww2)</strong> part, so we use <strong><code>Non-capturing group</code></strong> using <code>(?:)</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;\bhttps?://(?:www\.|ww2\.)?\b&#39;</span>
+</span></span></code></pre></div></li>
+<li>and then we need to capture the rest of the text, because the rest contains the domain name, so we add capturing group.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;\bhttps?://(?:www\.|ww2\.)?( pattern for domain )\b&#39;</span>
+</span></span></code></pre></div></li>
+<li>The pattern for domain contains many words with alphanumeric characters, and can have dashes (-), and those words separated by dots (.)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#6272a4">// format of domain
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>word.second<span style="color:#ff79c6">-</span>word.third<span style="color:#ff79c6">-</span>word.com
+</span></span></code></pre></div></li>
+<li>we use the <strong><code>Shorthand Character Class</code></strong>: <code>\w</code>, which matches alphanumeric characters plus underscore, and we add the dash in a character class <code>[\w-]</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;\bhttps?://(?:www\.|ww2\.)?((?:[\w-]+\.){1,}\w+)\b&#39;</span>
+</span></span></code></pre></div></li>
+<li>notice that we had to add the word with the dot in a group, and because we don&rsquo;t need to capture that nested group, we used <code>Non capturing group</code>.</li>
+</ol>
+<h2 id="a-word-about-python-and-javascript-implementation">A word about Python and JavaScript implementation</h2>
+<p>We are going to cover more on Python and JavaScript implementation, but for now we are going to talk about Python&rsquo;s findall, and JavaScript&rsquo;s exec.</p>
+<h4 id="pythons-findall">Python&rsquo;s findall</h4>
+<p>The Python has many ways to search for a match, including the methods: <strong><em>search</em></strong> and <strong><em>match</em></strong>. But both works on one match at the time.<br>
+<em><strong>findall</strong></em> will return a list with all non-overlapping occurrences of a pattern.<br>
+The following example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pattern <span style="color:#ff79c6">=</span> re<span style="color:#ff79c6">.</span>compile (<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;\w+&#39;</span>)
+</span></span><span style="display:flex;"><span>pattern<span style="color:#ff79c6">.</span>findall(<span style="color:#f1fa8c">&#39;Hello World&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># output: [&#39;Hello&#39;, &#39;World&#39;]</span>
+</span></span></code></pre></div><p>If you have more than a capturing group in the pattern, then it will return a list of tuples.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pattern <span style="color:#ff79c6">=</span> re<span style="color:#ff79c6">.</span>compile(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(\w+) (\w+)&#39;</span>)
+</span></span><span style="display:flex;"><span>pattern<span style="color:#ff79c6">.</span>findall(<span style="color:#f1fa8c">&#39;Hello World!, Hello Tom!&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># output: [(&#39;Hello&#39;, &#39;World&#39;), (&#39;Hello&#39;, &#39;Tom&#39;)]</span>
+</span></span></code></pre></div><p>Another alternative: <em><strong>finditer</strong></em> which returns an iterator in which each element is a <em><strong>MatchObject</strong></em>, which gives more information about each match.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pattern <span style="color:#ff79c6">=</span> re<span style="color:#ff79c6">.</span>compile(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(\w+) (\w+)&#39;</span>)
+</span></span><span style="display:flex;"><span>it <span style="color:#ff79c6">=</span> pattern<span style="color:#ff79c6">.</span>finditer(<span style="color:#f1fa8c">&#39;Hello World!, Hello Tom!&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">match</span> <span style="color:#ff79c6">=</span> it<span style="color:#ff79c6">.</span>next()
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">match</span><span style="color:#ff79c6">.</span>groups()
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># output: (&#39;Hello&#39;, &#39;World&#39;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">match</span><span style="color:#ff79c6">.</span>span()
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># output: (0, 11)</span>
+</span></span></code></pre></div><h4 id="javascript">JavaScript</h4>
+<p>JavaScript is a little bit tricky, and arguably it might be the worst implementation among many languages.<br>
+JavaScript didn&rsquo;t have an equivalent for Python&rsquo;s findall until very recently. It is the method <code>String.matchAll</code>, and it is supported in Node 12, and very latest browsers.<br>
+If you need to work in Node before 12, or a little bit older browsers, then you have one option to iterate through many matches.<br>
+JavaScript is funky because it implement the first match in different ways, but to match all matches, it force you in one awkward way (before String.matchAll).<br>
+To get all matches with their capturing group, you have to use <em><strong>exec</strong></em> method of regular expression object and iterate through it.<br>
+An example will be like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> exp <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">/\b(\w)\w+ ?/</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">while</span> ((rslt <span style="color:#ff79c6">=</span> exp.exec(inputString)) <span style="color:#ff79c6">!==</span> <span style="color:#ff79c6">null</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// the capturing group above will be accessed in rslt[1]
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    do_something_with_capturing_group_value(rslt[<span style="color:#bd93f9">1</span>])
+</span></span></code></pre></div><h2 id="list-of-posts">List of posts</h2>
+<p>We are going to explain advanced terms of Regular Expressions through different examples, and through series of posts. To see all articles in this series check here:</p>
+<p><a href="">Check all articles in this list</a>.</p>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2020_05_07_regular_expression_extract_comments_from_code/" data-toggle="tooltip" data-placement="top" title="Regular expression: Extract Comments From Code">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2020_09_11_regular_expression_extract_html_links/" data-toggle="tooltip" data-placement="top" title="Regular expression: Extract HTML Links">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2020_05_08_regular_expression_extract_domain_names\/',
+        pageTitle: 'Regular expression: Extract Domain Names',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

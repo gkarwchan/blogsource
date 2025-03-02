@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Asp.net on Ghassan&#39;s page</title>
+    <link>http://localhost:1313/tags/asp.net/</link>
+    <description>Recent content in Asp.net on Ghassan&#39;s page</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Oct 2024 18:41:54 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/asp.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Upload files using streaming in Asp.NET</title>
+      <link>http://localhost:1313/post/2024_10_26_upload_files_using_stream_with_aspnet/</link>
+      <pubDate>Sat, 26 Oct 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_10_26_upload_files_using_stream_with_aspnet/</guid>
+      <description>&lt;p&gt;Asp.NET provide a binding technique to upload files &lt;strong&gt;&lt;code&gt;IFormFile&lt;/code&gt;&lt;/strong&gt;. But that technique will consume memory as it buffers the content of the file in the memory or in the database.&lt;br&gt;&#xA;To skip buffering and use streaming, we kind of have to code it in own our way.&lt;/p&gt;&#xA;&lt;h2 id=&#34;http-protocol-and-uploading-file&#34;&gt;Http Protocol and uploading file:&lt;/h2&gt;&#xA;&lt;p&gt;The simplest way to upload file is to create an Html &lt;code&gt;file input&lt;/code&gt; element, and include it in &lt;code&gt;html form&lt;/code&gt; with &lt;code&gt;submit&lt;/code&gt; button as follows:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Stream long running webapi with Asp.NET Core and Javascript</title>
+      <link>http://localhost:1313/post/2024_06_22_streamline_long_process_with_aspnet_core_and_javascript/</link>
+      <pubDate>Sat, 22 Jun 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_06_22_streamline_long_process_with_aspnet_core_and_javascript/</guid>
+      <description>&lt;p&gt;If you have a long running process that return array of data, or a data that you can send back as chunk&#xA;of data, then you can stream the result.&lt;/p&gt;&#xA;&lt;h2 id=&#34;streaming-from-the-server&#34;&gt;Streaming from the server&lt;/h2&gt;&#xA;&lt;p&gt;In Asp.NET core 6 and later, it is so easy to stream back the result using &lt;code&gt;IAsyncEnumerable&lt;/code&gt;.&lt;br&gt;&#xA;Let us jump into the code right away:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt; [HttpGet(&amp;#34;ProcessLongData&amp;#34;)]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt; [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;async&lt;/span&gt; IAsyncEnumerable&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;&amp;gt; ProcessLongData(&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; input)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; i = &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;; i++)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#ff79c6&#34;&gt;await&lt;/span&gt; Task.Delay(&lt;span style=&#34;color:#bd93f9&#34;&gt;1000&lt;/span&gt;);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#ff79c6&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; i.ToString();&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;how-aspnet-serialize-the-result-back&#34;&gt;How ASP.NET serialize the result back?&lt;/h4&gt;&#xA;&lt;p&gt;Json serializer &lt;code&gt;System.Text.Json&lt;/code&gt; has a built-in support to serialize stream, so you don&amp;rsquo;t have to do anything because it is the default serializer for Asp.NET core.&lt;br&gt;&#xA;But what in case your project is using &lt;code&gt;NewtonsoftJson&lt;/code&gt;?&lt;br&gt;&#xA;Then you need to override the json serializer for that controller, or that method.&lt;br&gt;&#xA;You do that by using the &lt;a href=&#34;https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/understanding-action-filters-cs&#34;&gt;Action Filter&lt;/a&gt; in Asp.NET.&lt;br&gt;&#xA;Here is a code that will do that:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Write Asp.NET webhook handlers for Azure Event Grid events.</title>
+      <link>http://localhost:1313/post/2023_10_17_subscribe_to_upload_file_azure_blog_storage/</link>
+      <pubDate>Tue, 17 Oct 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_10_17_subscribe_to_upload_file_azure_blog_storage/</guid>
+      <description>&lt;p&gt;Azure Event Grid is a Pub Sub message distribution service that is fully integrated with Azure infrastructure. Almost all Azure services, and PaaS, and many third-party SaaS provides integration with Event Grid, by publishing events. It is supporting Http protocol for publishing events to it, and now with a newer upgrade it supports MQTT protocol for lighter fast IoT communications.&lt;/p&gt;&#xA;&lt;p&gt;It is providing Pub/Sub services from Azure services to the subscribers, and adding to that reliability to insure the delivery of the messages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Best way to run background services in ASP.NET.</title>
+      <link>http://localhost:1313/post/2023_07_12_hosting_backgroundservice_aspnet/</link>
+      <pubDate>Wed, 12 Jul 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_07_12_hosting_backgroundservice_aspnet/</guid>
+      <description>&lt;p&gt;Asp.Net provides many ways to run background processes. They are:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;IHostedService interface&lt;/li&gt;&#xA;&lt;li&gt;BackgroundService abstract class&lt;/li&gt;&#xA;&lt;li&gt;Worker Service using Microsoft.NET.SDK.Worker&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Actually they are just layers on top of each others, each layer provides extra functionality on the one below.&lt;br&gt;&#xA;This post is going to describe each layer and what it provides.&lt;/p&gt;&#xA;&lt;h2 id=&#34;running-background-tasks-using-ihostedservice&#34;&gt;Running background tasks using &lt;code&gt;IHostedService&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Asp.NET provides support for running background tasks in the same process that host Asp.net application.&lt;br&gt;&#xA;By implementing &lt;code&gt;IHostedService&lt;/code&gt; interface, your background task will start a little bit after Asp.Net application start, and end when Asp.Net application shutdown.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Build resilient applications accessing Azure services with no code.</title>
+      <link>http://localhost:1313/post/2023_03_11_build_resilient_applications_azure/</link>
+      <pubDate>Sat, 11 Mar 2023 18:44:55 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_03_11_build_resilient_applications_azure/</guid>
+      <description>&lt;p&gt;When working on distributed system like systems that are running on the cloud, and microservices, then you should anticipate transient faults like temporary loss of network connection, or temporary unavailability of a service, or a service is busy.&lt;br&gt;&#xA;This is why in cloud application, the term &lt;strong&gt;Building for resiliency&lt;/strong&gt; become a pattern in building application, and it means properly handling these transient faults in the code.&lt;/p&gt;&#xA;&lt;p&gt;There are two common used patterns that we can use in our code, that can help build resilience application.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Everything you need to know about telemetry for your Asp.NET application on Azure.</title>
+      <link>http://localhost:1313/post/2023_02_24_application_insights_on_azure/</link>
+      <pubDate>Fri, 24 Feb 2023 21:44:55 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_24_application_insights_on_azure/</guid>
+      <description>&lt;p&gt;All of the services that Azure offers for the instrumentation and observability (monitoring) of applications are grouped under Azure Monitor.&lt;/p&gt;&#xA;&lt;p&gt;Three services fall under the banner of Azure Monitor:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Azure Monitor itself, which offers the observability component to track your apps.&lt;/li&gt;&#xA;&lt;li&gt;Application Insights, or its substitute OpenTelemetry, which offers the instrumentation and telemetry components&lt;/li&gt;&#xA;&lt;li&gt;The analytics component is provided by Log Analytics.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;We will emphasise the instrumentation component in this post.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Implement a watchdog for your microservices using off-the-shelf ASP.Net Healthcheck UI.</title>
+      <link>http://localhost:1313/post/2023_02_02_aspnet_watchdog/</link>
+      <pubDate>Thu, 02 Feb 2023 20:22:20 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_02_aspnet_watchdog/</guid>
+      <description>&lt;h2 id=&#34;what-is-a-watchdog&#34;&gt;What is a watchdog&lt;/h2&gt;&#xA;&lt;p&gt;A watchdog is a service that monitor other services and take actions when it detect a service is failing.&lt;br&gt;&#xA;ASP.NET starting from Core 5 has a built in UI module to monitor other services, and in few line of code you can build a watchdog for your services.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-to-hook-it-up-with-your-services&#34;&gt;How to hook it up with your services:&lt;/h2&gt;&#xA;&lt;p&gt;Your microservices should implement health check endpoints to be monitored by the orchestration service (Kubernetes, docker storm, &amp;hellip; etc).&lt;br&gt;&#xA;&lt;a href=&#34;https://dev.to/gkarwchan/prepare-net-core-microservice-to-be-monitored-by-kubernetes-4pgn&#34;&gt;I explained in previous post&lt;/a&gt; on how to use built-in ASP.NET health check features to achieve build these endpoints.&lt;br&gt;&#xA;I recommend reading that article because there I talked about the Microsoft package &lt;a href=&#34;https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks&#34;&gt;AspNetCore.Diagnostics.HealthChecks&lt;/a&gt;. This package contains all the middleware for build-in health checks, and as well in the same repository has a UI module that with few line of code build a UI to monitor all integrated services and monitor their health check endpoints.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Calling HTTP API and Socket Exhaustion problem</title>
+      <link>http://localhost:1313/post/2023_01_08_http_and_socket_exhaustion/</link>
+      <pubDate>Sun, 08 Jan 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_01_08_http_and_socket_exhaustion/</guid>
+      <description>&lt;p&gt;You definitely had to write code to communicate to an API service. Regardless of the language you use, or the framework you use, there is a two major problems when you want to do lots of calls. They are:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Socket Exhaustion&lt;/li&gt;&#xA;&lt;li&gt;DNS Rotation&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;I am going to use C# and ASP.NET as an example and show you what .NET world has a solution for that, but there are solutions in every language and framework.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Take your development environment anywhere and on any machine with Dev Containers</title>
+      <link>http://localhost:1313/post/2022_12_29_devcontainer/</link>
+      <pubDate>Thu, 29 Dec 2022 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_29_devcontainer/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://containers.dev/&#34;&gt;Dev containers&lt;/a&gt; provides a fantastic way to onboard a new developer up and running in matter of just clone the git repository.&lt;/p&gt;&#xA;&lt;p&gt;Dev containers allow you to create a docker container that will host all the development tools and libraries you use in your projects, and run it inside the container, and if you have an editor compatible then you can make the IDE connect to the containers and you can run or debug your code inside the containers.  And even if you don&amp;rsquo;t have a compatible IDE, then you can run it inside &lt;a href=&#34;https://github.com/features/codespaces&#34;&gt;github&amp;rsquo;s codespaces&lt;/a&gt;, which is compatible with Dev container.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Prepare .NET core Microservice to be monitored by Kubernetes</title>
+      <link>http://localhost:1313/post/2022-12-28_prepare_aspnet_api_monitored_by_k8s/</link>
+      <pubDate>Tue, 27 Dec 2022 19:47:05 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022-12-28_prepare_aspnet_api_monitored_by_k8s/</guid>
+      <description>&lt;h2 id=&#34;kubernetes-monitoring&#34;&gt;Kubernetes Monitoring:&lt;/h2&gt;&#xA;&lt;p&gt;Kubernetes monitors the deployed microservices and check if any failure or a deadlock that makes the service not responding in order to restart the hosting container.&lt;br&gt;&#xA;Kubernetes achieve this by calling three different probes that determine the status of the container/pod. The three probes are:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;liveness&lt;/strong&gt;: which monitor any deadlock, or the service is down, and Kubernetes will remove the dead container and restart another one.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;startup&lt;/strong&gt;: Your service might need time at startup to wait for all its dependencies to be ready. Your service will implement this probe to tell Kubernetes that your service is ready or not to receive calls.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;readiness&lt;/strong&gt;: Will tell if your service is ready or not. it is different from liveness that Kubernetes won&amp;rsquo;t restart a new container, but just remove it from the load balancer.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;We create on our microservices three end points that correspond to the three Kubernetes probes, and define it in the deployment config file.&lt;br&gt;&#xA;As an example:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Some thoughts about ASP.NET Minimal API and Minimal Hosting Model</title>
+      <link>http://localhost:1313/post/2022_12_19_aspnet_minimal_api/</link>
+      <pubDate>Mon, 19 Dec 2022 19:15:28 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_19_aspnet_minimal_api/</guid>
+      <description>&lt;h2 id=&#34;why-this-post&#34;&gt;Why this post?&lt;/h2&gt;&#xA;&lt;p&gt;ASP.NET 6&amp;rsquo;s minimal hosting model made me compare it to ASP.NET 2 and wonder if Microsoft is going back to some old concepts. I was curious about the potential benefit of migration, so I intend to explain and compare ASP.NET 6, 5 and 2.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-new-webapplication-builder-and-some-history-of-aspnet&#34;&gt;The new &lt;strong&gt;WebApplication&lt;/strong&gt; builder and some history of ASP.NET:&lt;/h2&gt;&#xA;&lt;p&gt;Let us generate a new webapi application in .net 6 using webapi template:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dotnet new webapi -n tutorial.webapi&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You will see that we only have one file &lt;strong&gt;&lt;code&gt;program.cs&lt;/code&gt;&lt;/strong&gt;, and there is no more &lt;strong&gt;&lt;code&gt;startup.cs&lt;/code&gt;&lt;/strong&gt; and the code as follows:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Secret Manager for Configuration in .NET</title>
+      <link>http://localhost:1313/post/2022_11_28_use_secret_manager_in_dotnet/</link>
+      <pubDate>Mon, 28 Nov 2022 19:41:04 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_11_28_use_secret_manager_in_dotnet/</guid>
+      <description>&lt;p&gt;It is critical not to store passwords or API keys in our code.&lt;br&gt;&#xA;For all environments for the development process: (QA, UAT, Pre-Production, and Production), it is easier to place it in a safe place (Azure Key Vault for example), and access it during deployment.&lt;br&gt;&#xA;For developer machines, we can use &lt;code&gt;Secret Manager&lt;/code&gt;, or sometimes called &lt;code&gt;User Secrets&lt;/code&gt;, which has a built-in support in &lt;code&gt;ASP.NET&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;h2 id=&#34;enable-secret-storage&#34;&gt;Enable Secret Storage:&lt;/h2&gt;&#xA;&lt;p&gt;In the project you want to add a secret run this command:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Build emails with attachments using SMTP, MIME standard (AWS SES Case)</title>
+      <link>http://localhost:1313/post/2016_12_08_send_email_with_attachments_using_aws_ses/</link>
+      <pubDate>Thu, 08 Dec 2016 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2016_12_08_send_email_with_attachments_using_aws_ses/</guid>
+      <description>&lt;p&gt;To send an email with AWS SES service, there are two options:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Connecting directly to the AWS SMTP server with SMTP protocols.&lt;/li&gt;&#xA;&lt;li&gt;Or call AWS API over HTTPS.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The SMTP is easier, but then you have to open SMTP ports (587 or 25 usually).&lt;/p&gt;&#xA;&lt;h2 id=&#34;using-aws-ses-api&#34;&gt;Using AWS SES API:&lt;/h2&gt;&#xA;&lt;p&gt;AWS SES API has two options to send emails as described in the documentation:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Send simple text only formatted email.&lt;/li&gt;&#xA;&lt;li&gt;Send email with attachments as &lt;strong&gt;raw&lt;/strong&gt; formatted email.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;If you are sending text-only email, then your life is easy, and the API is simple straight forward.&lt;br&gt;&#xA;But sending email with attachments is not going to be straightforward, and I am going to describe the process here.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Devops on Ghassan&#39;s page</title>
+    <link>http://localhost:1313/tags/devops/</link>
+    <description>Recent content in Devops on Ghassan&#39;s page</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Dec 2024 18:41:54 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Artifacts Credential Provider</title>
+      <link>http://localhost:1313/post/2024_12_27_azure_artifact_cerdential_provider/</link>
+      <pubDate>Tue, 17 Dec 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_12_27_azure_artifact_cerdential_provider/</guid>
+      <description>&lt;p&gt;When you store your artifacts (NuGet, NPM, Docker&amp;hellip;) inside your private Azure Artifacts, you need to use credentials to pull those artifacts.&lt;br&gt;&#xA;You can require getting those artifacts from different tools that do your build: dotnet, nuget, msbuild, visual studio&amp;hellip;.&lt;br&gt;&#xA;In order to automate the aquisition of credentials needed from all these different tools, Microsoft provides a unified tool to automate aquisition those credentials: **Azure Artifacts Credential Provider&amp;quot;.&lt;/p&gt;&#xA;&lt;h1 id=&#34;introduction--underlying-technology&#34;&gt;Introduction &amp;amp; Underlying Technology.&lt;/h1&gt;&#xA;&lt;p&gt;Because artifacts are required when you need NuGet packages, and you need to preform NuGet operation, which will require you to authenticate, so the &lt;strong&gt;Credential Provider&lt;/strong&gt; is a NuGet plugin used by NuGet client.&lt;br&gt;&#xA;The NuGet client can be either:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Git Tools Every DevOps Engineer Should Know</title>
+      <link>http://localhost:1313/post/2024_09_25_git_commands_every_devops_should_know/</link>
+      <pubDate>Wed, 25 Sep 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_25_git_commands_every_devops_should_know/</guid>
+      <description>&lt;p&gt;As a DevOps engineer managing an active Git repository with hundreds of commits daily, you&amp;rsquo;ll inevitably face challenges that require a solid understanding of Git and its ecosystem. This post covers common issues that teams encounter while using Git and the tools used to address them. Each tool mentioned deserves a dedicated post, but here’s a brief overview of the essentials.&lt;/p&gt;&#xA;&lt;p&gt;The tools we&amp;rsquo;ll cover:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Maintaining the health of the repository.&lt;/li&gt;&#xA;&lt;li&gt;Managing large files.&lt;/li&gt;&#xA;&lt;li&gt;Permanently deleting files from the entire history.&lt;/li&gt;&#xA;&lt;li&gt;Purging large historical data.&lt;/li&gt;&#xA;&lt;li&gt;Speeding up work on huge repositories.&lt;/li&gt;&#xA;&lt;li&gt;Automatically generating a changelog for releases.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;cleaning-dead-and-unreachable-items-in-your-repo&#34;&gt;Cleaning Dead and Unreachable Items in Your Repo:&lt;/h1&gt;&#xA;&lt;p&gt;Just like performing a &amp;ldquo;Disk Cleanup&amp;rdquo; on your computer, a Git repository can accumulate unreachable items (such as old commits or branches). Git&amp;rsquo;s git gc (garbage collection) command cleans these up. This command:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enhancing Team Collaboration with a Git Forking Strategy</title>
+      <link>http://localhost:1313/post/2024_09_24_team_collaboration_using_git_fork/</link>
+      <pubDate>Mon, 23 Sep 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_24_team_collaboration_using_git_fork/</guid>
+      <description>&lt;p&gt;The fork-based pull request (PR) workflow is widely used in open-source projects because it enables external contributions while keeping the core repository secure and controlled by a designated team.&lt;/p&gt;&#xA;&lt;h1 id=&#34;fork-baed-workflow-and-inner-source&#34;&gt;Fork-baed workflow and Inner Source&lt;/h1&gt;&#xA;&lt;p&gt;Typically, only contributors with repository access can create pull requests. As a contributor, you can create branches, submit PRs, and request merges. However, what happens if you&amp;rsquo;re not part of the repository&amp;rsquo;s team, as is the case in open-source projects?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Design and implement Git branching strategies for CI/CD integration</title>
+      <link>http://localhost:1313/post/2024_09_23_design_and_implement_a_branch_strategy_and_workflow/</link>
+      <pubDate>Mon, 23 Sep 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_23_design_and_implement_a_branch_strategy_and_workflow/</guid>
+      <description>&lt;p&gt;Establishing a standardized development process that integrates a Git workflow with Continuous Integration/Continuous Deployment (CI/CD) is crucial before writing any code. This post will explore a widely-used approach: the Trunk-Based Development Workflow, which is adopted by many leading companies, including Microsoft.&lt;/p&gt;&#xA;&lt;h1 id=&#34;choosing-a-branching-strategy&#34;&gt;Choosing a branching strategy:&lt;/h1&gt;&#xA;&lt;p&gt;Every team should adopt a consistent code release process to maintain quality and reduce risks. This starts with selecting a Git workflow, continues through integrating CI/CD, and culminates in defining a release strategy.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enhancing Your Git Workflow with Git Credential Manager Core</title>
+      <link>http://localhost:1313/post/2024_09_22_make_sense_of_many_git_credential_helper/</link>
+      <pubDate>Sun, 22 Sep 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_22_make_sense_of_many_git_credential_helper/</guid>
+      <description>&lt;p&gt;Git’s credential helper is a handy tool that saves your credentials, so you won’t need to re-enter your username and password for every &lt;code&gt;git pull&lt;/code&gt; or &lt;code&gt;git push&lt;/code&gt;. However, depending on the age of the tutorial you&amp;rsquo;re following and the platform you&amp;rsquo;re using, the instructions for setting up credential storage may vary.&lt;/p&gt;&#xA;&lt;p&gt;In August 2021, GitHub introduced a new cross-platform tool called the &lt;a href=&#34;https://github.blog/open-source/git/git-credential-manager-core-building-a-universal-authentication-experience/&#34;&gt;Git Credential Manager Core&lt;/a&gt;. Let’s explore how this tool can streamline your team’s workflow.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Are you still using git checkout for everything? It is time to switch to git switch</title>
+      <link>http://localhost:1313/post/2024_09_21_git_checkout_splitted_to_many_commands/</link>
+      <pubDate>Sat, 21 Sep 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_21_git_checkout_splitted_to_many_commands/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re like me and still rely on the trusty git checkout for a variety of tasks—like switching branches, restoring files, and checking out commits—then you&amp;rsquo;re in for a treat. The Git community has made things easier by introducing two new commands to split the workload: git switch and git restore.&lt;/p&gt;&#xA;&lt;p&gt;These new commands were created to reduce the overload on git checkout and make Git a bit more intuitive, especially for developers who sometimes found it confusing. Let&amp;rsquo;s break it down!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Azure Key Vault to retrieve secured parameters during  Azure deployment.</title>
+      <link>http://localhost:1313/post/2023_02_04_azure_keyvault_deployment/</link>
+      <pubDate>Sat, 04 Feb 2023 20:42:03 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_04_azure_keyvault_deployment/</guid>
+      <description>&lt;p&gt;You have an ARM template to deploy, and you need to pass secure parameters. Instead of storing secure values in the parameter file, you can just retrieve these values from Key Vault.&lt;/p&gt;&#xA;&lt;p&gt;To be able to access the key vault by the resource manager you need to change access policy to allow &amp;ldquo;Azure Resource Manager for template deployment&amp;rdquo;, as shown here.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e693x90rrx04ul7bpd5e.jpg&#34; alt=&#34;Image description&#34;&gt;&#xA;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;Or you can do it from Powershell:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// to update an existing key vault&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Set-AzKeyVaultAccessPolicy&lt;/span&gt; -VaultName MyVaultName -EnabledForTemplateDeployment&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// to create a new key vault with this feature enabled&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;New-AzKeyVault&lt;/span&gt; `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -VaultName MyVaultName `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -resourceGroupName myresourcegroup `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -Location centralus `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -EnabledForTemplateDeployment&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;how-to-use-it&#34;&gt;How to use it?&lt;/h2&gt;&#xA;&lt;p&gt;in the deployment parameter file specify the location of the secured string to be the &lt;code&gt;keyvault&lt;/code&gt; as follows:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducing Kudu, the engine that handle all web application deployment to Azure App Service.</title>
+      <link>http://localhost:1313/post/2023_02_01_introducing_kudu/</link>
+      <pubDate>Wed, 01 Feb 2023 20:20:40 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_01_introducing_kudu/</guid>
+      <description>&lt;p&gt;If you follow any tutorials on Azure App Service, you will find that they use one of five options to deploy a web application to the Azure.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Using Azure DevOps&lt;/li&gt;&#xA;&lt;li&gt;Using Github actions and webhooks.&lt;/li&gt;&#xA;&lt;li&gt;FTP&lt;/li&gt;&#xA;&lt;li&gt;Zip Deploy.&lt;/li&gt;&#xA;&lt;li&gt;MSDeploy (Microsoft Web Deploy tool).&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;But behind the scenes, all these options are using the same back engine, which is &lt;a href=&#34;https://github.com/projectkudu/kudu&#34;&gt;Kudu&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;When we use FTP, Zip, or MSDeploy, we are actually calling Kudu REST API for deployment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deploy A Single Page Application to Azure Static Webapp using TeamCity, Jenkins or any CI, or command line</title>
+      <link>http://localhost:1313/post/2023_01_03_azure_static_webapp_deployment/</link>
+      <pubDate>Tue, 03 Jan 2023 19:56:30 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_01_03_azure_static_webapp_deployment/</guid>
+      <description>&lt;p&gt;I was trying to setup a deployment for an SPA application to an Azure Static Web app using TeamCity, but most of the tutorials I found was doing the deployment through CI/CD of Github&amp;rsquo;s Actions by monitoring a specific branch of a Github repository and deploy automatically whenever we check in into that branch, or the other alternative is using Azure DevOps pipeline.&#xA;But what if we don&amp;rsquo;t want to use neither, and instead we need to do it on demand from TeamCity, or any other CI/CD tool?&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

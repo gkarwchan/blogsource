@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Making sense of SSL, RSA, X509 and CSR" />
+    <meta property="og:title" content="Making sense of SSL, RSA, X509 and CSR" />
+    <meta property="twitter:title" content="Making sense of SSL, RSA, X509 and CSR" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Making sense of SSL, RSA, X509 and CSR | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2016_04_18_making_sense_of_ssl_rsa_x509_and_csr/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                    </div>
+                    <h1>Making sense of SSL, RSA, X509 and CSR</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Ghassan&#39;s page
+                             
+                            on 
+                            Monday, April 18, 2016
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>This is the second part of learning about SSL/TLS.<br>
+<a href="https://www.ghassan.page/posts/2016_03_11_secure_your_application_with_ssl">The first part was how to protect the site with SSL</a>.<br>
+This part is about explaining more the terms, technologies, protocols, standards used in SSL.</p>
+<h2 id="what-is-ssltls">What is SSL/TLS:</h2>
+<p><code>SSL</code> is the standard protocol to secure the communication between a web server and a browser, by creating an encrypted link between the two.<br>
+<code>SSL</code> last version was 3.0, and TLS  succeeds SSL, and become the new standard. But still some components of the protocols have the name SSL, like SSL certificate for example, so when you see the name SSL it most probably means the new TLS, because SSL is rarely used any more.</p>
+<h2 id="ssltls-workflow-and-tls-handshake">SSL/TLS workflow and TLS Handshake:</h2>
+<p>When a browser hits the web server using the <strong><code>HTTPS</code></strong> protocol, it start a process of creating an encrypted session between the two.<br>
+At the beginning, the encryption used is public-key encryption, which is an asymmetric type encryption.<br>
+The web server has a couple of keys public and private. It sends the public key to the browsers, and the browsers use the public key to encrypt the communications later.<br>
+Only the web server can know how to decrypt the communication.<br>
+Because the public key decryption is slow and expensive, so the web server and the browser will switch to symmetric encryption where only one key is required.<br>
+They negotiate between each other on what the best encryption algorithm they should use. The algorithm used would depend on the server and the browser.<br>
+This negotiation phase is called TLS handshake.</p>
+<h2 id="protocols-standards-and-concepts-used-in-ssl">Protocols, standards and concepts used in SSL</h2>
+<h3 id="1-public-key-encryption-rsa">1. Public key encryption RSA:</h3>
+<p>As we mentioned the server that implement <code>SSL</code> has pair of keys, public and private, which are used during the TLS handshake.<br>
+The most common public key encryption used in SSL is the <strong><code>RSA</code></strong>.<br>
+In <code>OpenSSL</code> tools, the <code>RSA</code> is the default option when generating a public/private key.<br>
+To generate key pairs with OpenSSL, we generate first a private key, then generate a public key depending on the private key.<br>
+Example of generate a private key:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl genrsa -out <span style="color:#ff79c6">{</span>private-key-filename<span style="color:#ff79c6">}</span> <span style="color:#bd93f9">2048</span>
+</span></span></code></pre></div><p>The 2048 is the size of the private key, which is now a days considered the appropriate secure size. Less than 2048 is not secure, and bigger than 2048 will be slow to process.<br>
+To extract a public key from the private key :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl rsa -pubout -in <span style="color:#ff79c6">{</span>private-key-filename<span style="color:#ff79c6">}</span> -out <span style="color:#ff79c6">{</span>public-key-filename<span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><h3 id="2-pem-protocol">2. PEM Protocol</h3>
+<p>When we generate the keys in the previous example, the generate files will contains data like this:</p>
+<blockquote>
+<p>&ldquo;&mdash;&ndash;BEGIN PRIVATE KEY&mdash;&ndash;<br>
+MIIEczCCA1ugAwIBAgIBADANBgkqhkiG9w0BAQQFAD..<br>
+AkGA1UEBhMCR0IEzARBgNVBAgTClNvbWUtU3RhdGUxFDASBgNVBAoTC0..<br>
+0EgTHRkMTcwNQYD<br>
+&hellip;&hellip;<br>
+&hellip;&hellip;<br>
+It8una2gY4l2O//on88r5IWJlm1L0oA8e4fR2yrBHX..adsGeFKkyNrwGi/<br>
+7vQMfXdGsRrXNGRGnX+vWDZ3zWI0joDtCkNnqEpVn..HoX<br>
+&mdash;&ndash;END CERTIFICATE&mdash;&ndash;&rdquo;</p></blockquote>
+<p>This format called <strong><code>PEM</code></strong> format, stands for <strong><code>Privacy Enhanced Mail</code></strong>.<br>
+<code>PEM</code> is a text representation of the real binary key in <code>DER</code> format (<strong><code>X.509 ASN.1 key</code></strong>), it is base64 encoding of the DER binary format.<br>
+We could store the binary version of the file only with <strong><code>DER</code></strong> encoding, but the most common way is the PEM version.</p>
+<h3 id="3-digital-identity">3. Digital Identity</h3>
+<p>As a user, in order to trust a web site for your precious information, you need to trust the web site owner.<br>
+Similarly, if you receive an email, you want to trust that the email you received was sent by the email owner, and not hacked by anyone else.<br>
+In real life, we have our identity card, which is a trusted document issued by a trusted authority (the government) which is a prove of our identity.<br>
+The industry came up with similar policies and standards to handle the digital identity.</p>
+<h3 id="4-public-key-infrastructure-pki-and-certificate-authority-ca">4. Public Key Infrastructure (PKI) and Certificate Authority (CA):</h3>
+<p>The <code>PKI</code> is the infrastructure that the industry created to manage the digital identities.<br>
+The PKI created a hierarchical body of many organizations which their role is to issue digital identities.<br>
+These organizations called <code>Certificate Authority (CA)</code>, and when you want to protect your site with <code>SSL/TLS</code>, you have to communicate with them, and they have to follow up with you to make sure that you are a legitimate company, and you are who you want to claim you are.<br>
+The digital identity has many four types ranked depending on their security level and how much investigation the <code>CA</code> will do before they submit a certificate.<br>
+Please find out these types in my previous post.</p>
+<h3 id="5-digital-certificate-x509">5. Digital Certificate (X.509)</h3>
+<p>As we discussed before, SSL required the web server to have public key, and a digital identity, to give to the browsers.<br>
+The industry decided to combine these two in one file, which is called : digital certificate, or <code>SSL certificate</code>.<br>
+PKI policies defined the format for this certificate in a standard called <strong><code>X.509</code></strong>
+The Certificate format X.509 v3 contains:</p>
+<ol>
+<li>Version Number.</li>
+<li>Serial Number.</li>
+<li>Signature Algorithm ID.</li>
+<li>Issuer Name.</li>
+<li>Validity period:
+<ol>
+<li>Not Before.</li>
+<li>Not After.</li>
+</ol>
+</li>
+<li>Subject name.</li>
+<li>Subject Public Key Info:
+<ol>
+<li>Public Key Algorithm</li>
+<li>Subject Public Key</li>
+</ol>
+</li>
+<li>Issuer Unique Identifier (optional).</li>
+<li>Subject Unique Identifier (optional)</li>
+<li>Extensions (optional)<br>
+&hellip;</li>
+<li>Certificate Signature Algorithm</li>
+<li>Certificate Signature</li>
+</ol>
+<h3 id="6-csr-certificate-signing-request">6. CSR: Certificate Signing Request:</h3>
+<p>The certificate is issued by one of CA(s), and in order to get a certificate you have to contact one of the CA(s) and send them a request in the format: CSR (Certificate Signing Request).<br>
+The CSR is a PEM formatted file with the following information:</p>
+<ul>
+<li>Common Name</li>
+<li>Organization</li>
+<li>Organizational Unit</li>
+<li>City</li>
+<li>State/County/Region</li>
+<li>Country</li>
+<li>Email Address</li>
+<li>Public Key.<br>
+You can generate a CSR by either doing it from a web server, or using openssl tools like the following:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl req -new -sha256 -key privatekey.key -out request.csr
+</span></span></code></pre></div><p>When you run the previous command, it will prompt you to enter all the CSR details and will generate a CSR file for you.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2016_03_11_secure_your_application_with_ssl/" data-toggle="tooltip" data-placement="top" title="Secure your web site with SSL/TLS">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2016_04_29_token_based_authentication_jwt/" data-toggle="tooltip" data-placement="top" title="Token Based Authentication and JWT.">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2016_04_18_making_sense_of_ssl_rsa_x509_and_csr\/',
+        pageTitle: 'Making sense of SSL, RSA, X509 and CSR',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

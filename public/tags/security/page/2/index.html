@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="" />
+    <meta property="og:title" content="" />
+    <meta property="twitter:title" content="" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Security | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/tags/security/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Ghassan&#39;s page </h1>
+                    
+		    <span class="subheading">Ghassan Karwchan Blog</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+  
+<div data-pagefind-ignore="all" class="container">
+    <div class="row">
+        
+        
+   	    <div class="
+            col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container
+        ">
+            
+<div data-pagefind-ignore="all">
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_12_8_azureappservice_ssl_certificate/">
+        <h2 class="post-title">
+            Different options to add SSL certificate to you Azure App Service
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>To add a SSL certificate to your web app hosted on Azure App Service with a custom domain, there are few options. I am going to list them here.</p>
+<h2 id="free-certificate">Free certificate:</h2>
+<p>Azure provides a free SSL certificate, and it is fully managed by Azure.  Azure renew the process for you, and take care of everything for you.<br>
+Although having a free certificate is a wonderful idea, but it has some shortcoming:</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Friday, December 8, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_10_27_oauth_openid_authenticationflow_in_plain_english/">
+        <h2 class="post-title">
+            OAuth, OpenID Connect, SSO and Authentication Flows in plain English.
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>Gone are the days when you force your users to register into your application by creating username/password.
+Everyone wants to skip that process when they can identify themselves using other ways (google, facebook, twitter…), and they want to use their single sign on process to identify them across multiple applications and multiple websites.
+In this post I am trying to explain the process and its technologies in simple English.</p>
+<h2 id="an-explanation-by-example">An explanation by example:</h2>
+<p>So you are a developer who is building an application and want to allow your users to use their Google credentials to authenticate themselves into your account.
+I am going to explain to you the concepts and the technologies.</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Friday, October 27, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_02_04_azure_keyvault_deployment/">
+        <h2 class="post-title">
+            Use Azure Key Vault to retrieve secured parameters during  Azure deployment.
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>You have an ARM template to deploy, and you need to pass secure parameters. Instead of storing secure values in the parameter file, you can just retrieve these values from Key Vault.</p>
+<p>To be able to access the key vault by the resource manager you need to change access policy to allow &ldquo;Azure Resource Manager for template deployment&rdquo;, as shown here.</p>
+<p>
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e693x90rrx04ul7bpd5e.jpg" alt="Image description">
+
+</p>
+<p>Or you can do it from Powershell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>// to update an existing key vault
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Set-AzKeyVaultAccessPolicy</span> -VaultName MyVaultName -EnabledForTemplateDeployment
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// to create a new key vault with this feature enabled
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">New-AzKeyVault</span> `
+</span></span><span style="display:flex;"><span>  -VaultName MyVaultName `
+</span></span><span style="display:flex;"><span>  -resourceGroupName myresourcegroup `
+</span></span><span style="display:flex;"><span>  -Location centralus `
+</span></span><span style="display:flex;"><span>  -EnabledForTemplateDeployment
+</span></span></code></pre></div><h2 id="how-to-use-it">How to use it?</h2>
+<p>in the deployment parameter file specify the location of the secured string to be the <code>keyvault</code> as follows:</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Saturday, February 4, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_02_03_parse_sas_token_regex/">
+        <h2 class="post-title">
+            Parse Azure SAS token using regular expression
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>If you have an Azure SAS token that is not working, it is good idea to parse it and understand what permissions and values it contains.</p>
+<p>This is a JavaScript code that uses Regular Expression to parse he SAS token, and an running example where you can try your own SAS token.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> paramNames <span style="color:#ff79c6">=</span> {
+</span></span><span style="display:flex;"><span>  sig<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;cryptographic signature&#39;</span>,
+</span></span><span style="display:flex;"><span>  st<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;start time&#39;</span>,
+</span></span><span style="display:flex;"><span>  se<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;end time&#39;</span>,
+</span></span><span style="display:flex;"><span>  spr<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;protocol&#39;</span>,
+</span></span><span style="display:flex;"><span>  srt<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;resource types&#39;</span>,
+</span></span><span style="display:flex;"><span>  sv<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;version&#39;</span>,
+</span></span><span style="display:flex;"><span>  sp<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;permissions&#39;</span>,
+</span></span><span style="display:flex;"><span>  ss<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;services&#39;</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> valueLookups <span style="color:#ff79c6">=</span> {
+</span></span><span style="display:flex;"><span>  sp <span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>     r<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;read&#39;</span>, d<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;delete&#39;</span>, w<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;write&#39;</span>, l<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;list&#39;</span>, a<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;add&#39;</span>,
+</span></span><span style="display:flex;"><span>    c<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;create&#39;</span>, u<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;update&#39;</span>, p<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;process&#39;</span>, f<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;filter&#39;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>  srt<span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>    s<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;service&#39;</span>, c<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;container&#39;</span>, o<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;object&#39;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  ss <span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>    b<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;blob&#39;</span>, f<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;file&#39;</span>, q<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;queue&#39;</span>, t<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;table&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> valueConvertor <span style="color:#ff79c6">=</span> (key, inputValue) =&gt; 
+</span></span><span style="display:flex;"><span>      valueLookups[key] <span style="color:#ff79c6">?</span> [...inputValue].map(x =&gt; valueLookups[key][x] <span style="color:#ff79c6">||</span> x)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">:</span> inputValue;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">function</span> parseData(sasToken) {
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">let</span> regExpressionPattern <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">/[?&amp;]([a-z]*)=([^\&amp;]*)/g</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">var</span> parameters <span style="color:#ff79c6">=</span> [...sasToken.matchAll(regExpressionPattern)];
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> finalObject <span style="color:#ff79c6">=</span> parameters.reduce((acc, row) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> {...acc, [paramNames[row[<span style="color:#bd93f9">1</span>]] <span style="color:#ff79c6">||</span> row[<span style="color:#bd93f9">1</span>]]<span style="color:#ff79c6">:</span> valueConvertor(row[<span style="color:#bd93f9">1</span>], row[<span style="color:#bd93f9">2</span>])}
+</span></span><span style="display:flex;"><span>}, {});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> outputObject <span style="color:#ff79c6">=</span> ParseData(inputSasToken);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// The output object will be in the format
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;version&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;2021-06-08&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;services&#34;</span><span style="color:#ff79c6">:</span>[<span style="color:#f1fa8c">&#34;blob&#34;</span>,<span style="color:#f1fa8c">&#34;file&#34;</span>,<span style="color:#f1fa8c">&#34;queue&#34;</span>,<span style="color:#f1fa8c">&#34;table&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;resource types&#34;</span><span style="color:#ff79c6">:</span>[<span style="color:#f1fa8c">&#34;service&#34;</span>,<span style="color:#f1fa8c">&#34;container&#34;</span>,<span style="color:#f1fa8c">&#34;object&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;permissions&#34;</span><span style="color:#ff79c6">:</span>[<span style="color:#f1fa8c">&#34;read&#34;</span>,<span style="color:#f1fa8c">&#34;write&#34;</span>,<span style="color:#f1fa8c">&#34;delete&#34;</span>,<span style="color:#f1fa8c">&#34;list&#34;</span>,<span style="color:#f1fa8c">&#34;add&#34;</span>,<span style="color:#f1fa8c">&#34;create&#34;</span>,<span style="color:#f1fa8c">&#34;update&#34;</span>,<span style="color:#f1fa8c">&#34;process&#34;</span>,<span style="color:#f1fa8c">&#34;i&#34;</span>,<span style="color:#f1fa8c">&#34;y&#34;</span>,<span style="color:#f1fa8c">&#34;t&#34;</span>,<span style="color:#f1fa8c">&#34;filter&#34;</span>,<span style="color:#f1fa8c">&#34;x&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;end time&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;2023-02-04T03:03:37Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;start time&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;2023-02-03T19:03:37Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;protocol&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;https&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;cryptographic signature&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;..jhh&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Try it for yourself:</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Friday, February 3, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_01_10_azure_networking_reciep_one/">
+        <h2 class="post-title">
+            Azure Networking Recipes - Connect Azure Database and an Azure App Service using Virtual Network.
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>If your application is connecting to Azure database, or any other resources, then connecting them through Virtual Network (VNet) will enhance the performance (assuming the app service and the resources are in the same region), as well it enhance the security and we can lock the resources to have private endpoint, and not accessed publicly.
+I am going to go through a walk-through tutorial, using Azure Sql Server as an example, but this can work with any database on Azure, or even any resources like blob storage.</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Tuesday, January 10, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+</div>
+
+            
+
+
+<ul class="pager" data-pagefind-ignore="all">
+    
+    <li class="previous">
+        <a href="/tags/security/">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/tags/security/page/3/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+       	</div>
+        
+
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+	
+    <section class="visible-md visible-lg">
+	
+        <div class="short-about">
+            
+            <a href="/about">
+               <img src="/img/pic.png" alt="avatar" style="cursor: pointer" />
+            </a>
+            
+            
+                <p>Software Developer, Open Source Enthusiast and Life Adventurer</p>
+            
+           
+           <ul class="list-inline">
+               
+               <li>
+                   <a href="mailto:youremail@gmail.com">
+                      <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                      </span>
+                   </a>
+               </li>
+               
+               
+               
+               
+               
+               
+               <li>
+                   <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               <li>
+                   <a target="_blank" href="https://github.com/yourgithub">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               
+               
+               <li>
+                   <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+            
+            
+               
+               
+               
+               
+                </ul>
+            </div>
+    </section>
+	
+    
+    
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5>FEATURED TAGS</h5>
+        <div class="tags">
+            
+            
+               
+                    <a href="/tags/algorithm" title="algorithm">
+                        algorithm
+                    </a>
+               
+            
+               
+                    <a href="/tags/asp.net" title="asp.net">
+                        asp.net
+                    </a>
+               
+            
+               
+                    <a href="/tags/azure" title="azure">
+                        azure
+                    </a>
+               
+            
+               
+                    <a href="/tags/container" title="container">
+                        container
+                    </a>
+               
+            
+               
+                    <a href="/tags/css" title="css">
+                        css
+                    </a>
+               
+            
+               
+                    <a href="/tags/dev-tools" title="dev tools">
+                        dev tools
+                    </a>
+               
+            
+               
+                    <a href="/tags/devops" title="devops">
+                        devops
+                    </a>
+               
+            
+               
+                    <a href="/tags/javascript" title="javascript">
+                        javascript
+                    </a>
+               
+            
+               
+                    <a href="/tags/networking" title="networking">
+                        networking
+                    </a>
+               
+            
+               
+                    <a href="/tags/performance" title="performance">
+                        performance
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/security" title="security">
+                        security
+                    </a>
+               
+            
+        </div>
+    </section>
+    
+
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5>FRIENDS</h5>
+        <ul class="list-inline">
+            
+            <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+            
+        </ul>
+    </section>
+    
+    
+</div>
+
+	</div>
+</div>
+
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='/tags/security/index.xml' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

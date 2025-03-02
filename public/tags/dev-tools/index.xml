@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dev Tools on Ghassan&#39;s page</title>
+    <link>http://localhost:1313/tags/dev-tools/</link>
+    <description>Recent content in Dev Tools on Ghassan&#39;s page</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Dec 2024 18:41:54 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/dev-tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Artifacts Credential Provider</title>
+      <link>http://localhost:1313/post/2024_12_27_azure_artifact_cerdential_provider/</link>
+      <pubDate>Tue, 17 Dec 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_12_27_azure_artifact_cerdential_provider/</guid>
+      <description>&lt;p&gt;When you store your artifacts (NuGet, NPM, Docker&amp;hellip;) inside your private Azure Artifacts, you need to use credentials to pull those artifacts.&lt;br&gt;&#xA;You can require getting those artifacts from different tools that do your build: dotnet, nuget, msbuild, visual studio&amp;hellip;.&lt;br&gt;&#xA;In order to automate the aquisition of credentials needed from all these different tools, Microsoft provides a unified tool to automate aquisition those credentials: **Azure Artifacts Credential Provider&amp;quot;.&lt;/p&gt;&#xA;&lt;h1 id=&#34;introduction--underlying-technology&#34;&gt;Introduction &amp;amp; Underlying Technology.&lt;/h1&gt;&#xA;&lt;p&gt;Because artifacts are required when you need NuGet packages, and you need to preform NuGet operation, which will require you to authenticate, so the &lt;strong&gt;Credential Provider&lt;/strong&gt; is a NuGet plugin used by NuGet client.&lt;br&gt;&#xA;The NuGet client can be either:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Take your development environment anywhere and on any machine with Dev Containers</title>
+      <link>http://localhost:1313/post/2022_12_29_devcontainer/</link>
+      <pubDate>Thu, 29 Dec 2022 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_29_devcontainer/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://containers.dev/&#34;&gt;Dev containers&lt;/a&gt; provides a fantastic way to onboard a new developer up and running in matter of just clone the git repository.&lt;/p&gt;&#xA;&lt;p&gt;Dev containers allow you to create a docker container that will host all the development tools and libraries you use in your projects, and run it inside the container, and if you have an editor compatible then you can make the IDE connect to the containers and you can run or debug your code inside the containers.  And even if you don&amp;rsquo;t have a compatible IDE, then you can run it inside &lt;a href=&#34;https://github.com/features/codespaces&#34;&gt;github&amp;rsquo;s codespaces&lt;/a&gt;, which is compatible with Dev container.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

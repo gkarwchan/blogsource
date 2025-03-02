@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Everything you need to know about telemetry for your Asp.NET application on Azure." />
+    <meta property="og:title" content="Everything you need to know about telemetry for your Asp.NET application on Azure." />
+    <meta property="twitter:title" content="Everything you need to know about telemetry for your Asp.NET application on Azure." />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Everything you need to know about telemetry for your Asp.NET application on Azure. | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2023_02_24_application_insights_on_azure/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        <a class="tag" href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                    </div>
+                    <h1>Everything you need to know about telemetry for your Asp.NET application on Azure.</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Ghassan&#39;s page
+                             
+                            on 
+                            Friday, February 24, 2023
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>All of the services that Azure offers for the instrumentation and observability (monitoring) of applications are grouped under Azure Monitor.</p>
+<p>Three services fall under the banner of Azure Monitor:</p>
+<ol>
+<li>Azure Monitor itself, which offers the observability component to track your apps.</li>
+<li>Application Insights, or its substitute OpenTelemetry, which offers the instrumentation and telemetry components</li>
+<li>The analytics component is provided by Log Analytics.</li>
+</ol>
+<p>We will emphasise the instrumentation component in this post.</p>
+<h2 id="telemetry-and-instrumentation-in-azure">Telemetry and instrumentation in Azure.</h2>
+<p>Telemetry, the data collected to observe your application, can be broken into three types or &ldquo;pillars&rdquo;:</p>
+<ul>
+<li>Distributed Tracing</li>
+<li>Metrics</li>
+<li>Logs</li>
+</ul>
+<p>Azure provides two services that cover this area:</p>
+<ul>
+<li>Application Insights</li>
+<li>OpenTelemtry</li>
+</ul>
+<p>Application Insights is the service we will discuss in this post because it offers thorough and rich capabilities for gathering information about your application. Yet <code>OpenTelemetry</code> deserves a quick mention.</p>
+<h3 id="opentelemetry-on-azure">OpenTelemetry on Azure:</h3>
+<p>Resuming with Application Insights
+OpenTelemetry is the new kid in the hood and it is the future of telemetry. This initiative aims to standardize telemetry APIs and SDKs, and establish vendor-neutral SDKs for telemetry.<br>
+It is still in early phase of development, and it only cover the <strong>Distributed Tracing</strong> part of the telemetry.<br>
+The technology is widely utilised in the world of Docker and Kubernetes.<br>
+Recently, Azure Monitor began implementing OpenTelmetry by reading its data. Nonetheless, in general, we should choose Application Insights because it has far more functionality till this technology advances further, especially if we are working on App Service and Azure functionalities.</p>
+<p>Now back to Application Insights.</p>
+<h2 id="application-insights-and-auto-instrumentation">Application Insights and Auto-Instrumentation:</h2>
+<p>You can enable Application Insights on an App Service or Azure Function without writing any line of code.
+This feature is called Auto-instrumentation or “Run-time instrumentation”
+This feature is available because the App Service base image has a built-in agent that will collect the instrumentation and communicate with the Application Insights server.</p>
+<p>Asp.net core (on both linux and windows) supports Auto-instrumentation.</p>
+<p>To enable Auto-instrumentation on an App Service, on Azure Portal check the App Service, and on the left side there is <strong><code>Application Insigths</code></strong> blade.<br>
+
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/eflexlh7m9gd41lkpwv1.png" alt="Image description">
+
+
+Then you enable it on the App Service.
+
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/opsn6eio4ylbu2w9pxfd.png" alt="Image description">
+
+</p>
+<h4 id="auto-instrumentation-on-client-side">Auto-instrumentation on client side:</h4>
+<p>If you are using Asp.NET MVC application on Windows hosted App Service, or using Azure Static Web App, you can auto-instrument your JavaScript code, by just doing the following:<br>
+Add a new application setting <strong><code>APPINSIGHTS_JAVASCRIPT_ENABLED</code></strong> and set its value to <strong><code>true</code></strong>.<br>
+That will inject JavaScript SDK for Application Insights in your JavaScript code.</p>
+<p>Client-side instrumentation captures information about the user experience of the app, including page load times, details of browser exceptions, and performance data about AJAX calls.</p>
+<h2 id="application-insights-and-manual-instrumentation">Application Insights and Manual-Instrumentation:</h2>
+<p>Although Auto-instremenation will provide good coverage, it is not enough.
+We need to track our application manually from inside the code.
+The more we track from inside the code the more coverage we will have on the performance and operational issues we encounter in production, which translates to better support.</p>
+<h4 id="manual-instrumentation-on-the-aspnet-server-code">Manual instrumentation on the Asp.NET server code:</h4>
+<p>To collect telemetry from the code, we need to include NuGet package:</p>
+<pre tabindex="0"><code>Microsoft.ApplicationInsights.AspNetCore
+</code></pre><p>Then initialize the service from the code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> builder = WebApplication.CreateBuilder(args);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// The following line enables Application Insights telemetry collection.</span>
+</span></span><span style="display:flex;"><span>builder.Services.AddApplicationInsightsTelemetry();
+</span></span></code></pre></div><p>You can pass the connection string in the code, but better to provide it from the <code>appsettings.json</code> file as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#6272a4">// in appsettings.json
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#f1fa8c">&#34;ApplicationInsights&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;ConnectionString&#34;</span>: <span style="color:#f1fa8c">&#34;Copy connection string from Application Insights Resource Overview&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>By just adding these few lines, our SDK will collect lots of metrics from the running application. It will collect:</p>
+<ul>
+<li>Application Dependencies: for example communication with databases including sql statements, or with blob storage.</li>
+<li>Performance Counters: for example memory and CPU usage.</li>
+<li>Events Counter: There are built-in events that the SDK will collect, and you can create your own custom event. For a list of built-in events <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/eventcounters">check this link</a>.</li>
+</ul>
+<h4 id="what-to-capture-with-the-sdk">What to capture with the SDK</h4>
+<p>Many metrics can be collected, and each one has a corresponding config name which we can turned off</p>
+<ul>
+<li>Http request calls</li>
+<li>Performance counters (memory, CPU usage)</li>
+<li>Dependencies: <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/asp-net-dependencies#dependency-auto-collection">check this for a list of trackable dependencies</a></li>
+<li>Heart Beat feature</li>
+<li>Events: this deserve another post</li>
+</ul>
+<h4 id="frequency-of-metric-sampling">Frequency of metric sampling</h4>
+<p>How often the SDK will send sampling to Azure service?<br>
+We can configure that using sampling configuration. There are two options to define sampling frequency:</p>
+<ul>
+<li>Adaptive: which is the default</li>
+<li>Fixed-rate: which you can use to reduce the traffic to the server.</li>
+</ul>
+<h2 id="logging-to-application-insights">Logging to Application Insights</h2>
+<p>Finally, we need to do our logging in Application Insights.<br>
+First add this package:</p>
+<pre tabindex="0"><code>Microsoft.Extensions.Logging.ApplicationInsights
+</code></pre><p>then we add this to our <code>appsettings.json</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;ApplicationInsights&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;InstrumentationKey&#34;</span>: <span style="color:#f1fa8c">&#34;[The instrumentation key]&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;Logging&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;PathFormat&#34;</span>: <span style="color:#f1fa8c">&#34;[The path and file format used in file logging, e.g.: c:\\log-{Date}.txt]&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;LogLevel&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;Default&#34;</span>: <span style="color:#f1fa8c">&#34;Information&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;ApplicationInsightsLoggerProvider&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;LogLevel&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;Default&#34;</span>: <span style="color:#f1fa8c">&#34;Warning&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>and add this when you configure the service collection</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#6272a4">// as we discussed before</span>
+</span></span><span style="display:flex;"><span>services.AddApplicationInsightsTelemetry();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    services.AddLogging(logBuilder =&gt;
+</span></span><span style="display:flex;"><span>             {
+</span></span><span style="display:flex;"><span>                 logBuilder.AddApplicationInsights(YourInstrumentationKey)
+</span></span><span style="display:flex;"><span>                     <span style="color:#6272a4">// adding custom filter for specific use case. </span>
+</span></span><span style="display:flex;"><span>                     .AddFilter(<span style="color:#f1fa8c">&#34;Orleans&#34;</span>, (level) =&gt; level == LogLevel.Error);
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2023_02_22_azure_application_insight_performance/" data-toggle="tooltip" data-placement="top" title="Check performance bottleneck with Azure Application Insights.">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2023_03_05_buy_custom_domain_with_azure/" data-toggle="tooltip" data-placement="top" title="Buy Custom Domain With Azure for your App Service.">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2023_02_24_application_insights_on_azure\/',
+        pageTitle: 'Everything you need to know about telemetry for your Asp.NET application on Azure.',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

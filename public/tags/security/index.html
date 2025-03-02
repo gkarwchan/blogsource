@@ -101,18 +101,6 @@
                     </li>
                     
                         
-                        <li>
-                            <a href="/categories/life/">life</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/tech/">tech</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/tips/">tips</a>
-                        </li>
-                        
                     
                     
 		    
@@ -195,24 +183,28 @@
 <div data-pagefind-ignore="all">
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2018/05/23/external_system_auth/">
+    <a href="http://localhost:1313/post/2024_11_05_self-signed-certificates/">
         <h2 class="post-title">
-            微服务安全沉思录之三
+            Self certified certificates
         </h2>
-	
-        <h3 class="post-subtitle">
-            外部系统访问控制
-        </h3>
 	
         <div class="post-content-preview">
 	
-            一些外部的第三方系统可能需要访问系统内部的微服务。例如在网上商店的例子中，外部的推荐服务可能需要接入系统，以获取商店的商品目录信息。相对于内部服务之间的访问而言，外部系统的访问需要进行严格的安全控制。
-        
+            <p>A self-signed certificate is a type of SSL/TLS certificate that is generated and signed by the individual or organization that owns it, rather than being issued by a trusted Certificate Authority (CA).<br>
+For development process we need a certificate for the host <code>localhost</code>, and be stored in the certificate store which vary depends on the operating system.<br>
+To generate and use the certificate do the following two steps:</p>
+<ol>
+<li>generate the certificate</li>
+<li>store the certificate in the certificate store which vary depends on the operating system.</li>
+</ol>
+<h1 id="generate-self-signed-">Generate self-signed :</h1>
+<p>We will see how to generate self-signed certificate using:</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by     &#34;赵化冰&#34; on Wednesday, May 23, 2018
+        Posted by Ghassan&#39;s page on Tuesday, November 5, 2024
         
         
     
@@ -222,24 +214,48 @@
 <hr>
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2018/05/23/service_2_service_auth/">
+    <a href="http://localhost:1313/post/2024_08_19_microsoft_identity_platform/">
         <h2 class="post-title">
-            微服务安全沉思录之二
+            A Journey into Microsoft Identity Platform
         </h2>
-	
-        <h3 class="post-subtitle">
-            服务间认证与鉴权
-        </h3>
 	
         <div class="post-content-preview">
 	
-            除来自用户的访问请求以外，微服务应用中的各个微服务相互之间还有大量的访问,根据应用系统数据敏感程度不同，对于系统内微服务的访问也需要进行相应的安全控制。
-        
+            <p>It is not exaggeration if I said, Microsoft Identity Platform is bigger than any SAS authentication provider, and if you are using Azure as your cloud provider, then the authorization benefits that will add to your application off-the-shelf, won&rsquo;t be able to do it with any other platform without writing code.</p>
+<h1 id="usage-with-net">Usage with .NET</h1>
+<p>.NET has a library, which is considered part of the platform. It is <code>Microsfot.Identity.Web</code>.</p>
+<h3 id="how-to-use-it">How to use it?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">using</span> Microsoft.Identity.Web;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">using</span> Microsoft.Identity.Web.UI;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">using</span> Microsoft.IdentityModel.Tokens;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> builder = WebApplication.CreateBuilder(args);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Add services to the container.</span>
+</span></span><span style="display:flex;"><span>builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+</span></span><span style="display:flex;"><span>    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection(<span style="color:#f1fa8c">&#34;AzureAd&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>builder.Services.AddControllersWithViews(options =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> policy = <span style="color:#ff79c6">new</span> AuthorizationPolicyBuilder()
+</span></span><span style="display:flex;"><span>        .RequireAuthenticatedUser()
+</span></span><span style="display:flex;"><span>        .Build();
+</span></span><span style="display:flex;"><span>    options.Filters.Add(<span style="color:#ff79c6">new</span> AuthorizeFilter(policy));
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>builder.Services.AddRazorPages()
+</span></span><span style="display:flex;"><span>    .AddMicrosoftIdentityUI();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> app = builder.Build();
+</span></span></code></pre></div><h3 id="explaining-the-code">Explaining the code</h3>
+<p>The library <code>Microsoft.Idenity.Web</code> provides lots of workflow behind the scene, and it is the latest.
+More about the library later.
+What the code will do for your application:</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by     &#34;赵化冰&#34; on Wednesday, May 23, 2018
+        Posted by Ghassan&#39;s page on Monday, August 19, 2024
         
         
     
@@ -249,24 +265,40 @@
 <hr>
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2018/05/22/user_authentication_authorization/">
+    <a href="http://localhost:1313/post/2024_05_01_auth0_and_spa/">
         <h2 class="post-title">
-            微服务安全沉思录之一
+            Auth0 Single Sign On and seamless silent authentication
         </h2>
-	
-        <h3 class="post-subtitle">
-            用户访问认证与鉴权
-        </h3>
 	
         <div class="post-content-preview">
 	
-            这段时间对之前微服务安全相关的一些想法进行了进一步总结和归纳，理清在之前文章里面没有想得太清楚的地方，例如服务间的认证与鉴权以及用户身份在服务调用链中的传递。在这一系列博客里面将分为三个部分对微服务安全进行系统阐述：用户访问认证与鉴权，服务间认证与鉴权，外部系统访问控制。
-        
+            <p>Auth0 streamlines lots of complexity for you when it comes to authenticate your SPA application.<br>
+In this article we will talk about how Single Sign ON works.</p>
+<h2 id="auth0-single-sign-on-and-sessions">Auth0 Single Sign On and sessions:</h2>
+<p>Auth0 provides Single Sign-on through the use of sessions. There are up to three different sessions:</p>
+<ol>
+<li>Local session.</li>
+<li>Authorication Server session, if SSO is enabled.</li>
+<li>Identity Provider (IdP) session, if the user login through an IdP like Google, Facebook&hellip;etc.</li>
+</ol>
+<h2 id="how-sso-works">How SSO works:</h2>
+<ol>
+<li>the application will redirect the user to login page on Auth0 Authorization Server.</li>
+<li>Auth0 checks to see if there is an existing SSO cookie for the authorization server.</li>
+<li>there is no cookie, so the user will be redirect to the login page.</li>
+<li>after login, Auth0 will set SSO cookie and redirect the user to our application, returning the ID token.</li>
+<li>The user compes back to our application.</li>
+<li>the application will redirect to the login page.</li>
+<li>Auh0 check for SSO cookie.</li>
+<li>Auth0 will find the cookie and update it without the login process.</li>
+</ol>
+<p>The developer can check for the SSO session from their application by using Auth0 SDK: <a href="https://auth0.com/docs/libraries/auth0js">Auth0.js</a>.</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by     &#34;赵化冰&#34; on Wednesday, May 23, 2018
+        Posted by Ghassan&#39;s page on Wednesday, May 1, 2024
         
         
     
@@ -276,24 +308,48 @@
 <hr>
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2018/05/22/user_authentication_authorization/">
+    <a href="http://localhost:1313/post/2024_01_14_managedidentity/">
         <h2 class="post-title">
-            如何构建安全的微服务应用？
+            Using Azure Managed Identity to skip sharing credentials
         </h2>
-	
-        <h3 class="post-subtitle">
-            微服务架构下的认证和鉴权方案探讨
-        </h3>
 	
         <div class="post-content-preview">
 	
-            微服务架构的引入为软件应用带来了诸多好处：包括小开发团队，缩短开发周期，语言选择灵活性，增强服务伸缩能力等。与此同时，也引入了分布式系统的诸多复杂问题。其中一个挑战就是如何在微服务架构中实现一个灵活，安全，高效的认证和鉴权方案。本文将尝试就此问题进行一次比较完整的探讨。
-        
+            <p>A common challenge for developers is the management of secrets and credentials used to secure communication between different components making up a solution. Managed identities eliminate the need for developers to manage credentials.<br>
+While developers can securely store the secrets in Azure Key Vault, services need a way to access Azure Key Vault. Managed identities provide an automatically managed identity in Microsoft Entra ID for applications to use when connecting to Azure resources. Applications can use managed identities to obtain Microsoft Entra tokens without having to manage any credentials.</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by 赵化冰 on Saturday, February 3, 2018
+        Posted by Ghassan&#39;s page on Sunday, January 14, 2024
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2024_01_05_oauth2_and_spa/">
+        <h2 class="post-title">
+            How Single Page Application call a secure your API with OAuth2
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>When a public SPA needs to authenticate through OAuth 2.0, it faces a big challenge.<br>
+The challenge is you cannot store any type of secrets of credentials in your code. This is why OAuth provided a special flow to be used by SPA: Authorization Code Grant &amp; PKCE. We are going to describe this flow in details here.</p>
+<h2 id="summary-of-the-process">Summary of the process:</h2>
+<p>To describe the flow briefly, when the SPA requires to get a token it will direct the application to an Authorization Server (AS), which will use that server login page and UI, and the user will run the login process on the AS server website, then that server will return back to the original client website using a callback url passing the token to the SPA.<br>
+So the client SPA has no idea about the credentials and the client cannot intercept those credentials because the login run on Authorization Server website.</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Friday, January 5, 2024
         
         
     
@@ -306,6 +362,15 @@
 
             
 
+
+<ul class="pager" data-pagefind-ignore="all">
+    
+    
+    <li class="next">
+        <a href="/tags/security/page/2/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
 
 
        	</div>
@@ -411,34 +476,62 @@
             
             
                
-            
-               
-            
-               
-                    <a href="/tags/docker" title="docker">
-                        docker
+                    <a href="/tags/algorithm" title="algorithm">
+                        algorithm
                     </a>
                
             
                
-            
-               
-                    <a href="/tags/istio" title="istio">
-                        istio
+                    <a href="/tags/asp.net" title="asp.net">
+                        asp.net
                     </a>
                
             
                
-            
-               
-                    <a href="/tags/kubernetes" title="kubernetes">
-                        kubernetes
+                    <a href="/tags/azure" title="azure">
+                        azure
                     </a>
                
             
                
-                    <a href="/tags/microservice" title="microservice">
-                        microservice
+                    <a href="/tags/container" title="container">
+                        container
+                    </a>
+               
+            
+               
+                    <a href="/tags/css" title="css">
+                        css
+                    </a>
+               
+            
+               
+                    <a href="/tags/dev-tools" title="dev tools">
+                        dev tools
+                    </a>
+               
+            
+               
+                    <a href="/tags/devops" title="devops">
+                        devops
+                    </a>
+               
+            
+               
+                    <a href="/tags/javascript" title="javascript">
+                        javascript
+                    </a>
+               
+            
+               
+                    <a href="/tags/networking" title="networking">
+                        networking
+                    </a>
+               
+            
+               
+                    <a href="/tags/performance" title="performance">
+                        performance
                     </a>
                
             
@@ -448,24 +541,6 @@
                     <a href="/tags/security" title="security">
                         security
                     </a>
-               
-            
-               
-                    <a href="/tags/service-mesh" title="service mesh">
-                        service mesh
-                    </a>
-               
-            
-               
-                    <a href="/tags/tips" title="tips">
-                        tips
-                    </a>
-               
-            
-               
-            
-               
-            
                
             
         </div>

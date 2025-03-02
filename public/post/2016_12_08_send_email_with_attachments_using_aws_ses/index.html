@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Build emails with attachments using SMTP, MIME standard (AWS SES Case)" />
+    <meta property="og:title" content="Build emails with attachments using SMTP, MIME standard (AWS SES Case)" />
+    <meta property="twitter:title" content="Build emails with attachments using SMTP, MIME standard (AWS SES Case)" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Build emails with attachments using SMTP, MIME standard (AWS SES Case) | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2016_12_08_send_email_with_attachments_using_aws_ses/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                    </div>
+                    <h1>Build emails with attachments using SMTP, MIME standard (AWS SES Case)</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Ghassan&#39;s page
+                             
+                            on 
+                            Thursday, December 8, 2016
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>To send an email with AWS SES service, there are two options:</p>
+<ul>
+<li>Connecting directly to the AWS SMTP server with SMTP protocols.</li>
+<li>Or call AWS API over HTTPS.</li>
+</ul>
+<p>The SMTP is easier, but then you have to open SMTP ports (587 or 25 usually).</p>
+<h2 id="using-aws-ses-api">Using AWS SES API:</h2>
+<p>AWS SES API has two options to send emails as described in the documentation:</p>
+<ul>
+<li>Send simple text only formatted email.</li>
+<li>Send email with attachments as <strong>raw</strong> formatted email.</li>
+</ul>
+<p>If you are sending text-only email, then your life is easy, and the API is simple straight forward.<br>
+But sending email with attachments is not going to be straightforward, and I am going to describe the process here.</p>
+<blockquote>
+<p>PS: If you just want a code that works, you can just skip to the end of the article and get the code at the end of this article. But I am trying here to describe the details of the solution, and give deeper understanding of the email protocols.</p></blockquote>
+<h2 id="what-is-an-email-message-smtp">What is an email message: SMTP?</h2>
+<p>As the following diagram shows, the client sends email messages to an email serves using SMTP protocols over port 587, and email servers communicate with the same SMTP protocol over port 25.</p>
+<p>
+  <img src="/img/SMTP-ports-1.png" alt="SMTP Protocol">
+
+</p>
+<p>An email message that is transferred from end to end consists of three parts:</p>
+<ol>
+<li>Envelope: The envelope contains the actual routing information that is communicated between the email client and the mail server during the SMTP session. It is constructed by the SMTP protocol, and it is analogous to the information on a postal envelope.</li>
+<li>Header: Contains metadata of the message, examples are the sender’s address, the recipient’s address, the subject, and the date.</li>
+<li>Body: Contains the text message.</li>
+</ol>
+<h3 id="message-format">Message format:</h3>
+<p>SMTP covers only the envelope part, and the rest of the message is covered by another protocol the <strong><code>Internet Message Format</code></strong> (RFC 5322).<br>
+<strong><code>Internet Message Format</code></strong> defines the format of the Header and the Body that consists the message.</p>
+<h4 id="simple-message-format">Simple message format:</h4>
+<p>This is an example a simple message:</p>
+<pre tabindex="0"><code>From: &#34;Andrew&#34; &lt;andrew@example.com&gt;
+To: &#34;Bob&#34; &lt;bob@example.com&gt;
+Date: Fri, 17 Dec 2010 14:26:21 -0800
+Subject: Hello
+Message-ID: &lt;61967230-7A45-4A9D-BEC9-87CBCF2211C9@example.com&gt;
+Accept-Language: en-US
+Content-Language: en-US
+Content-Type: text/plain; charset=&#34;us-ascii&#34;
+Content-Transfer-Encoding: quoted-printable
+
+Hello, I hope you are having a good day.
+
+-Andrew
+</code></pre><p>From the previous example we can extract the following:</p>
+<ul>
+<li>The header and body are separated by a blank line.</li>
+<li>The header consists of multi lines, each line represent a header field with its value separated by a colon.</li>
+</ul>
+<h2 id="using-mime">Using MIME</h2>
+<p>The SMTP protocol was designed to send data composed of 7-bit ASCII characters. And <code>Internet Message Format</code> was design with that restriction in mind. But email spread out and there was requirements to send more complicated data format as attachments or Unicode characters, and the industry came up with a new protocol called <strong><code>Multipurpose Internet Mail Extensions (MIME)</code></strong>.<br>
+MIME still send data as 7-bit ASCII, but it encode the non-ASCII data to do that, and the most used encoding is base64 encoding.
+The MIME standard works by breaking the message body into multiple parts and then specifying what is to be done with each part.</p>
+<h3 id="email-with-an-attachment">Email with an attachment:</h3>
+<p>Let’s see an example of an attachment:</p>
+<pre tabindex="0"><code>From: &#34;Bob&#34; &lt;bob@example.com&gt;
+To: &#34;Andrew&#34; &lt;andrew@example.com&gt;
+Date: Wed, 2 Mar 2011 11:39:34 -0800
+Subject: Customer service contact info
+Message-ID: &lt;97DCB304-C529-4779-BEBC-FC8357FCC4D2@example.com&gt;
+Accept-Language: en-US
+Content-Language: en-US
+Content-Type: multipart/mixed;
+  boundary=&#34;_003_97DCB304C5294779BEBCFC8357FCC4D2&#34;
+MIME-Version: 1.0
+
+--_003_97DCB304C5294779BEBCFC8357FCC4D2
+Content-Type: text/plain; charset=&#34;us-ascii&#34;
+Content-Transfer-Encoding: quoted-printable
+
+Hi Andrew.  Here are the customer service names and telephone numbers I promised you. 
+
+See attached.
+
+-Bob
+
+--_003_97DCB304C5294779BEBCFC8357FCC4D2
+Content-Type: text/plain; name=&#34;cust-serv.txt&#34;
+Content-Description: cust-serv.txt
+Content-Disposition: attachment; filename=&#34;cust-serv.txt&#34;; size=1180;
+  creation-date=&#34;Wed, 02 Mar 2011 11:39:39 GMT&#34;;
+  modification-date=&#34;Wed, 02 Mar 2011 11:39:39 GMT&#34;
+Content-Transfer-Encoding: base64
+
+TWFyeSBEYXZpcyAtICgzMjEpIDU1NS03NDY1DQpDYXJsIFRob21hcyAtICgzMjEpIDU1NS01MjM1
+DQpTYW0gRmFycmlzIC0gKDMyMSkgNTU1LTIxMzQ=
+
+--_003_97DCB304C5294779BEBCFC8357FCC4D2
+</code></pre><p>We should notice the following:</p>
+<ul>
+<li>A blank line still separate the body from the header.</li>
+<li>The content type is <code>mulitpart/mixed</code>.</li>
+<li>A <code>boundary</code> parameter specifies where each part begin and ends.</li>
+<li>The <code>Content-Disposition</code> header field specifies how the client should handle the attachment.</li>
+<li>The <code>Content-Transfer-Encoding</code> is base64, and this is the standard way that the Mime types are stored in 7-bit Ascii based text, because the SMTP still transfer the message as 7-bit Ascii.</li>
+</ul>
+<h3 id="email-with-embedded-image">Email with embedded image:</h3>
+<p>Let’s see how an email with an embedded image is represented:</p>
+<pre tabindex="0"><code>From: Bob &lt;bob@example.com&gt;
+To: &lt;john@example.com&gt;
+Subject: The deal you want.
+Content-Type: multipart/related;
+	boundary=&#34;--boundary_1_16494d19-57aa-4462-a4c8-c8e5abefb2aa&#34;;
+	type=&#34;text/html&#34;
+
+----boundary_1_16494d19-57aa-4462-a4c8-c8e5abefb2aa
+Content-Type: text/html; charset=&#34;us-ascii&#34;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;img src=&#34;cid:BannerId&#34;&gt;&lt;br&gt;
+The deal you want
+&lt;/body&gt;
+&lt;/html&gt;
+
+----boundary_1_16494d19-57aa-4462-a4c8-c8e5abefb2aa
+Content-Type: image/jpeg
+Content-Transfer-Encoding: base64
+Content-ID: &lt;BannerId&gt;
+
+
+iVBORw0KGgoAAAANSUhEUgAAAykAAABXCAYAAAAAqgpGAAAAAXNSR0IArs4c6QAAAARnQU1B
+.......
+paVF/g8NZOLQHqTPpAAAAABJRU5ErkJggg==
+----boundary_1_16494d19-57aa-4462-a4c8-c8e5abefb2aa--
+</code></pre><p>We should notice the following:</p>
+<ul>
+<li>A blank line still separate the body from the header.</li>
+<li>A boundary parameter still used to separate parts.</li>
+<li>the content of the body must be HTML.</li>
+<li>The content type is <code>mulitpart/related</code> : and this type is used for compound documents, those messages in which the separate body parts are intended to work together to provide the full meaning of the message</li>
+<li>The image part has a header field called <code>Content-ID</code> which has value BannerId equal to an <code>ID</code> in the html document that specify where the image will be embedded, which is defined in the pattern <code>cid:BannerId</code>.
+The binary of the image is represented as base64.</li>
+</ul>
+<h2 id="calling-aws-ses-api-using-c">Calling AWS SES API using C#:</h2>
+<p>Let us now jump to programming, and see how we can call AWS SES API.</p>
+<h3 id="the-shortage-of-net-framework">The shortage of .NET framework:</h3>
+<p>.NET provides the namespace <strong><code>System.Net.Mail</code></strong> that helps interact with a SMTP server and send emails with complicated contents (attachments, embedded images, …etc). It abstracts the low level of generating these raw data of the email message.
+But, when we use AWS SES API, we want to see and use these raw messages generated by .NET classes. Unfortunately, .NET doesn’t provide an easy way to generate these raw messages.
+But there are three solutions:</p>
+<ol>
+<li>We build the raw message ourselves, which is going to be a nightmare and a magnet for bugs.</li>
+<li>Using un undocumented hack in .NET assemblies.</li>
+<li>Using third party libraries that does generate the raw message.
+Of course, I am not interested in building the raw message by myself, so let’s ignore that and describe the two other solutions:</li>
+</ol>
+<h3 id="using-a-hack-in-net-framework">Using a hack in .NET Framework</h3>
+<p>There is an undocumented way to generate the raw message from Microsoft .NET assemblies, but with a small hack. The namespace <code>System.Net.Mail</code> provides internal classes and members that cannot be called directly, but can be accessed using reflection. There are these two useful entities: <code>System.Net.Mail.MailMessage</code> has an internal method called <strong><code>Send</code></strong>, which will generate the <code>Raw</code> message and write it into a stream. <code>System.Net.Mail.MailWriter</code> is an internal class that is used by the above method to write the <code>Raw</code> message. I used this approach, and I will show a sample code of it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#ff79c6">void</span> SendMessage()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Here we construct the System.Net.Mail.MailMessage </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// using all the tools in the System.Net.Mail namespace </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// that help us build a complicated message.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// for examples: Attachment, LinedResource (for embedded resources)...</span>
+</span></span><span style="display:flex;"><span>    System.Net.Mail.MailMessage message = ConstructMessage();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Here where we generate the raw message</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> rawASCII_message = ConvertMessageToAscii(message);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd">string</span> ConvertMessageToAscii(MailMessage message)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Assembly assembly = <span style="color:#ff79c6">typeof</span>(SmtpClient).Assembly;
+</span></span><span style="display:flex;"><span>    Type mailWriterType = assembly.GetType(<span style="color:#f1fa8c">&#34;System.Net.Mail.MailWriter&#34;</span>);
+</span></span><span style="display:flex;"><span>    MemoryStream fileStream = <span style="color:#ff79c6">new</span> MemoryStream();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Create an instance of the internal class MailWriter</span>
+</span></span><span style="display:flex;"><span>    ConstructorInfo mailWriterContructor = mailWriterType.GetConstructor
+</span></span><span style="display:flex;"><span>        (BindingFlags.Instance | BindingFlags.NonPublic, <span style="color:#ff79c6">null</span>, <span style="color:#ff79c6">new</span>[] { <span style="color:#ff79c6">typeof</span>(Stream) }, <span style="color:#ff79c6">null</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">object</span> mailWriter = mailWriterContructor.Invoke(<span style="color:#ff79c6">new</span> <span style="color:#8be9fd">object</span>[] { fileStream });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Call the internal method &#34;Send&#34; of the MailMessage</span>
+</span></span><span style="display:flex;"><span>    MethodInfo sendMethod = <span style="color:#ff79c6">typeof</span>(MailMessage).GetMethod(<span style="color:#f1fa8c">&#34;Send&#34;</span>, 
+</span></span><span style="display:flex;"><span>        BindingFlags.Instance | BindingFlags.NonPublic);
+</span></span><span style="display:flex;"><span>    sendMethod.Invoke(message, BindingFlags.Instance 
+</span></span><span style="display:flex;"><span>        | BindingFlags.NonPublic, <span style="color:#ff79c6">null</span>, <span style="color:#ff79c6">new</span>[] { mailWriter, <span style="color:#ff79c6">true</span> }, <span style="color:#ff79c6">null</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Now mailWriter has the raw data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Read the stream as ASCII</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> reader = <span style="color:#ff79c6">new</span> StreamReader(mailWriter, Encoding.ASCII);
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> rawMessage = reader.ReadToEnd();
+</span></span><span style="display:flex;"><span>    MethodInfo closeMethod = mailWriter.GetType().GetMethod
+</span></span><span style="display:flex;"><span>        (<span style="color:#f1fa8c">&#34;Close&#34;</span>, BindingFlags.Instance | BindingFlags.NonPublic);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    closeMethod.Invoke(mailWriter, BindingFlags.Instance 
+</span></span><span style="display:flex;"><span>        | BindingFlags.NonPublic, <span style="color:#ff79c6">null</span>, <span style="color:#ff79c6">new</span> <span style="color:#8be9fd">object</span>[] { }, <span style="color:#ff79c6">null</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> rawMessage;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="third-party-solutions">Third-party solutions</h3>
+<p>The .NET community came up with third-party libraries that help parse/generate all MIME types that are even not supported by .NET framework:</p>
+<ul>
+<li>MimeKit.</li>
+<li>MimeKitLite.</li>
+<li>SharpMimeTools</li>
+<li>OpenPop.NET.</li>
+</ul>
+<p>and there are others.
+The above libraries will generate and parse MIME based raw messages.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2016_04_29_token_based_authentication_jwt/" data-toggle="tooltip" data-placement="top" title="Token Based Authentication and JWT.">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2017_09_26_advanced_https/" data-toggle="tooltip" data-placement="top" title="Advanced HTTP">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2016_12_08_send_email_with_attachments_using_aws_ses\/',
+        pageTitle: 'Build emails with attachments using SMTP, MIME standard (AWS SES Case)',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

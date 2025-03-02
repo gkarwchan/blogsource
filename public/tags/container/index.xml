@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Container on Ghassan&#39;s page</title>
+    <link>http://localhost:1313/tags/container/</link>
+    <description>Recent content in Container on Ghassan&#39;s page</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Dec 2022 19:51:56 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Take your development environment anywhere and on any machine with Dev Containers</title>
+      <link>http://localhost:1313/post/2022_12_29_devcontainer/</link>
+      <pubDate>Thu, 29 Dec 2022 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_29_devcontainer/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://containers.dev/&#34;&gt;Dev containers&lt;/a&gt; provides a fantastic way to onboard a new developer up and running in matter of just clone the git repository.&lt;/p&gt;&#xA;&lt;p&gt;Dev containers allow you to create a docker container that will host all the development tools and libraries you use in your projects, and run it inside the container, and if you have an editor compatible then you can make the IDE connect to the containers and you can run or debug your code inside the containers.  And even if you don&amp;rsquo;t have a compatible IDE, then you can run it inside &lt;a href=&#34;https://github.com/features/codespaces&#34;&gt;github&amp;rsquo;s codespaces&lt;/a&gt;, which is compatible with Dev container.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Prepare .NET core Microservice to be monitored by Kubernetes</title>
+      <link>http://localhost:1313/post/2022-12-28_prepare_aspnet_api_monitored_by_k8s/</link>
+      <pubDate>Tue, 27 Dec 2022 19:47:05 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022-12-28_prepare_aspnet_api_monitored_by_k8s/</guid>
+      <description>&lt;h2 id=&#34;kubernetes-monitoring&#34;&gt;Kubernetes Monitoring:&lt;/h2&gt;&#xA;&lt;p&gt;Kubernetes monitors the deployed microservices and check if any failure or a deadlock that makes the service not responding in order to restart the hosting container.&lt;br&gt;&#xA;Kubernetes achieve this by calling three different probes that determine the status of the container/pod. The three probes are:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;liveness&lt;/strong&gt;: which monitor any deadlock, or the service is down, and Kubernetes will remove the dead container and restart another one.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;startup&lt;/strong&gt;: Your service might need time at startup to wait for all its dependencies to be ready. Your service will implement this probe to tell Kubernetes that your service is ready or not to receive calls.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;readiness&lt;/strong&gt;: Will tell if your service is ready or not. it is different from liveness that Kubernetes won&amp;rsquo;t restart a new container, but just remove it from the load balancer.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;We create on our microservices three end points that correspond to the three Kubernetes probes, and define it in the deployment config file.&lt;br&gt;&#xA;As an example:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to fix common error using Azure Kubernetes AKS from WSL2</title>
+      <link>http://localhost:1313/post/2022_12_27_fix_common_error_kubernets_wsl2/</link>
+      <pubDate>Tue, 27 Dec 2022 19:43:59 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_27_fix_common_error_kubernets_wsl2/</guid>
+      <description>&lt;p&gt;When you use Kubernetes CLI tool: &lt;code&gt;kubectl&lt;/code&gt; that is installed while you installed Docker Desktop for Windows, there is a small glitch that it will fail the &lt;code&gt;kubectl&lt;/code&gt; commands, because of Kubeconfig file.&lt;/p&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s supposed you want to create a new cluster on AKS, as follows:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az aks create --resource-group MyResourceGropu --name MyMicroserviceCluster --node-count &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt; --enable-addons http_application_routing --generate-ssh-keys&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And then you need to set that new cluster as your default cluster to work on, so you use&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

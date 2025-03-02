@@ -102,18 +102,6 @@
                     </li>
                     
                         
-                        <li>
-                            <a href="/categories/life/">life</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/tech/">tech</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/tips/">tips</a>
-                        </li>
-                        
                     
                     
 		    
@@ -196,20 +184,23 @@
 <div data-pagefind-ignore="all">
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2018/02/09/docker-without-sudo/">
+    <a href="http://localhost:1313/post/2023_11_09_get_most_out_of_app_service/">
         <h2 class="post-title">
-            如何使用非root用户执行docker命令
+            Get the most out of Azure App Service.
         </h2>
 	
         <div class="post-content-preview">
 	
-            如何使用非root用户执行docker命令
-        
+            <p>Azure App service take care of tons of infrastructure, hosting, scalability, monitoring, deployment, DevOps, security and environment of your shoulders.</p>
+<p>But the question, are you really utilizing the most out of this wonderful service?<br>
+Azure App service has tons of features that make it easy to forget about some of them and missing using them.</p>
+<p>I am going to list this checklist and explain more details on them. There are features that <strong>Must</strong> be implemented, and there are features that are optional because you might be using other services to achieve their functionalities.</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by 赵化冰 on Friday, February 9, 2018
+        Posted by Ghassan&#39;s page on Thursday, November 9, 2023
         
         
     
@@ -219,24 +210,25 @@
 <hr>
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2018/05/22/user_authentication_authorization/">
+    <a href="http://localhost:1313/post/2023_10_27_oauth_openid_authenticationflow_in_plain_english/">
         <h2 class="post-title">
-            如何构建安全的微服务应用？
+            OAuth, OpenID Connect, SSO and Authentication Flows in plain English.
         </h2>
-	
-        <h3 class="post-subtitle">
-            微服务架构下的认证和鉴权方案探讨
-        </h3>
 	
         <div class="post-content-preview">
 	
-            微服务架构的引入为软件应用带来了诸多好处：包括小开发团队，缩短开发周期，语言选择灵活性，增强服务伸缩能力等。与此同时，也引入了分布式系统的诸多复杂问题。其中一个挑战就是如何在微服务架构中实现一个灵活，安全，高效的认证和鉴权方案。本文将尝试就此问题进行一次比较完整的探讨。
-        
+            <p>Gone are the days when you force your users to register into your application by creating username/password.
+Everyone wants to skip that process when they can identify themselves using other ways (google, facebook, twitter…), and they want to use their single sign on process to identify them across multiple applications and multiple websites.
+In this post I am trying to explain the process and its technologies in simple English.</p>
+<h2 id="an-explanation-by-example">An explanation by example:</h2>
+<p>So you are a developer who is building an application and want to allow your users to use their Google credentials to authenticate themselves into your account.
+I am going to explain to you the concepts and the technologies.</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by 赵化冰 on Saturday, February 3, 2018
+        Posted by Ghassan&#39;s page on Friday, October 27, 2023
         
         
     
@@ -246,20 +238,21 @@
 <hr>
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2018/01/02/nginmesh-install/">
+    <a href="http://localhost:1313/post/2023_10_17_subscribe_to_upload_file_azure_blog_storage/">
         <h2 class="post-title">
-            Nginx开源Service Mesh组件Nginmesh安装指南
+            Write Asp.NET webhook handlers for Azure Event Grid events.
         </h2>
 	
         <div class="post-content-preview">
 	
-            Nginmesh是NGINX的Service Mesh开源项目，用于Istio服务网格平台中的数据面代理。它旨在提供七层负载均衡和服务路由功能，与Istio集成作为sidecar部署，并将以“标准，可靠和安全的方式”使得服务间通信更容易。Nginmesh在今年底已经连续发布了0.2和0.3版本，提供了服务发现，请求转发，路由规则，性能指标收集等功能。本文介绍如何采用kubeadmin安装kubernetes集群并部署Nginmesh sidecar。
-        
+            <p>Azure Event Grid is a Pub Sub message distribution service that is fully integrated with Azure infrastructure. Almost all Azure services, and PaaS, and many third-party SaaS provides integration with Event Grid, by publishing events. It is supporting Http protocol for publishing events to it, and now with a newer upgrade it supports MQTT protocol for lighter fast IoT communications.</p>
+<p>It is providing Pub/Sub services from Azure services to the subscribers, and adding to that reliability to insure the delivery of the messages.</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by 赵化冰 on Tuesday, January 2, 2018
+        Posted by Ghassan&#39;s page on Tuesday, October 17, 2023
         
         
     
@@ -269,20 +262,30 @@
 <hr>
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2017/11/28/access-application-from-outside/">
+    <a href="http://localhost:1313/post/2023_07_12_hosting_backgroundservice_aspnet/">
         <h2 class="post-title">
-            如何从外部访问Kubernetes集群中的应用？
+            Best way to run background services in ASP.NET.
         </h2>
 	
         <div class="post-content-preview">
 	
-            我们知道，kubernetes的Cluster Network属于私有网络，只能在cluster Network内部才能访问部署的应用，那如何才能将Kubernetes集群中的应用暴露到外部网络，为外部用户提供服务呢？本文探讨了从外部网络访问kubernetes cluster中应用的几种实现方式。
-        
+            <p>Asp.Net provides many ways to run background processes. They are:</p>
+<ul>
+<li>IHostedService interface</li>
+<li>BackgroundService abstract class</li>
+<li>Worker Service using Microsoft.NET.SDK.Worker</li>
+</ul>
+<p>Actually they are just layers on top of each others, each layer provides extra functionality on the one below.<br>
+This post is going to describe each layer and what it provides.</p>
+<h2 id="running-background-tasks-using-ihostedservice">Running background tasks using <code>IHostedService</code></h2>
+<p>Asp.NET provides support for running background tasks in the same process that host Asp.net application.<br>
+By implementing <code>IHostedService</code> interface, your background task will start a little bit after Asp.Net application start, and end when Asp.Net application shutdown.</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by 赵化冰 on Tuesday, November 28, 2017
+        Posted by Ghassan&#39;s page on Wednesday, July 12, 2023
         
         
     
@@ -292,24 +295,22 @@
 <hr>
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2017/11/08/istio-canary-release/">
+    <a href="http://localhost:1313/post/2023_03_11_build_resilient_applications_azure/">
         <h2 class="post-title">
-            采用Istio实现灰度发布(金丝雀发布)
+            Build resilient applications accessing Azure services with no code.
         </h2>
-	
-        <h3 class="post-subtitle">
-            用户无感知的平滑业务升级
-        </h3>
 	
         <div class="post-content-preview">
 	
-            当应用上线以后，运维面临的一大挑战是如何能在不影响已上线业务的情况下进行升级。本文将介绍如何使用Istio实现应用的灰度发布（金丝雀发布）
-        
+            <p>When working on distributed system like systems that are running on the cloud, and microservices, then you should anticipate transient faults like temporary loss of network connection, or temporary unavailability of a service, or a service is busy.<br>
+This is why in cloud application, the term <strong>Building for resiliency</strong> become a pattern in building application, and it means properly handling these transient faults in the code.</p>
+<p>There are two common used patterns that we can use in our code, that can help build resilience application.</p>
+       
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by 赵化冰 on Wednesday, November 8, 2017
+        Posted by Ghassan&#39;s page on Saturday, March 11, 2023
         
         
     
@@ -440,34 +441,62 @@
             
             
                
-            
-               
-            
-               
-                    <a href="/tags/docker" title="docker">
-                        docker
+                    <a href="/tags/algorithm" title="algorithm">
+                        algorithm
                     </a>
                
             
                
-            
-               
-                    <a href="/tags/istio" title="istio">
-                        istio
+                    <a href="/tags/asp.net" title="asp.net">
+                        asp.net
                     </a>
                
             
                
-            
-               
-                    <a href="/tags/kubernetes" title="kubernetes">
-                        kubernetes
+                    <a href="/tags/azure" title="azure">
+                        azure
                     </a>
                
             
                
-                    <a href="/tags/microservice" title="microservice">
-                        microservice
+                    <a href="/tags/container" title="container">
+                        container
+                    </a>
+               
+            
+               
+                    <a href="/tags/css" title="css">
+                        css
+                    </a>
+               
+            
+               
+                    <a href="/tags/dev-tools" title="dev tools">
+                        dev tools
+                    </a>
+               
+            
+               
+                    <a href="/tags/devops" title="devops">
+                        devops
+                    </a>
+               
+            
+               
+                    <a href="/tags/javascript" title="javascript">
+                        javascript
+                    </a>
+               
+            
+               
+                    <a href="/tags/networking" title="networking">
+                        networking
+                    </a>
+               
+            
+               
+                    <a href="/tags/performance" title="performance">
+                        performance
                     </a>
                
             
@@ -477,24 +506,6 @@
                     <a href="/tags/security" title="security">
                         security
                     </a>
-               
-            
-               
-                    <a href="/tags/service-mesh" title="service mesh">
-                        service mesh
-                    </a>
-               
-            
-               
-                    <a href="/tags/tips" title="tips">
-                        tips
-                    </a>
-               
-            
-               
-            
-               
-            
                
             
         </div>

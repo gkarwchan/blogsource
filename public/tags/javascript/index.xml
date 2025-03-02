@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on Ghassan&#39;s page</title>
+    <link>http://localhost:1313/tags/javascript/</link>
+    <description>Recent content in Javascript on Ghassan&#39;s page</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Jun 2024 10:41:54 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stream long running webapi with Asp.NET Core and Javascript</title>
+      <link>http://localhost:1313/post/2024_06_22_streamline_long_process_with_aspnet_core_and_javascript/</link>
+      <pubDate>Sat, 22 Jun 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_06_22_streamline_long_process_with_aspnet_core_and_javascript/</guid>
+      <description>&lt;p&gt;If you have a long running process that return array of data, or a data that you can send back as chunk&#xA;of data, then you can stream the result.&lt;/p&gt;&#xA;&lt;h2 id=&#34;streaming-from-the-server&#34;&gt;Streaming from the server&lt;/h2&gt;&#xA;&lt;p&gt;In Asp.NET core 6 and later, it is so easy to stream back the result using &lt;code&gt;IAsyncEnumerable&lt;/code&gt;.&lt;br&gt;&#xA;Let us jump into the code right away:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt; [HttpGet(&amp;#34;ProcessLongData&amp;#34;)]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt; [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;async&lt;/span&gt; IAsyncEnumerable&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;&amp;gt; ProcessLongData(&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; input)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; i = &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;; i++)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#ff79c6&#34;&gt;await&lt;/span&gt; Task.Delay(&lt;span style=&#34;color:#bd93f9&#34;&gt;1000&lt;/span&gt;);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#ff79c6&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; i.ToString();&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;how-aspnet-serialize-the-result-back&#34;&gt;How ASP.NET serialize the result back?&lt;/h4&gt;&#xA;&lt;p&gt;Json serializer &lt;code&gt;System.Text.Json&lt;/code&gt; has a built-in support to serialize stream, so you don&amp;rsquo;t have to do anything because it is the default serializer for Asp.NET core.&lt;br&gt;&#xA;But what in case your project is using &lt;code&gt;NewtonsoftJson&lt;/code&gt;?&lt;br&gt;&#xA;Then you need to override the json serializer for that controller, or that method.&lt;br&gt;&#xA;You do that by using the &lt;a href=&#34;https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/understanding-action-filters-cs&#34;&gt;Action Filter&lt;/a&gt; in Asp.NET.&lt;br&gt;&#xA;Here is a code that will do that:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>No More JavaScript Transpiler</title>
+      <link>http://localhost:1313/post/2020_12_23_no_more_js_transpiler/</link>
+      <pubDate>Wed, 23 Dec 2020 16:02:54 -0700</pubDate>
+      <guid>http://localhost:1313/post/2020_12_23_no_more_js_transpiler/</guid>
+      <description>&lt;p&gt;With modern browsers supporting ES6 modules, and Edge is adopting Chromium which align the major browsers to use latest EcmaScript features, we don&amp;rsquo;t need to use transpilers like Webpack or Gulp.&lt;br&gt;&#xA;This will make it easier on many areas, and enhance the performance of our applications.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Memoization in Python and JavaScript</title>
+      <link>http://localhost:1313/post/2020_09_20_memoization_python_javascript/</link>
+      <pubDate>Sun, 20 Sep 2020 09:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020_09_20_memoization_python_javascript/</guid>
+      <description>&lt;p&gt;Memoization is a technique that is used a lot in Dynamic Programming and in general to speed up algorithms.&lt;br&gt;&#xA;Memoization is the same as caching but in functional programming. The Caching mechanism will store the data into a cache store, and that data can be from anywhere (HTTP page, REST call, &amp;hellip; etc) , where memoization is specific to cache the results of a function, and it create and maintain the store inside the function itself (so the function will be pure function) and send the store as a parameter into the function arguments.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ajax, CORS, JSONP and the battle with Same-Origin Policy</title>
+      <link>http://localhost:1313/post/2015_12_16_ajax_cors/</link>
+      <pubDate>Wed, 16 Dec 2015 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2015_12_16_ajax_cors/</guid>
+      <description>&lt;p&gt;All modern browsers have a built-in security policy called &lt;code&gt;Same-origin policy&lt;/code&gt;, which help mitigate many vulnerabilities and security flaws. This policy means the browser can only pull data from the same site.&lt;br&gt;&#xA;Same site means pages that share the scheme (http, ftp, https&amp;hellip;), and the host name and the port.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-clash-between-same-origin-policy-and-ajax&#34;&gt;The clash between Same-Origin Policy and Ajax&lt;/h2&gt;&#xA;&lt;p&gt;This policy was useful for a while to protect against XSS, but with the advance of ajax, and requesting data and resources from different domains and sites, then this policy become an obstacle.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CSS Fonts</title>
+      <link>http://localhost:1313/post/2015_11_26_css_fonts/</link>
+      <pubDate>Thu, 26 Nov 2015 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2015_11_26_css_fonts/</guid>
+      <description>&lt;p&gt;The simplist way to use different fonts in your web site is using fonts from the &amp;ldquo;Web-Safe&amp;rdquo; fonts&lt;a href=&#34;https://en.wikipedia.org/wiki/Core_fonts_for_the_Web&#34;&gt;[1]&lt;/a&gt;  &lt;a href=&#34;https://www.w3schools.com/cssref/css_websafe_fonts.php&#34;&gt;[2]&lt;/a&gt;.&lt;br&gt;&#xA;But, no impressive design will depend only on these web-safe fonts, and designers add their own preferable fonts to the web site they are building.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-to-add-your-preferable-fonts&#34;&gt;How to add your preferable fonts?&lt;/h2&gt;&#xA;&lt;p&gt;Fonts comes as files that you have to upload to the site, and then reference them in the CSS file.&lt;br&gt;&#xA;Usually font vendors provide fonts with different formats in order to be consumable by many different browsers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CSS Reset</title>
+      <link>http://localhost:1313/post/2015_11_18_css_reset/</link>
+      <pubDate>Wed, 18 Nov 2015 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2015_11_18_css_reset/</guid>
+      <description>&lt;p&gt;Every web developer had an experience where he test his web site on Chrome, IE and FireFox, to find out that the experience is a little bit different, because browsers have their own default implementation and rendering for the HTML elements.&#xA;Which means if you don&amp;rsquo;t overwrite the default implementation with your own CSS rules, then the browser will use its own implementation.&lt;br&gt;&#xA;If you are very keen on making the exact same user experience between all browsers even with the smallest details, then the community came up with a technique called &amp;ldquo;CSS Reset&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

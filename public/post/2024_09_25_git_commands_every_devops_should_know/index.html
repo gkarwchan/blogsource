@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Git Tools Every DevOps Engineer Should Know" />
+    <meta property="og:title" content="Git Tools Every DevOps Engineer Should Know" />
+    <meta property="twitter:title" content="Git Tools Every DevOps Engineer Should Know" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Git Tools Every DevOps Engineer Should Know | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2024_09_25_git_commands_every_devops_should_know/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                    </div>
+                    <h1>Git Tools Every DevOps Engineer Should Know</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Ghassan&#39;s page
+                             
+                            on 
+                            Wednesday, September 25, 2024
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>As a DevOps engineer managing an active Git repository with hundreds of commits daily, you&rsquo;ll inevitably face challenges that require a solid understanding of Git and its ecosystem. This post covers common issues that teams encounter while using Git and the tools used to address them. Each tool mentioned deserves a dedicated post, but here’s a brief overview of the essentials.</p>
+<p>The tools we&rsquo;ll cover:</p>
+<ul>
+<li>Maintaining the health of the repository.</li>
+<li>Managing large files.</li>
+<li>Permanently deleting files from the entire history.</li>
+<li>Purging large historical data.</li>
+<li>Speeding up work on huge repositories.</li>
+<li>Automatically generating a changelog for releases.</li>
+</ul>
+<h1 id="cleaning-dead-and-unreachable-items-in-your-repo">Cleaning Dead and Unreachable Items in Your Repo:</h1>
+<p>Just like performing a &ldquo;Disk Cleanup&rdquo; on your computer, a Git repository can accumulate unreachable items (such as old commits or branches). Git&rsquo;s git gc (garbage collection) command cleans these up. This command:</p>
+<ol>
+<li>Compresses objects.</li>
+<li>Cleans up orphaned data (like unreachable commits or branches).</li>
+<li>Enhances performance.</li>
+</ol>
+<blockquote>
+<p>Remarkable to know that some commands will do built-in auto <code>gc</code>
+the following commands do that:</p>
+<ol>
+<li>git commit</li>
+<li>git merge</li>
+<li>git pull</li>
+<li>git rebase</li>
+</ol></blockquote>
+<p>Although these commands perform built-in cleaning, it&rsquo;s still recommended to run git gc manually from time to time. Some DevOps teams automate this process in their CI/CD pipelines after every release.</p>
+<h1 id="managing-large-files">Managing Large Files:</h1>
+<p>When you add a file to Git, it stores the file in its database along with metadata for tracking. For very large files (e.g., in the gigabytes range), this process can be costly, which is why Git limits the size of uploaded files. For example, GitHub’s file size limits are as follows:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Product</th>
+          <th>Max file size</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GitHub Free</td>
+          <td>2 GB</td>
+      </tr>
+      <tr>
+          <td>GitHub Pro</td>
+          <td>2 GB</td>
+      </tr>
+      <tr>
+          <td>GitHub Team</td>
+          <td>4 GB</td>
+      </tr>
+      <tr>
+          <td>GitHub Enterprise Cloud</td>
+          <td>5 GB</td>
+      </tr>
+  </tbody>
+</table>
+<p>To manage large files effectively, Git offers an extension called <a href="https://git-lfs.com/">Git Large File Storage</a>. Instead of storing large files in the Git database, LFS stores them externally and tracks them using lightweight pointers in Git.</p>
+<h3 id="how-to-use-git-lfs">How to use Git LFS?</h3>
+<p>After downloading and installing Git LFS, enable it by running:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git lfs install
+</span></span></code></pre></div><p>You can then configure specific file types to be tracked by LFS, for example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git lfs track <span style="color:#f1fa8c">&#34;*.pdf&#34;</span>
+</span></span></code></pre></div><p>From this point, any PDF files will be handled by LFS.</p>
+<h1 id="permanently-deleting-files-from-git-history-and-purging-repositories">Permanently Deleting Files from Git History and Purging Repositories</h1>
+<p>Sometimes, a sensitive file (like credentials) or a large, unnecessary file gets committed by mistake. In such cases, you&rsquo;ll need to permanently remove it from the Git history. Additionally, you may want to purge a repository’s old, unneeded branches and tags to reduce its size.</p>
+<p>To handle these tasks, two tools can rewrite Git history:</p>
+<ul>
+<li>git filter-repo</li>
+<li>BFG Repo-Cleaner</li>
+</ul>
+<blockquote>
+<p>Important: These tools rewrite the repository history. Be sure to close any open pull requests first, as the PRs may break after the history changes.</p></blockquote>
+<h3 id="using-bfg-repo-cleaner">Using BFG Repo-Cleaner</h3>
+<p>The BFG Repo-Cleaner specializes in removing unwanted files from a Git repository. It&rsquo;s faster and simpler than <code>git filter-repo</code>, but it is more limited, focusing only on file deletion and text replacement.</p>
+<p>To use it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># create bare repository</span>
+</span></span><span style="display:flex;"><span>git clone --mirror git://github.com/&lt;username&gt;/myrepo.git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># delete the required file</span>
+</span></span><span style="display:flex;"><span>java -jar bfg.jar --delete-files &lt;path to files&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># or replace text in a file, which will arease all data</span>
+</span></span><span style="display:flex;"><span>java -jar bfg.jar --replace-text &lt;path to files&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># then clean your local reflog from those orphan entries</span>
+</span></span><span style="display:flex;"><span>git reflog expire --expire<span style="color:#ff79c6">=</span>now --all
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># and run garbage collection to prune all orphan entries from the repository</span>
+</span></span><span style="display:flex;"><span>$ git gc --prune<span style="color:#ff79c6">=</span>now --aggressive
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># then you need to push with force the cleaned repository back</span>
+</span></span><span style="display:flex;"><span>git push --force
+</span></span></code></pre></div><p>This process alter the repo&rsquo;s history, which means will change the SHAs for that commit you are altering, and will change all its child and dependent commits.<br>
+So before doing that, make sure to close any pull requestes in your repository.</p>
+<p>BFG and other tools that will change the history will work on bare repository</p>
+<h3 id="using-git-filter-repo">Using git filter-repo</h3>
+<p><a href="https://github.com/newren/git-filter-repo">git-filter-repo</a> is a more comprehensive tool for rewriting Git history, purging unwanted data, and trimming repository size. It’s more versatile than BFG and handles many complex use cases.</p>
+<h1 id="dealing-with-large-repositories">Dealing with Large Repositories:</h1>
+<p>If your team works with a large repository, you may need a solution to improve performance without sacrificing history. The best tool for this is <a href="https://github.com/microsoft/scalar/">Scalar</a>, developed by Microsoft after managing their massive Windows repository.</p>
+<p>Scalar is built on top of <a href="https://github.com/microsoft/VFSForGit"><code>VFS For Git</code></a>, or <strong><code>Virtual File System For Git</code></strong>, and still uses this technology under the hood.</p>
+<p>Scalar works seamlessly with large repositories by using a combination of Git LFS and efficient file tracking systems.<br>
+Scalar includes a background service that runs on developer machines to monitor and sync repositories, keeping them healthy and up-to-date. It requires a Git service provider that supports the GVFS protocol, such as GitHub or Azure Repos.</p>
+<h1 id="automatically-generating-a-changelog-for-releases">Automatically Generating a Changelog for Releases</h1>
+<p>During development, your team adds new features, fixes bugs, and commits meaningful messages. When it&rsquo;s time for a release, you&rsquo;ll want a summary of these changes. A common approach is to create a <code>CHANGELOG</code> file.</p>
+<p>You can use <code>git log</code> to list changes since the last release:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log &lt;tag-or-branch-of-last-release&gt;..&lt;current-tag&gt; 
+</span></span></code></pre></div><p>However, this output can be noisy. Two tools can help generate cleaner, more useful changelogs:</p>
+<ul>
+<li>gitchangelog</li>
+<li>github-changelog-generator</li>
+</ul>
+<h3 id="gitchangelog">gitchangelog</h3>
+<p><a href="https://pypi.org/project/gitchangelog/">gitchangelog</a> is a python tool that parses commit messages using a defined pattern to create a well-organized report from Git logs.</p>
+<h3 id="github-changelog-generator">github-changelog-generator</h3>
+<p><a href="https://github.com/github-changelog-generator/github-changelog-generator">github-changelog-generator</a> is a Ruby tool that generates changelogs by parsing pull request messages on GitHub.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2024_09_24_team_collaboration_using_git_fork/" data-toggle="tooltip" data-placement="top" title="Enhancing Team Collaboration with a Git Forking Strategy">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2024_10_26_upload_files_using_stream_with_aspnet/" data-toggle="tooltip" data-placement="top" title="Upload files using streaming in Asp.NET">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2024_09_25_git_commands_every_devops_should_know\/',
+        pageTitle: 'Git Tools Every DevOps Engineer Should Know',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

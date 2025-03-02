@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Prepare .NET core Microservice to be monitored by Kubernetes" />
+    <meta property="og:title" content="Prepare .NET core Microservice to be monitored by Kubernetes" />
+    <meta property="twitter:title" content="Prepare .NET core Microservice to be monitored by Kubernetes" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Prepare .NET core Microservice to be monitored by Kubernetes | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2022-12-28_prepare_aspnet_api_monitored_by_k8s/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        <a class="tag" href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        <a class="tag" href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                    </div>
+                    <h1>Prepare .NET core Microservice to be monitored by Kubernetes</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Ghassan&#39;s page
+                             
+                            on 
+                            Tuesday, December 27, 2022
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h2 id="kubernetes-monitoring">Kubernetes Monitoring:</h2>
+<p>Kubernetes monitors the deployed microservices and check if any failure or a deadlock that makes the service not responding in order to restart the hosting container.<br>
+Kubernetes achieve this by calling three different probes that determine the status of the container/pod. The three probes are:</p>
+<ol>
+<li><strong>liveness</strong>: which monitor any deadlock, or the service is down, and Kubernetes will remove the dead container and restart another one.</li>
+<li><strong>startup</strong>: Your service might need time at startup to wait for all its dependencies to be ready. Your service will implement this probe to tell Kubernetes that your service is ready or not to receive calls.</li>
+<li><strong>readiness</strong>: Will tell if your service is ready or not. it is different from liveness that Kubernetes won&rsquo;t restart a new container, but just remove it from the load balancer.</li>
+</ol>
+<p>We create on our microservices three end points that correspond to the three Kubernetes probes, and define it in the deployment config file.<br>
+As an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Pod
+</span></span><span style="display:flex;"><span> ....
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: myservice
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">livenessProbe</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">httpGet</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">path</span>: /live
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">initialDelaySeconds</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">periodSeconds</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">readinessProbe</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">httpGet</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">path</span>: /ready
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">startupProbe</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">httpGet</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">path</span>: /started
+</span></span></code></pre></div><p>We don&rsquo;t have to implement all three and just implement what is useful for our case.</p>
+<blockquote>
+<p>P.S: Because <code>startup</code> and <code>readiness</code> overlap about checking external dependencies, most systems just implement one of them.</p></blockquote>
+<h2 id="aspnet-core-health-check-features">ASP.NET Core health check features:</h2>
+<p>ASP.NET offers health checks middleware and libraries for reporting the health of the app, and we don&rsquo;t have to build that from scratch.<br>
+Let us jump to the code and write a health check for liveness, which only check if the service respond to the url &ldquo;live&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>builder.Services.AddHealthChecks()
+</span></span><span style="display:flex;"><span>       .AddCheck(<span style="color:#f1fa8c">&#34;self&#34;</span>, () =&gt; HealthCheckResult.Healthy());
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> app = builder.Build();
+</span></span><span style="display:flex;"><span>app.UseHealthChecks(<span style="color:#f1fa8c">&#34;/live&#34;</span>, <span style="color:#ff79c6">new</span> HealthCheckOptions
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>       Predicate = r =&gt; r.Name.Contains(<span style="color:#f1fa8c">&#34;self&#34;</span>)
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><p>The above code will respond to the URL: <code>live</code> and return a string &ldquo;Healthy&rdquo;.</p>
+<p>Our service is using Sql Server, so let us write a health check for readiness by checking if the sql server is available.<br>
+Because Sql server is very common dependency in DOT.NET world, so you will expect lots of developers had to write that health check. So the community came up with many common used checks and added them in a nuget package.</p>
+<h4 id="common-occurring-health-check">Common occurring health check.</h4>
+<p>Most microservices are using some kind of data store, and maybe queue messaging software.<br>
+Checking these dependencies are part of the health check. The ASP.NET community came up with a library of predefined checks on common used resources, like for example:</p>
+<ul>
+<li>SQL Server</li>
+<li>RabbitQ</li>
+<li>AWS S3
+&hellip;.<br>
+Checkout the library <a href="https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks#health-checks">AspNetCore.Diagnostics.HealthChecks</a> to check all built-in predefined checks.</li>
+</ul>
+<p>As an example, to check the database connection as part of the healtcheck by using the above library we can write:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span>builder.Services.AddHealthChecks()
+</span></span><span style="display:flex;"><span>.AddSqlServer(builder.Configuration.GetConnectionString(<span style="color:#f1fa8c">&#34;DefaultConnection&#34;</span>));
+</span></span></code></pre></div><p>If you didn&rsquo;t find your dependency in that library then just search on github and for sure you will find someone who already did that.</p>
+<p>So let assume our application is using sql server and redis , and let us write our readiness check by checking them both:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>builder.Services.AddHealthChecks()
+</span></span><span style="display:flex;"><span>       .AddCheck(<span style="color:#f1fa8c">&#34;self&#34;</span>, () =&gt; HealthCheckResult.Healthy())
+</span></span><span style="display:flex;"><span>.AddSqlServer(builder.Configuration.GetConnectionString(<span style="color:#f1fa8c">&#34;DefaultConnection&#34;</span>,
+</span></span><span style="display:flex;"><span>              tags: <span style="color:#ff79c6">new</span>[] {<span style="color:#f1fa8c">&#34;dependencies&#34;</span>})
+</span></span><span style="display:flex;"><span>.AddRedis(<span style="color:#f1fa8c">&#34;redis&#34;</span>,
+</span></span><span style="display:flex;"><span>              tags: <span style="color:#ff79c6">new</span>[] {<span style="color:#f1fa8c">&#34;dependencies&#34;</span>});
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> app = builder.Build();
+</span></span><span style="display:flex;"><span>app.UseHealthChecks(<span style="color:#f1fa8c">&#34;/live&#34;</span>, <span style="color:#ff79c6">new</span> HealthCheckOptions
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>       Predicate = r =&gt; r.Name.Contains(<span style="color:#f1fa8c">&#34;self&#34;</span>)
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span> app.UseHealthChecks(<span style="color:#f1fa8c">&#34;/ready&#34;</span>, <span style="color:#ff79c6">new</span> HealthCheckOptions
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>    Predicate = r =&gt; r.Tags.Contains(<span style="color:#f1fa8c">&#34;dependencies&#34;</span>)
+</span></span><span style="display:flex;"><span> });
+</span></span></code></pre></div><p>The above code will create two health check, on is the basic default one, and associate it with the url &ldquo;live&rdquo;, and the second will check sql server and redis and associate it with the url &ldquo;ready&rdquo;.</p>
+<p>And now your service is ready to be deployed to Kubernetes.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2022_12_27_fix_common_error_kubernets_wsl2/" data-toggle="tooltip" data-placement="top" title="How to fix common error using Azure Kubernetes AKS from WSL2">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2022_12_29_devcontainer/" data-toggle="tooltip" data-placement="top" title="Take your development environment anywhere and on any machine with Dev Containers">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2022-12-28_prepare_aspnet_api_monitored_by_k8s\/',
+        pageTitle: 'Prepare .NET core Microservice to be monitored by Kubernetes',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

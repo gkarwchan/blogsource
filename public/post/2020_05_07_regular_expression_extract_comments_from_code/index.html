@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="Regular expression: Extract Comments From Code" />
+    <meta property="og:title" content="Regular expression: Extract Comments From Code" />
+    <meta property="twitter:title" content="Regular expression: Extract Comments From Code" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Regular expression: Extract Comments From Code | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2020_05_07_regular_expression_extract_comments_from_code/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                    </div>
+                    <h1>Regular expression: Extract Comments From Code</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Ghassan Karwchan
+                             
+                            on 
+                            Thursday, May 7, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>Explain advanced concepts of Regular Expressions through practical receipes:<br>
+In this recipe we are going to cover:</p>
+<ul>
+<li>Capturing Group</li>
+<li>Negated Character Class</li>
+<li>Greedy / non-greedy quantifier.</li>
+</ul>
+<h2 id="problem-description">Problem Description</h2>
+<p>We need to parse a file of code to extract the comments in the code.<br>
+The comments can be single line comments:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#6272a4">// this is a single line comment
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>x <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>; <span style="color:#6272a4">// a single line comment after code
+</span></span></span></code></pre></div><p>Or multi lines</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#6272a4">/* This is one way of writing comments */</span> 
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">/* This is a multiline 
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">   comment. These can often
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">   be useful*/</span>
+</span></span></code></pre></div><br />
+<br />
+<h2 id="code">Code</h2>
+<p>The final code in JavaScript:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">function</span> processData(inputText) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">var</span> t <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">String</span>.raw<span style="color:#f1fa8c">`(//[^\n]*|/\*[\s\S]*?\*/)`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">var</span> ex <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> <span style="color:#8be9fd;font-style:italic">RegExp</span>(t, <span style="color:#f1fa8c">&#39;g&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">var</span> ar <span style="color:#ff79c6">=</span> inputText.match(ex).map(x =&gt; 
+</span></span><span style="display:flex;"><span>        x.split(<span style="color:#f1fa8c">&#39;\n&#39;</span>).map(y =&gt; y.trimStart()).join(<span style="color:#f1fa8c">&#39;\n&#39;</span>)
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> ar
+</span></span><span style="display:flex;"><span>} 
+</span></span></code></pre></div><p>And Python</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> re
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">extract_comments</span>(txt):
+</span></span><span style="display:flex;"><span>    comments <span style="color:#ff79c6">=</span> [ j<span style="color:#ff79c6">.</span>lstrip() <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> re<span style="color:#ff79c6">.</span>findall(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(//[^\n]*|/\*.*?\*/)&#39;</span>, 
+</span></span><span style="display:flex;"><span>        txt, re<span style="color:#ff79c6">.</span>MULTILINE <span style="color:#ff79c6">|</span> re<span style="color:#ff79c6">.</span>DOTALL) <span style="color:#ff79c6">for</span> j <span style="color:#ff79c6">in</span> i<span style="color:#ff79c6">.</span>split(<span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#39;</span>)]
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">.</span>join(comments)
+</span></span></code></pre></div><br />
+<br />
+<h2 id="code-description">Code Description</h2>
+<p>Let us explain the code.</p>
+<p>For Python:</p>
+<ol>
+<li>we start by writing the pattern in a string and prefix it with <strong><code>r</code></strong> prefix, which treat the rest as <code>Raw</code> string, which means ignore the escape character <strong><code>\</code></strong> and treat it as normal character.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;the pattern string&#39;</span>
+</span></span></code></pre></div></li>
+<li>Because we want to extract the comments in the code, so we have to create <code>Capturing Group</code>. The capture group will capture the text matched by them into a numbered group. We create a capture group with <strong><code>()</code></strong>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(the pattern of comments to match)&#39;</span>
+</span></span></code></pre></div></li>
+<li>We have two styles of comments to capture: single line comment, and multi-lines comment. this is why we separate them with <strong><code>|</code></strong>. so our regular expression format is:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(single line format | multi-line format)&#39;</span>
+</span></span></code></pre></div></li>
+<li>The first comment style is single line comment, which starts with <strong><code>//</code></strong>.</li>
+<li>and then we should match all the rest of characters until new line. To do that we use <strong><code>Negated Character Class</code></strong> : <code>[^\n]*</code> which means any character but new line. Negated Character Class will match any character that is not in the negated character class.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(//[^\n]*| multi-line format)&#39;</span>
+</span></span></code></pre></div></li>
+<li>We are done with first style of comments, and let us move to the second style of comments which is multi-line.</li>
+<li>the multi-line comment starts with <strong><code>/*</code></strong>. We represent that with <code>/\*</code>. Notice how we added the escape character <code>\ </code> before the star, so we treat the star as a normal star and not a special character.</li>
+<li>Then we need to match any character including new line, and to do that we use the special character (Dot) <strong><code>.</code></strong>. The special character <strong><code>.</code></strong> (Dot) will match any character except the new line, but in Python there is an option we can specify to makes the Dot matches new line, and that option will be passed to match statement <code>re.DOTALL</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>re<span style="color:#ff79c6">.</span>findall(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(pattern with Dot)&#39;</span>, txt, re<span style="color:#ff79c6">.</span>MULTILINE <span style="color:#ff79c6">|</span> re<span style="color:#ff79c6">.</span>DOTALL)
+</span></span></code></pre></div></li>
+<li>to close the multi-line comment we add the following to the pattern: <code>\*/</code>, which make the whole pattern as follows:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>re<span style="color:#ff79c6">.</span>findall(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(//[^\n]*|/\*.*\*/)&#39;</span>, txt, re<span style="color:#ff79c6">.</span>MULTILINE <span style="color:#ff79c6">|</span> re<span style="color:#ff79c6">.</span>DOTALL)
+</span></span></code></pre></div></li>
+<li>Now there is a problem with previous code, which is caused by <code>Greedy quantifier</code>. We will discuss this in details later, but now to continue and finish, to fix the problem we add <code>?</code> after the star <code>*</code> to be as follows:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>re<span style="color:#ff79c6">.</span>findall(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(//[^\n]*|/\*.*?\*/)&#39;</span>, txt, re<span style="color:#ff79c6">.</span>MULTILINE <span style="color:#ff79c6">|</span> re<span style="color:#ff79c6">.</span>DOTALL)
+</span></span></code></pre></div></li>
+</ol>
+<p>Before we jump to greedy quantifier, let us discuss JavaScript code.</p>
+<h4 id="javascript-code">JavaScript Code</h4>
+<p>The JavaScript code is very similar to the python except one important exception. JavaScript doesn&rsquo;t have an option to force the special character <code>.</code> (Dot) to match new line as in Python, and the alternative is to match this:
+<code>javascript [\s\S]*? </code>
+And for an alternative for <code>re.MULTILINE</code> in python there is a flag <code>g</code> in JavaScript.
+<code>javascript var t = String.raw`(//[^\n]*|/\*[\s\S]*?\*/)` var ex = new RegExp(t, 'g') </code></p>
+<br />
+<br />
+<h2 id="greedy-and-non-greedy-quantifier">Greedy and non-greedy quantifier:</h2>
+<p>An Example on extracting comments that are not working:</p>
+<p>For the input text:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#6272a4">/* Iterate through the list till we encounter the last node.*/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">while</span>(pointer<span style="color:#ff79c6">-&gt;</span>next<span style="color:#ff79c6">!=</span>NULL)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>            pointer <span style="color:#ff79c6">=</span> pointer <span style="color:#ff79c6">-&gt;</span> next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">/* Allocate memory for the new node and put data in it.*/</span>
+</span></span></code></pre></div><p>It will generate this output</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#6272a4">/* Iterate through the list till we encounter the last node.*/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">while</span>(pointer<span style="color:#ff79c6">-&gt;</span>next<span style="color:#ff79c6">!=</span>NULL)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>            pointer <span style="color:#ff79c6">=</span> pointer <span style="color:#ff79c6">-&gt;</span> next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">/* Allocate memory for the new node and put data in it.*/</span>
+</span></span></code></pre></div><p>To fix this problem we will add <code>*?</code> as non-greedy quantifier.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>re<span style="color:#ff79c6">.</span>findall(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;(//[^\n]*|/\*.*?\*/)&#39;</span>, txt, re<span style="color:#ff79c6">.</span>MULTILINE <span style="color:#ff79c6">|</span> re<span style="color:#ff79c6">.</span>DOTALL)
+</span></span></code></pre></div><p>To explain more:<br>
+By default, a quantifier tells the engine to match as many instances of its quantified token or sub-pattern as possible. This behavior is called greedy.<br>
+As an example to match</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> rg <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">/.*apple/g</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> input <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;a tasty apple&#39;</span>
+</span></span><span style="display:flex;"><span>input.match(rg)
+</span></span></code></pre></div><p>The previous code won&rsquo;t match because the <code>.*</code> is greedy, so it swallow all characters, and then nothing left for <code>apple</code>.
+The default behavior when you try to match something with the quantifier, it matches the longest possible.</p>
+<br />
+<br />
+<h2 id="list-of-posts">List of posts</h2>
+<p>We are going to explain advanced terms of Regular Expressions through different examples, and through series of posts. To see all articles in this series check here:</p>
+<p><a href="">Check all articles in this list</a>.</p>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2020_05_06_advanced_regular_expression_by_examples/" data-toggle="tooltip" data-placement="top" title="Advanced Regular Expression Recipes - Introduction.">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2020_05_08_regular_expression_extract_domain_names/" data-toggle="tooltip" data-placement="top" title="Regular expression: Extract Domain Names">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2020_05_07_regular_expression_extract_comments_from_code\/',
+        pageTitle: 'Regular expression: Extract Comments From Code',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

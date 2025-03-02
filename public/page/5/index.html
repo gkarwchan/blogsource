@@ -102,18 +102,6 @@
                     </li>
                     
                         
-                        <li>
-                            <a href="/categories/life/">life</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/tech/">tech</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/tips/">tips</a>
-                        </li>
-                        
                     
                     
 		    
@@ -196,80 +184,201 @@
 <div data-pagefind-ignore="all">
 
 <div class="post-preview">
-    <a href="http://localhost:1313/2017/11/07/istio-traffic-shifting/">
+    <a href="http://localhost:1313/post/2023_03_05_buy_custom_domain_with_azure/">
         <h2 class="post-title">
-            使用Istio实现应用流量转移
+            Buy Custom Domain With Azure for your App Service.
         </h2>
-	
-        <h3 class="post-subtitle">
-              &#34;本文翻译自istio官方文档&#34;
-        </h3>
 	
         <div class="post-content-preview">
 	
-            本任务将演示如何将应用流量逐渐从旧版本的服务迁移到新版本。通过Istio，可以使用一系列不同权重的规则（10%，20%，··· 100%）将流量平缓地从旧版本服务迁移到新版本服务。
-        
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by     &#34;赵化冰&#34; on Tuesday, November 7, 2017
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="http://localhost:1313/2017/11/04/istio-install_and_example/">
-        <h2 class="post-title">
-            Istio及Bookinfo示例程序安装试用笔记
-        </h2>
-	
-        <h3 class="post-subtitle">
-            手把手教你从零搭建Istio及Bookinfo示例程序
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Istio是来自Google，IBM和Lyft的一个Service Mesh（服务网格）开源项目，是Google继Kubernetes之后的又一大作,本文将演示如何从裸机开始从零搭建Istio及Bookinfo示例程序。
-        
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by 赵化冰 on Saturday, November 4, 2017
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="http://localhost:1313/2017/11/03/hello-world/">
-        <h2 class="post-title">
-            Welcome to Zhaohuabing Blog
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Hello World, Hello Blog
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            <blockquote>
-<p>“Yeah It&rsquo;s on. ”</p></blockquote>
-<h2 id="hello-world">Hello World!</h2>
+            <p>If you googled how to buy a domain name on Azure, you might get answers saying that Azure doesn&rsquo;t provide domain name registrar, like <a href="https://learn.microsoft.com/en-us/answers/questions/10805/use-azure-as-a-domain-registrar-for-a-domain-curre?orderby=helpful">the following answer</a>, or <a href="https://feedback.azure.com/d365community/idea/9e9f97ea-8526-ec11-b6e6-000d3a4f0789">the following discussion</a>.<br>
+Not even those answers, even the book <a href="https://www.microsoftpressstore.com/store/exam-ref-az-900-microsoft-azure-fundamentals-9780137955145">Exam Ref AZ-900</a> which is a Microsoft book says the following about <code>Azure DNS Zone</code>:</p>
+<blockquote>
+<p>If you want to purchase your own domain name, you go to a domain registrar, and they register the domain to you. &hellip;.</p>
        
         </div>
     </a>
     <p class="post-meta">
     
-        Posted by 赵化冰 on Saturday, November 4, 2017
+        Posted by Ghassan&#39;s page on Saturday, March 4, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_02_24_application_insights_on_azure/">
+        <h2 class="post-title">
+            Everything you need to know about telemetry for your Asp.NET application on Azure.
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>All of the services that Azure offers for the instrumentation and observability (monitoring) of applications are grouped under Azure Monitor.</p>
+<p>Three services fall under the banner of Azure Monitor:</p>
+<ol>
+<li>Azure Monitor itself, which offers the observability component to track your apps.</li>
+<li>Application Insights, or its substitute OpenTelemetry, which offers the instrumentation and telemetry components</li>
+<li>The analytics component is provided by Log Analytics.</li>
+</ol>
+<p>We will emphasise the instrumentation component in this post.</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Friday, February 24, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_02_22_azure_application_insight_performance/">
+        <h2 class="post-title">
+            Check performance bottleneck with Azure Application Insights.
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>If you have Application Insights enabled for your azure app service, then it is a piece of cake to get the performance bottleneck in your app, and even it check external dependencies like database queries or any other external dependencies.</p>
+<p>I have a Web API application, that is accessing Azure Sql Server, and Azure blob storage.</p>
+<p>By going into the performance blade under <code>Investigate</code>:<br>
+
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0mr3srn55zc4vebhm1ik.png" alt="Image description">
+
+</p>
+<p>You will see the average time for each API call, sorted descending by time:
+
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ir4wnbet13t5m4875maz.png" alt="Image description">
+
+</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Wednesday, February 22, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_02_04_azure_keyvault_deployment/">
+        <h2 class="post-title">
+            Use Azure Key Vault to retrieve secured parameters during  Azure deployment.
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>You have an ARM template to deploy, and you need to pass secure parameters. Instead of storing secure values in the parameter file, you can just retrieve these values from Key Vault.</p>
+<p>To be able to access the key vault by the resource manager you need to change access policy to allow &ldquo;Azure Resource Manager for template deployment&rdquo;, as shown here.</p>
+<p>
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e693x90rrx04ul7bpd5e.jpg" alt="Image description">
+
+</p>
+<p>Or you can do it from Powershell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>// to update an existing key vault
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Set-AzKeyVaultAccessPolicy</span> -VaultName MyVaultName -EnabledForTemplateDeployment
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// to create a new key vault with this feature enabled
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">New-AzKeyVault</span> `
+</span></span><span style="display:flex;"><span>  -VaultName MyVaultName `
+</span></span><span style="display:flex;"><span>  -resourceGroupName myresourcegroup `
+</span></span><span style="display:flex;"><span>  -Location centralus `
+</span></span><span style="display:flex;"><span>  -EnabledForTemplateDeployment
+</span></span></code></pre></div><h2 id="how-to-use-it">How to use it?</h2>
+<p>in the deployment parameter file specify the location of the secured string to be the <code>keyvault</code> as follows:</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Saturday, February 4, 2023
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="http://localhost:1313/post/2023_02_03_parse_sas_token_regex/">
+        <h2 class="post-title">
+            Parse Azure SAS token using regular expression
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>If you have an Azure SAS token that is not working, it is good idea to parse it and understand what permissions and values it contains.</p>
+<p>This is a JavaScript code that uses Regular Expression to parse he SAS token, and an running example where you can try your own SAS token.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> paramNames <span style="color:#ff79c6">=</span> {
+</span></span><span style="display:flex;"><span>  sig<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;cryptographic signature&#39;</span>,
+</span></span><span style="display:flex;"><span>  st<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;start time&#39;</span>,
+</span></span><span style="display:flex;"><span>  se<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;end time&#39;</span>,
+</span></span><span style="display:flex;"><span>  spr<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;protocol&#39;</span>,
+</span></span><span style="display:flex;"><span>  srt<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;resource types&#39;</span>,
+</span></span><span style="display:flex;"><span>  sv<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;version&#39;</span>,
+</span></span><span style="display:flex;"><span>  sp<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;permissions&#39;</span>,
+</span></span><span style="display:flex;"><span>  ss<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;services&#39;</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> valueLookups <span style="color:#ff79c6">=</span> {
+</span></span><span style="display:flex;"><span>  sp <span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>     r<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;read&#39;</span>, d<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;delete&#39;</span>, w<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;write&#39;</span>, l<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;list&#39;</span>, a<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;add&#39;</span>,
+</span></span><span style="display:flex;"><span>    c<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;create&#39;</span>, u<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;update&#39;</span>, p<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;process&#39;</span>, f<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;filter&#39;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>  srt<span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>    s<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;service&#39;</span>, c<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;container&#39;</span>, o<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;object&#39;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  ss <span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>    b<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;blob&#39;</span>, f<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;file&#39;</span>, q<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;queue&#39;</span>, t<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;table&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> valueConvertor <span style="color:#ff79c6">=</span> (key, inputValue) =&gt; 
+</span></span><span style="display:flex;"><span>      valueLookups[key] <span style="color:#ff79c6">?</span> [...inputValue].map(x =&gt; valueLookups[key][x] <span style="color:#ff79c6">||</span> x)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">:</span> inputValue;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">function</span> parseData(sasToken) {
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">let</span> regExpressionPattern <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">/[?&amp;]([a-z]*)=([^\&amp;]*)/g</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">var</span> parameters <span style="color:#ff79c6">=</span> [...sasToken.matchAll(regExpressionPattern)];
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> finalObject <span style="color:#ff79c6">=</span> parameters.reduce((acc, row) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> {...acc, [paramNames[row[<span style="color:#bd93f9">1</span>]] <span style="color:#ff79c6">||</span> row[<span style="color:#bd93f9">1</span>]]<span style="color:#ff79c6">:</span> valueConvertor(row[<span style="color:#bd93f9">1</span>], row[<span style="color:#bd93f9">2</span>])}
+</span></span><span style="display:flex;"><span>}, {});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> outputObject <span style="color:#ff79c6">=</span> ParseData(inputSasToken);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// The output object will be in the format
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;version&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;2021-06-08&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;services&#34;</span><span style="color:#ff79c6">:</span>[<span style="color:#f1fa8c">&#34;blob&#34;</span>,<span style="color:#f1fa8c">&#34;file&#34;</span>,<span style="color:#f1fa8c">&#34;queue&#34;</span>,<span style="color:#f1fa8c">&#34;table&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;resource types&#34;</span><span style="color:#ff79c6">:</span>[<span style="color:#f1fa8c">&#34;service&#34;</span>,<span style="color:#f1fa8c">&#34;container&#34;</span>,<span style="color:#f1fa8c">&#34;object&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;permissions&#34;</span><span style="color:#ff79c6">:</span>[<span style="color:#f1fa8c">&#34;read&#34;</span>,<span style="color:#f1fa8c">&#34;write&#34;</span>,<span style="color:#f1fa8c">&#34;delete&#34;</span>,<span style="color:#f1fa8c">&#34;list&#34;</span>,<span style="color:#f1fa8c">&#34;add&#34;</span>,<span style="color:#f1fa8c">&#34;create&#34;</span>,<span style="color:#f1fa8c">&#34;update&#34;</span>,<span style="color:#f1fa8c">&#34;process&#34;</span>,<span style="color:#f1fa8c">&#34;i&#34;</span>,<span style="color:#f1fa8c">&#34;y&#34;</span>,<span style="color:#f1fa8c">&#34;t&#34;</span>,<span style="color:#f1fa8c">&#34;filter&#34;</span>,<span style="color:#f1fa8c">&#34;x&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;end time&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;2023-02-04T03:03:37Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;start time&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;2023-02-03T19:03:37Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;protocol&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;https&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;cryptographic signature&#34;</span><span style="color:#ff79c6">:</span><span style="color:#f1fa8c">&#34;..jhh&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Try it for yourself:</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Ghassan&#39;s page on Friday, February 3, 2023
         
         
     
@@ -289,6 +398,10 @@
         <a href="/page/4/">&larr; Newer Posts</a>
     </li>
     
+    
+    <li class="next">
+        <a href="/page/6/">Older Posts &rarr;</a>
+    </li>
     
 </ul>
 
@@ -396,34 +509,62 @@
             
             
                
-            
-               
-            
-               
-                    <a href="/tags/docker" title="docker">
-                        docker
+                    <a href="/tags/algorithm" title="algorithm">
+                        algorithm
                     </a>
                
             
                
-            
-               
-                    <a href="/tags/istio" title="istio">
-                        istio
+                    <a href="/tags/asp.net" title="asp.net">
+                        asp.net
                     </a>
                
             
                
-            
-               
-                    <a href="/tags/kubernetes" title="kubernetes">
-                        kubernetes
+                    <a href="/tags/azure" title="azure">
+                        azure
                     </a>
                
             
                
-                    <a href="/tags/microservice" title="microservice">
-                        microservice
+                    <a href="/tags/container" title="container">
+                        container
+                    </a>
+               
+            
+               
+                    <a href="/tags/css" title="css">
+                        css
+                    </a>
+               
+            
+               
+                    <a href="/tags/dev-tools" title="dev tools">
+                        dev tools
+                    </a>
+               
+            
+               
+                    <a href="/tags/devops" title="devops">
+                        devops
+                    </a>
+               
+            
+               
+                    <a href="/tags/javascript" title="javascript">
+                        javascript
+                    </a>
+               
+            
+               
+                    <a href="/tags/networking" title="networking">
+                        networking
+                    </a>
+               
+            
+               
+                    <a href="/tags/performance" title="performance">
+                        performance
                     </a>
                
             
@@ -433,24 +574,6 @@
                     <a href="/tags/security" title="security">
                         security
                     </a>
-               
-            
-               
-                    <a href="/tags/service-mesh" title="service mesh">
-                        service mesh
-                    </a>
-               
-            
-               
-                    <a href="/tags/tips" title="tips">
-                        tips
-                    </a>
-               
-            
-               
-            
-               
-            
                
             
         </div>

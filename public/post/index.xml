@@ -6,168 +6,364 @@
     <description>Recent content in Posts on Ghassan&#39;s page</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Dec 2024 18:41:54 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Clean White Theme for Hugo</title>
-      <link>http://localhost:1313/post/readme/</link>
-      <pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/readme/</guid>
-      <description>&lt;h1 id=&#34;clean-white-theme-for-hugo&#34;&gt;Clean White Theme for Hugo&lt;/h1&gt;&#xA;&lt;p&gt;CleanWhite is a clean, elegant, but fully functional blog theme for Hugo. Here is a live &lt;a href=&#34;https://zhaohuabing.com&#34;&gt;demo site&lt;/a&gt; using this theme.&lt;/p&gt;&#xA;&lt;p&gt;It is based on &lt;a href=&#34;https://github.com/Huxpro/huxpro.github.io&#34;&gt;huxblog Jekyll Theme&lt;/a&gt;&#xA;and &lt;a href=&#34;https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll&#34;&gt;Clean Blog Jekyll Theme&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;These two upstream projects have done awesome jobs to create a blog theme, what I&amp;rsquo;m doing here is porting it to Hugo, of which I like the simplicity and the much faster compiling speed. Some other features which I think could be useful, such as site search with algolia and proxy for Disqus access in China, have also been built in the CleanWhite theme. Other fancy features of upstream projects are not supported by this Hugo theme, I&amp;rsquo;d like to make it as simple as possible and only focus on blog purpose, at least for now.&#xA;While I created this theme, I followed the Hugo theme best practice and tried to make every part of the template as a replaceable partial html, so it could be much easier for you to make your customization based on it.&lt;/p&gt;</description>
+      <title>Azure Artifacts Credential Provider</title>
+      <link>http://localhost:1313/post/2024_12_27_azure_artifact_cerdential_provider/</link>
+      <pubDate>Tue, 17 Dec 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_12_27_azure_artifact_cerdential_provider/</guid>
+      <description>&lt;p&gt;When you store your artifacts (NuGet, NPM, Docker&amp;hellip;) inside your private Azure Artifacts, you need to use credentials to pull those artifacts.&lt;br&gt;&#xA;You can require getting those artifacts from different tools that do your build: dotnet, nuget, msbuild, visual studio&amp;hellip;.&lt;br&gt;&#xA;In order to automate the aquisition of credentials needed from all these different tools, Microsoft provides a unified tool to automate aquisition those credentials: **Azure Artifacts Credential Provider&amp;quot;.&lt;/p&gt;&#xA;&lt;h1 id=&#34;introduction--underlying-technology&#34;&gt;Introduction &amp;amp; Underlying Technology.&lt;/h1&gt;&#xA;&lt;p&gt;Because artifacts are required when you need NuGet packages, and you need to preform NuGet operation, which will require you to authenticate, so the &lt;strong&gt;Credential Provider&lt;/strong&gt; is a NuGet plugin used by NuGet client.&lt;br&gt;&#xA;The NuGet client can be either:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Istio v1aplha3 routing API介绍(译文）</title>
-      <link>http://localhost:1313/2018/06/04/introducing-the-istio-v1alpha3-routing-api/</link>
-      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/06/04/introducing-the-istio-v1alpha3-routing-api/</guid>
-      <description>&lt;p&gt;到目前为止，Istio提供了一个简单的API来进行流量管理，该API包括了四种资源：RouteRule，DestinationPolicy，EgressRule和Ingress（直接使用了Kubernets的Ingress资源）。借助此API，用户可以轻松管理Istio服务网格中的流量。该API允许用户将请求路由到特定版本的服务，为弹性测试注入延迟和失败，添加超时和断路器等等，所有这些功能都不必更改应用程序本身的代码。&lt;/p&gt;</description>
+      <title>Self certified certificates</title>
+      <link>http://localhost:1313/post/2024_11_05_self-signed-certificates/</link>
+      <pubDate>Tue, 05 Nov 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_11_05_self-signed-certificates/</guid>
+      <description>&lt;p&gt;A self-signed certificate is a type of SSL/TLS certificate that is generated and signed by the individual or organization that owns it, rather than being issued by a trusted Certificate Authority (CA).&lt;br&gt;&#xA;For development process we need a certificate for the host &lt;code&gt;localhost&lt;/code&gt;, and be stored in the certificate store which vary depends on the operating system.&lt;br&gt;&#xA;To generate and use the certificate do the following two steps:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;generate the certificate&lt;/li&gt;&#xA;&lt;li&gt;store the certificate in the certificate store which vary depends on the operating system.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;generate-self-signed-&#34;&gt;Generate self-signed :&lt;/h1&gt;&#xA;&lt;p&gt;We will see how to generate self-signed certificate using:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Istio 0.8 Release发布</title>
-      <link>http://localhost:1313/2018/06/02/istio08/</link>
-      <pubDate>Sat, 02 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/06/02/istio08/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;在6月1日这一天的早上，Istio社区宣布发布0.8 Release，除了常规的故障修复和性能改进外，这个儿童节礼物里面还有什么值得期待内容呢？让我们来看一看：&lt;/p&gt;&lt;/blockquote&gt;</description>
+      <title>Upload files using streaming in Asp.NET</title>
+      <link>http://localhost:1313/post/2024_10_26_upload_files_using_stream_with_aspnet/</link>
+      <pubDate>Sat, 26 Oct 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_10_26_upload_files_using_stream_with_aspnet/</guid>
+      <description>&lt;p&gt;Asp.NET provide a binding technique to upload files &lt;strong&gt;&lt;code&gt;IFormFile&lt;/code&gt;&lt;/strong&gt;. But that technique will consume memory as it buffers the content of the file in the memory or in the database.&lt;br&gt;&#xA;To skip buffering and use streaming, we kind of have to code it in own our way.&lt;/p&gt;&#xA;&lt;h2 id=&#34;http-protocol-and-uploading-file&#34;&gt;Http Protocol and uploading file:&lt;/h2&gt;&#xA;&lt;p&gt;The simplest way to upload file is to create an Html &lt;code&gt;file input&lt;/code&gt; element, and include it in &lt;code&gt;html form&lt;/code&gt; with &lt;code&gt;submit&lt;/code&gt; button as follows:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Everything about Setting Up My Ubuntu Desktop</title>
-      <link>http://localhost:1313/2018/05/24/set_up_my_ubuntu_desktop/</link>
-      <pubDate>Thu, 24 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/24/set_up_my_ubuntu_desktop/</guid>
-      <description>&lt;h2 id=&#34;generate-ssh-key-pair&#34;&gt;Generate SSH Key Pair&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh-keygen -C &amp;#34;zhaohuabing@gmail.com&amp;#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;shadowsocks&#34;&gt;Shadowsocks&lt;/h2&gt;&#xA;&lt;p&gt;Install shadowsokcs&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install python3-pip&#xA;&#xA;sudo pip3 install shadowsocks&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Create config at &lt;code&gt;config/shadowsocks.json&lt;/code&gt;, with the following content:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{&#xA;&#x9;&amp;#34;server&amp;#34;:&amp;#34;remote-shadowsocks-server-ip-addr&amp;#34;,&#xA;&#x9;&amp;#34;server_port&amp;#34;:443,&#xA;&#x9;&amp;#34;local_address&amp;#34;:&amp;#34;127.0.0.1&amp;#34;,&#xA;&#x9;&amp;#34;local_port&amp;#34;:1080,&#xA;&#x9;&amp;#34;password&amp;#34;:&amp;#34;your-passwd&amp;#34;,&#xA;&#x9;&amp;#34;timeout&amp;#34;:300,&#xA;&#x9;&amp;#34;method&amp;#34;:&amp;#34;aes-256-cfb&amp;#34;,&#xA;&#x9;&amp;#34;fast_open&amp;#34;:false,&#xA;&#x9;&amp;#34;workers&amp;#34;:1&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Start a local socks proxy&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sslocal -c config/shadowsocks.json -d start&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In case there is an openssl error, modify shadowsocks source file.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo vi /usr/local/lib/python3.6/dist-packages/shadowsocks/crypto/openssl.py &#xA;&#xA;:%s/cleanup/reset/gc&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Convert shadowsocks socks proxy to http proxy&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install polipo&#xA;&#xA;echo &amp;#34;socksParentProxy = localhost:1080&amp;#34; | sudo tee -a /etc/polipo/config &#xA;sudo service polipo restart&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Http proxy now is available at port 8123&lt;/p&gt;</description>
+      <title>Git Tools Every DevOps Engineer Should Know</title>
+      <link>http://localhost:1313/post/2024_09_25_git_commands_every_devops_should_know/</link>
+      <pubDate>Wed, 25 Sep 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_25_git_commands_every_devops_should_know/</guid>
+      <description>&lt;p&gt;As a DevOps engineer managing an active Git repository with hundreds of commits daily, you&amp;rsquo;ll inevitably face challenges that require a solid understanding of Git and its ecosystem. This post covers common issues that teams encounter while using Git and the tools used to address them. Each tool mentioned deserves a dedicated post, but here’s a brief overview of the essentials.&lt;/p&gt;&#xA;&lt;p&gt;The tools we&amp;rsquo;ll cover:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Maintaining the health of the repository.&lt;/li&gt;&#xA;&lt;li&gt;Managing large files.&lt;/li&gt;&#xA;&lt;li&gt;Permanently deleting files from the entire history.&lt;/li&gt;&#xA;&lt;li&gt;Purging large historical data.&lt;/li&gt;&#xA;&lt;li&gt;Speeding up work on huge repositories.&lt;/li&gt;&#xA;&lt;li&gt;Automatically generating a changelog for releases.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;cleaning-dead-and-unreachable-items-in-your-repo&#34;&gt;Cleaning Dead and Unreachable Items in Your Repo:&lt;/h1&gt;&#xA;&lt;p&gt;Just like performing a &amp;ldquo;Disk Cleanup&amp;rdquo; on your computer, a Git repository can accumulate unreachable items (such as old commits or branches). Git&amp;rsquo;s git gc (garbage collection) command cleans these up. This command:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>微服务安全沉思录之三</title>
-      <link>http://localhost:1313/2018/05/23/external_system_auth/</link>
-      <pubDate>Wed, 23 May 2018 18:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/23/external_system_auth/</guid>
-      <description>&lt;h2 id=&#34;外部系统访问控制&#34;&gt;外部系统访问控制&lt;/h2&gt;&#xA;&lt;p&gt;除用户访问和微服务之间的相互访问外，外部的第三方系统也可能需要访问系统内部的微服务。例如在上一篇博客的网上商店例子中，外部的推荐服务可能需要接入系统，以获取商店的商品目录信息。相对于内部服务之间的访问而言，外部系统的访问需要进行严格的安全控制。&lt;/p&gt;</description>
+      <title>Enhancing Team Collaboration with a Git Forking Strategy</title>
+      <link>http://localhost:1313/post/2024_09_24_team_collaboration_using_git_fork/</link>
+      <pubDate>Mon, 23 Sep 2024 18:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_24_team_collaboration_using_git_fork/</guid>
+      <description>&lt;p&gt;The fork-based pull request (PR) workflow is widely used in open-source projects because it enables external contributions while keeping the core repository secure and controlled by a designated team.&lt;/p&gt;&#xA;&lt;h1 id=&#34;fork-baed-workflow-and-inner-source&#34;&gt;Fork-baed workflow and Inner Source&lt;/h1&gt;&#xA;&lt;p&gt;Typically, only contributors with repository access can create pull requests. As a contributor, you can create branches, submit PRs, and request merges. However, what happens if you&amp;rsquo;re not part of the repository&amp;rsquo;s team, as is the case in open-source projects?&lt;/p&gt;</description>
     </item>
     <item>
-      <title>微服务安全沉思录之二</title>
-      <link>http://localhost:1313/2018/05/23/service_2_service_auth/</link>
-      <pubDate>Wed, 23 May 2018 15:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/23/service_2_service_auth/</guid>
-      <description>&lt;h2 id=&#34;服务间认证与鉴权&#34;&gt;服务间认证与鉴权&lt;/h2&gt;&#xA;&lt;p&gt;除来自用户的访问请求以外，微服务应用中的各个微服务相互之间还有大量的访问，包括下述场景：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;用户间接触发的微服务之间的相互访问&lt;BR&gt;&#xA;例如在一个网上商店应用中，用户访问购物车微服务进行结算时，购物车微服务可能需要访问用户评级微服务获取用户的会员级别，以得到用户可以享受购物折扣。&lt;/li&gt;&#xA;&lt;li&gt;非用户触发的微服务之间的相互访问&lt;BR&gt;&#xA;例如数据同步或者后台定时任务导致的微服务之间的相互访问。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;根据应用系统的数据敏感程度的不同，对于系统内微服务的相互访问可能有不同的安全要求。&lt;/p&gt;</description>
+      <title>Design and implement Git branching strategies for CI/CD integration</title>
+      <link>http://localhost:1313/post/2024_09_23_design_and_implement_a_branch_strategy_and_workflow/</link>
+      <pubDate>Mon, 23 Sep 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_23_design_and_implement_a_branch_strategy_and_workflow/</guid>
+      <description>&lt;p&gt;Establishing a standardized development process that integrates a Git workflow with Continuous Integration/Continuous Deployment (CI/CD) is crucial before writing any code. This post will explore a widely-used approach: the Trunk-Based Development Workflow, which is adopted by many leading companies, including Microsoft.&lt;/p&gt;&#xA;&lt;h1 id=&#34;choosing-a-branching-strategy&#34;&gt;Choosing a branching strategy:&lt;/h1&gt;&#xA;&lt;p&gt;Every team should adopt a consistent code release process to maintain quality and reduce risks. This starts with selecting a Git workflow, continues through integrating CI/CD, and culminates in defining a release strategy.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>微服务安全沉思录之一</title>
-      <link>http://localhost:1313/2018/05/22/user_authentication_authorization/</link>
-      <pubDate>Wed, 23 May 2018 10:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/22/user_authentication_authorization/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;这段时间对之前微服务安全相关的一些想法进行了进一步总结和归纳，理清了在之前文章里面没有想得太清楚的地方，例如服务间的认证与鉴权以及用户身份在服务调用链中的传递。&lt;/p&gt;</description>
+      <title>Enhancing Your Git Workflow with Git Credential Manager Core</title>
+      <link>http://localhost:1313/post/2024_09_22_make_sense_of_many_git_credential_helper/</link>
+      <pubDate>Sun, 22 Sep 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_22_make_sense_of_many_git_credential_helper/</guid>
+      <description>&lt;p&gt;Git’s credential helper is a handy tool that saves your credentials, so you won’t need to re-enter your username and password for every &lt;code&gt;git pull&lt;/code&gt; or &lt;code&gt;git push&lt;/code&gt;. However, depending on the age of the tutorial you&amp;rsquo;re following and the platform you&amp;rsquo;re using, the instructions for setting up credential storage may vary.&lt;/p&gt;&#xA;&lt;p&gt;In August 2021, GitHub introduced a new cross-platform tool called the &lt;a href=&#34;https://github.blog/open-source/git/git-credential-manager-core-building-a-universal-authentication-experience/&#34;&gt;Git Credential Manager Core&lt;/a&gt;. Let’s explore how this tool can streamline your team’s workflow.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Istio Sidecar自动注入原理</title>
-      <link>http://localhost:1313/2018/05/23/istio-auto-injection-with-webhook/</link>
-      <pubDate>Wed, 23 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/23/istio-auto-injection-with-webhook/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;Kubernets 1.9版本引入了Admission Webhook(web 回调)扩展机制，通过Webhook,开发者可以非常灵活地对Kubernets API Server的功能进行扩展，在API Server创建资源时对资源进行验证或者修改。&lt;/p&gt;&#xA;&lt;p&gt;使用webhook的优势是不需要对API Server的源码进行修改和重新编译就可以扩展其功能。插入的逻辑实现为一个独立的web进程，通过参数方式传入到kubernets中，由kubernets在进行自身逻辑处理时对扩展逻辑进行回调。&lt;/p&gt;&#xA;&lt;p&gt;Istio 0.7版本就利用了Kubernets webhook实现了sidecar的自动注入。&lt;/p&gt;</description>
+      <title>Are you still using git checkout for everything? It is time to switch to git switch</title>
+      <link>http://localhost:1313/post/2024_09_21_git_checkout_splitted_to_many_commands/</link>
+      <pubDate>Sat, 21 Sep 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_09_21_git_checkout_splitted_to_many_commands/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re like me and still rely on the trusty git checkout for a variety of tasks—like switching branches, restoring files, and checking out commits—then you&amp;rsquo;re in for a treat. The Git community has made things easier by introducing two new commands to split the workload: git switch and git restore.&lt;/p&gt;&#xA;&lt;p&gt;These new commands were created to reduce the overload on git checkout and make Git a bit more intuitive, especially for developers who sometimes found it confusing. Let&amp;rsquo;s break it down!&lt;/p&gt;</description>
     </item>
     <item>
-      <title>使用Algolia为Gitpage博客提供站内搜索</title>
-      <link>http://localhost:1313/2018/05/21/algolia-integration-with-jekyll/</link>
-      <pubDate>Mon, 21 May 2018 11:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/21/algolia-integration-with-jekyll/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;This series of articles are my notes of &amp;ldquo;Bitcoin and Cryptocurrency Technologies&amp;rdquo; online course.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;table-of-content&#34;&gt;Table of Content&lt;/h2&gt;&#xA;&lt;p&gt;{:.no_toc}&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Table of Content&#xA;{:toc}&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;scrooge-coin-transaction&#34;&gt;Scrooge Coin Transaction&lt;/h2&gt;&#xA;&lt;p&gt;Scrooge Coin programming assignment is a little bit tricky, the video of this lesson hasn&amp;rsquo;t explained some implementation details. To help you understand the transaction data structure used in Scrooge Coin, I draw this diagram:&#xA;&#xA;  &lt;img src=&#34;http://localhost:1313/img/2018-5-20-cryptocurrency_week1_scroogecoin/scroogecoin.png&#34; alt=&#34;Scrooge Coin&#34;&gt;&#xA;&#xA;&lt;/p&gt;</description>
+      <title>A Journey into Microsoft Identity Platform</title>
+      <link>http://localhost:1313/post/2024_08_19_microsoft_identity_platform/</link>
+      <pubDate>Mon, 19 Aug 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_08_19_microsoft_identity_platform/</guid>
+      <description>&lt;p&gt;It is not exaggeration if I said, Microsoft Identity Platform is bigger than any SAS authentication provider, and if you are using Azure as your cloud provider, then the authorization benefits that will add to your application off-the-shelf, won&amp;rsquo;t be able to do it with any other platform without writing code.&lt;/p&gt;&#xA;&lt;h1 id=&#34;usage-with-net&#34;&gt;Usage with .NET&lt;/h1&gt;&#xA;&lt;p&gt;.NET has a library, which is considered part of the platform. It is &lt;code&gt;Microsfot.Identity.Web&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;h3 id=&#34;how-to-use-it&#34;&gt;How to use it?&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; Microsoft.Identity.Web;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; Microsoft.Identity.Web.UI;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; Microsoft.IdentityModel.Tokens;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; builder = WebApplication.CreateBuilder(args);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// Add services to the container.&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;AzureAd&amp;#34;&lt;/span&gt;));&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;builder.Services.AddControllersWithViews(options =&amp;gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; policy = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; AuthorizationPolicyBuilder()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        .RequireAuthenticatedUser()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        .Build();&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    options.Filters.Add(&lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; AuthorizeFilter(policy));&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;});&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;builder.Services.AddRazorPages()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .AddMicrosoftIdentityUI();&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; app = builder.Build();&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;explaining-the-code&#34;&gt;Explaining the code&lt;/h3&gt;&#xA;&lt;p&gt;The library &lt;code&gt;Microsoft.Idenity.Web&lt;/code&gt; provides lots of workflow behind the scene, and it is the latest.&#xA;More about the library later.&#xA;What the code will do for your application:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>川西秘境探险</title>
-      <link>http://localhost:1313/2018/05/01/may-day-jiulonghu/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/01/may-day-jiulonghu/</guid>
-      <description>&lt;h2 id=&#34;寻浮云牧场不遇&#34;&gt;寻浮云牧场不遇&lt;/h2&gt;&#xA;&lt;p&gt;五一节前的一周内，几个朋友就纷纷坐不住了，一个二个不再安心上班，开始在微信群里讨论过节要到哪里耍。&#xA;大家思来想去，最后决定还是去理县方向。因为根据多年自驾的经验，只要出了汶川，沿途都是风景。&lt;/p&gt;</description>
+      <title>Stream long running webapi with Asp.NET Core and Javascript</title>
+      <link>http://localhost:1313/post/2024_06_22_streamline_long_process_with_aspnet_core_and_javascript/</link>
+      <pubDate>Sat, 22 Jun 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_06_22_streamline_long_process_with_aspnet_core_and_javascript/</guid>
+      <description>&lt;p&gt;If you have a long running process that return array of data, or a data that you can send back as chunk&#xA;of data, then you can stream the result.&lt;/p&gt;&#xA;&lt;h2 id=&#34;streaming-from-the-server&#34;&gt;Streaming from the server&lt;/h2&gt;&#xA;&lt;p&gt;In Asp.NET core 6 and later, it is so easy to stream back the result using &lt;code&gt;IAsyncEnumerable&lt;/code&gt;.&lt;br&gt;&#xA;Let us jump into the code right away:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt; [HttpGet(&amp;#34;ProcessLongData&amp;#34;)]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt; [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;async&lt;/span&gt; IAsyncEnumerable&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;&amp;gt; ProcessLongData(&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; input)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; i = &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;; i++)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#ff79c6&#34;&gt;await&lt;/span&gt; Task.Delay(&lt;span style=&#34;color:#bd93f9&#34;&gt;1000&lt;/span&gt;);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#ff79c6&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; i.ToString();&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;how-aspnet-serialize-the-result-back&#34;&gt;How ASP.NET serialize the result back?&lt;/h4&gt;&#xA;&lt;p&gt;Json serializer &lt;code&gt;System.Text.Json&lt;/code&gt; has a built-in support to serialize stream, so you don&amp;rsquo;t have to do anything because it is the default serializer for Asp.NET core.&lt;br&gt;&#xA;But what in case your project is using &lt;code&gt;NewtonsoftJson&lt;/code&gt;?&lt;br&gt;&#xA;Then you need to override the json serializer for that controller, or that method.&lt;br&gt;&#xA;You do that by using the &lt;a href=&#34;https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/understanding-action-filters-cs&#34;&gt;Action Filter&lt;/a&gt; in Asp.NET.&lt;br&gt;&#xA;Here is a code that will do that:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Helm介绍</title>
-      <link>http://localhost:1313/2018/04/16/using-helm-to-deploy-to-kubernetes/</link>
-      <pubDate>Mon, 16 Apr 2018 15:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/04/16/using-helm-to-deploy-to-kubernetes/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;Helm是Kubernetes生态系统中的一个软件包管理工具。本文将介绍为何要使用Helm进行Kubernetes软件包管理，澄清Helm中使用到的相关概念，并通过一个具体的示例学习如何使用Helm打包，分发，安装，升级及回退Kubernetes应用。&lt;/p&gt;</description>
+      <title>Auth0 Single Sign On and seamless silent authentication</title>
+      <link>http://localhost:1313/post/2024_05_01_auth0_and_spa/</link>
+      <pubDate>Wed, 01 May 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_05_01_auth0_and_spa/</guid>
+      <description>&lt;p&gt;Auth0 streamlines lots of complexity for you when it comes to authenticate your SPA application.&lt;br&gt;&#xA;In this article we will talk about how Single Sign ON works.&lt;/p&gt;&#xA;&lt;h2 id=&#34;auth0-single-sign-on-and-sessions&#34;&gt;Auth0 Single Sign On and sessions:&lt;/h2&gt;&#xA;&lt;p&gt;Auth0 provides Single Sign-on through the use of sessions. There are up to three different sessions:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Local session.&lt;/li&gt;&#xA;&lt;li&gt;Authorication Server session, if SSO is enabled.&lt;/li&gt;&#xA;&lt;li&gt;Identity Provider (IdP) session, if the user login through an IdP like Google, Facebook&amp;hellip;etc.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;how-sso-works&#34;&gt;How SSO works:&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;the application will redirect the user to login page on Auth0 Authorization Server.&lt;/li&gt;&#xA;&lt;li&gt;Auth0 checks to see if there is an existing SSO cookie for the authorization server.&lt;/li&gt;&#xA;&lt;li&gt;there is no cookie, so the user will be redirect to the login page.&lt;/li&gt;&#xA;&lt;li&gt;after login, Auth0 will set SSO cookie and redirect the user to our application, returning the ID token.&lt;/li&gt;&#xA;&lt;li&gt;The user compes back to our application.&lt;/li&gt;&#xA;&lt;li&gt;the application will redirect to the login page.&lt;/li&gt;&#xA;&lt;li&gt;Auh0 check for SSO cookie.&lt;/li&gt;&#xA;&lt;li&gt;Auth0 will find the cookie and update it without the login process.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;The developer can check for the SSO session from their application by using Auth0 SDK: &lt;a href=&#34;https://auth0.com/docs/libraries/auth0js&#34;&gt;Auth0.js&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Service Mesh 和 API Gateway的关系探讨（译文）</title>
-      <link>http://localhost:1313/2018/04/11/service-mesh-vs-api-gateway/</link>
-      <pubDate>Wed, 11 Apr 2018 09:32:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/04/11/service-mesh-vs-api-gateway/</guid>
-      <description>&lt;h2 id=&#34;service-mesh-vs-api-gateway&#34;&gt;Service Mesh vs API Gateway&lt;/h2&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;https://medium.com/microservices-in-practice/service-mesh-for-microservices-2953109a3c9a&#34;&gt;前一篇关于Service Mesh的文章&lt;/a&gt;中,我提到了几个关于Service Mesh和API Gateway之间关系的问题，在本篇文章中，我打算就Service Mesh和API Gateway的用途进行进一步讨论。&lt;/p&gt;</description>
+      <title>Using Azure Managed Identity to skip sharing credentials</title>
+      <link>http://localhost:1313/post/2024_01_14_managedidentity/</link>
+      <pubDate>Sun, 14 Jan 2024 10:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_01_14_managedidentity/</guid>
+      <description>&lt;p&gt;A common challenge for developers is the management of secrets and credentials used to secure communication between different components making up a solution. Managed identities eliminate the need for developers to manage credentials.&lt;br&gt;&#xA;While developers can securely store the secrets in Azure Key Vault, services need a way to access Azure Key Vault. Managed identities provide an automatically managed identity in Microsoft Entra ID for applications to use when connecting to Azure resources. Applications can use managed identities to obtain Microsoft Entra tokens without having to manage any credentials.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>谈谈微服务架构中的基础设施：Service Mesh与Istio</title>
-      <link>http://localhost:1313/2018/03/29/what-is-service-mesh-and-istio/</link>
-      <pubDate>Thu, 29 Mar 2018 12:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/03/29/what-is-service-mesh-and-istio/</guid>
-      <description>&lt;h2 id=&#34;微服务架构的演进&#34;&gt;微服务架构的演进&lt;/h2&gt;&#xA;&lt;p&gt;作为一种架构模式，微服务将复杂系统切分为数十乃至上百个小服务，每个服务负责实现一个独立的业务逻辑。这些小服务易于被小型的软件工程师团队所理解和修改，并带来了语言和框架选择灵活性，缩短应用开发上线时间，可根据不同的工作负载和资源要求对服务进行独立缩扩容等优势。&lt;/p&gt;&#xA;&lt;p&gt;另一方面，当应用被拆分为多个微服务进程后，进程内的方法调用变成了了进程间的远程调用。引入了对大量服务的连接、管理和监控的复杂性。&lt;/p&gt;</description>
+      <title>How Single Page Application call a secure your API with OAuth2</title>
+      <link>http://localhost:1313/post/2024_01_05_oauth2_and_spa/</link>
+      <pubDate>Fri, 05 Jan 2024 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2024_01_05_oauth2_and_spa/</guid>
+      <description>&lt;p&gt;When a public SPA needs to authenticate through OAuth 2.0, it faces a big challenge.&lt;br&gt;&#xA;The challenge is you cannot store any type of secrets of credentials in your code. This is why OAuth provided a special flow to be used by SPA: Authorization Code Grant &amp;amp; PKCE. We are going to describe this flow in details here.&lt;/p&gt;&#xA;&lt;h2 id=&#34;summary-of-the-process&#34;&gt;Summary of the process:&lt;/h2&gt;&#xA;&lt;p&gt;To describe the flow briefly, when the SPA requires to get a token it will direct the application to an Authorization Server (AS), which will use that server login page and UI, and the user will run the login process on the AS server website, then that server will return back to the original client website using a callback url passing the token to the SPA.&lt;br&gt;&#xA;So the client SPA has no idea about the credentials and the client cannot intercept those credentials because the login run on Authorization Server website.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>如何配置docker使用HTTP代理</title>
-      <link>http://localhost:1313/2018/03/13/use-docker-behind-http-proxy/</link>
-      <pubDate>Tue, 13 Mar 2018 18:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/03/13/use-docker-behind-http-proxy/</guid>
-      <description>&lt;h2 id=&#34;ubuntu&#34;&gt;Ubuntu&lt;/h2&gt;&#xA;&lt;h3 id=&#34;设置docker使用http-proxy&#34;&gt;设置docker使用http proxy&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo /etc/default/docker&#xA;&#xA;export http_proxy=&amp;#34;http://127.0.0.1:3128/&amp;#34;&#xA;export https_proxy=&amp;#34;http://127.0.0.1:3128/&amp;#34;&#xA;export HTTP_PROXY=&amp;#34;http://127.0.0.1:3128/&amp;#34;&#xA;export HTTPS_PROXY=&amp;#34;http://127.0.0.1:3128/&amp;#34;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+      <title>Different options to add SSL certificate to you Azure App Service</title>
+      <link>http://localhost:1313/post/2023_12_8_azureappservice_ssl_certificate/</link>
+      <pubDate>Fri, 08 Dec 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_12_8_azureappservice_ssl_certificate/</guid>
+      <description>&lt;p&gt;To add a SSL certificate to your web app hosted on Azure App Service with a custom domain, there are few options. I am going to list them here.&lt;/p&gt;&#xA;&lt;h2 id=&#34;free-certificate&#34;&gt;Free certificate:&lt;/h2&gt;&#xA;&lt;p&gt;Azure provides a free SSL certificate, and it is fully managed by Azure.  Azure renew the process for you, and take care of everything for you.&lt;br&gt;&#xA;Although having a free certificate is a wonderful idea, but it has some shortcoming:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Vim Tips</title>
-      <link>http://localhost:1313/2018/02/09/vim-tips/</link>
-      <pubDate>Fri, 09 Feb 2018 11:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/02/09/vim-tips/</guid>
-      <description>&lt;h2 id=&#34;vim-graphical-cheat-sheet&#34;&gt;vim graphical cheat sheet&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;//img/2018-02-09-vim-tips/vi-vim-cheat-sheet.svg&#34; alt=&#34;&#34;&gt;&#xA;&#xA;&lt;/p&gt;</description>
+      <title>Everything you need to know about configure DNS to provide domain for your blog</title>
+      <link>http://localhost:1313/post/2023_12_3_dns_settings_to_map_blog/</link>
+      <pubDate>Sun, 03 Dec 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_12_3_dns_settings_to_map_blog/</guid>
+      <description>&lt;p&gt;You host your blog on Github pages, or Azure static website, or Azure blob storage with static website enabled.  But you need to use a custom domain.&lt;br&gt;&#xA;Every time I changed my content location, I go back to remember how to do it, so I decided to make a post about it.&lt;/p&gt;&#xA;&lt;h1 id=&#34;understand-how-custom-domain-mapping-works&#34;&gt;Understand how custom domain mapping works:&lt;/h1&gt;&#xA;&lt;p&gt;You host your static web pages on one of the static hosting services, for example these three:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>如何使用非root用户执行docker命令</title>
-      <link>http://localhost:1313/2018/02/09/docker-without-sudo/</link>
-      <pubDate>Fri, 09 Feb 2018 10:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/02/09/docker-without-sudo/</guid>
-      <description>&lt;h3 id=&#34;add-the-docker-group-if-it-doesnt-already-exist&#34;&gt;Add the docker group if it doesn&amp;rsquo;t already exist:&lt;/h3&gt;&#xA;&lt;p&gt;sudo groupadd docker&lt;/p&gt;&#xA;&lt;h3 id=&#34;add-the-connected-user-user-to-the-docker-group-change-the-user-name-to-match-your-preferred-user-if-you-do-not-want-to-use-your-current-user&#34;&gt;Add the connected user &amp;ldquo;$USER&amp;rdquo; to the docker group. Change the user name to match your preferred user if you do not want to use your current user:&lt;/h3&gt;&#xA;&lt;p&gt;sudo gpasswd -a $USER docker&lt;/p&gt;&#xA;&lt;h3 id=&#34;either-do-a-newgrp-docker-or-log-outin-to-activate-the-changes-to-groups&#34;&gt;Either do a newgrp docker or log out/in to activate the changes to groups.&lt;/h3&gt;</description>
+      <title>Get the most out of Azure App Service.</title>
+      <link>http://localhost:1313/post/2023_11_09_get_most_out_of_app_service/</link>
+      <pubDate>Thu, 09 Nov 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_11_09_get_most_out_of_app_service/</guid>
+      <description>&lt;p&gt;Azure App service take care of tons of infrastructure, hosting, scalability, monitoring, deployment, DevOps, security and environment of your shoulders.&lt;/p&gt;&#xA;&lt;p&gt;But the question, are you really utilizing the most out of this wonderful service?&lt;br&gt;&#xA;Azure App service has tons of features that make it easy to forget about some of them and missing using them.&lt;/p&gt;&#xA;&lt;p&gt;I am going to list this checklist and explain more details on them. There are features that &lt;strong&gt;Must&lt;/strong&gt; be implemented, and there are features that are optional because you might be using other services to achieve their functionalities.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>如何构建安全的微服务应用？</title>
-      <link>http://localhost:1313/2018/05/22/user_authentication_authorization/</link>
-      <pubDate>Sat, 03 Feb 2018 12:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/05/22/user_authentication_authorization/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;微服务架构的引入为软件应用带来了诸多好处：包括小开发团队，缩短开发周期，语言选择灵活性，增强服务伸缩能力等。与此同时，也引入了分布式系统的诸多复杂问题。其中一个挑战就是如何在微服务架构中实现一个灵活，安全，高效的认证和鉴权方案。本文将尝试就此问题进行一次比较完整的探讨。&lt;/p&gt;</description>
+      <title>OAuth, OpenID Connect, SSO and Authentication Flows in plain English.</title>
+      <link>http://localhost:1313/post/2023_10_27_oauth_openid_authenticationflow_in_plain_english/</link>
+      <pubDate>Fri, 27 Oct 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_10_27_oauth_openid_authenticationflow_in_plain_english/</guid>
+      <description>&lt;p&gt;Gone are the days when you force your users to register into your application by creating username/password.&#xA;Everyone wants to skip that process when they can identify themselves using other ways (google, facebook, twitter…), and they want to use their single sign on process to identify them across multiple applications and multiple websites.&#xA;In this post I am trying to explain the process and its technologies in simple English.&lt;/p&gt;&#xA;&lt;h2 id=&#34;an-explanation-by-example&#34;&gt;An explanation by example:&lt;/h2&gt;&#xA;&lt;p&gt;So you are a developer who is building an application and want to allow your users to use their Google credentials to authenticate themselves into your account.&#xA;I am going to explain to you the concepts and the technologies.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Nginx开源Service Mesh组件Nginmesh安装指南</title>
-      <link>http://localhost:1313/2018/01/02/nginmesh-install/</link>
-      <pubDate>Tue, 02 Jan 2018 12:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2018/01/02/nginmesh-install/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;Nginmesh是NGINX的Service Mesh开源项目，用于Istio服务网格平台中的数据面代理。它旨在提供七层负载均衡和服务路由功能，与Istio集成作为sidecar部署，并将以“标准，可靠和安全的方式”使得服务间通信更容易。Nginmesh在今年底已经连续发布了0.2和0.3版本，提供了服务发现，请求转发，路由规则，性能指标收集等功能。&lt;/p&gt;</description>
+      <title>Write Asp.NET webhook handlers for Azure Event Grid events.</title>
+      <link>http://localhost:1313/post/2023_10_17_subscribe_to_upload_file_azure_blog_storage/</link>
+      <pubDate>Tue, 17 Oct 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_10_17_subscribe_to_upload_file_azure_blog_storage/</guid>
+      <description>&lt;p&gt;Azure Event Grid is a Pub Sub message distribution service that is fully integrated with Azure infrastructure. Almost all Azure services, and PaaS, and many third-party SaaS provides integration with Event Grid, by publishing events. It is supporting Http protocol for publishing events to it, and now with a newer upgrade it supports MQTT protocol for lighter fast IoT communications.&lt;/p&gt;&#xA;&lt;p&gt;It is providing Pub/Sub services from Azure services to the subscribers, and adding to that reliability to insure the delivery of the messages.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>如何从外部访问Kubernetes集群中的应用？</title>
-      <link>http://localhost:1313/2017/11/28/access-application-from-outside/</link>
-      <pubDate>Tue, 28 Nov 2017 12:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2017/11/28/access-application-from-outside/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;我们知道，kubernetes的Cluster Network属于私有网络，只能在cluster Network内部才能访问部署的应用，那如何才能将Kubernetes集群中的应用暴露到外部网络，为外部用户提供服务呢？本文探讨了从外部网络访问kubernetes cluster中应用的几种实现方式。&lt;/p&gt;</description>
+      <title>Best way to run background services in ASP.NET.</title>
+      <link>http://localhost:1313/post/2023_07_12_hosting_backgroundservice_aspnet/</link>
+      <pubDate>Wed, 12 Jul 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_07_12_hosting_backgroundservice_aspnet/</guid>
+      <description>&lt;p&gt;Asp.Net provides many ways to run background processes. They are:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;IHostedService interface&lt;/li&gt;&#xA;&lt;li&gt;BackgroundService abstract class&lt;/li&gt;&#xA;&lt;li&gt;Worker Service using Microsoft.NET.SDK.Worker&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Actually they are just layers on top of each others, each layer provides extra functionality on the one below.&lt;br&gt;&#xA;This post is going to describe each layer and what it provides.&lt;/p&gt;&#xA;&lt;h2 id=&#34;running-background-tasks-using-ihostedservice&#34;&gt;Running background tasks using &lt;code&gt;IHostedService&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Asp.NET provides support for running background tasks in the same process that host Asp.net application.&lt;br&gt;&#xA;By implementing &lt;code&gt;IHostedService&lt;/code&gt; interface, your background task will start a little bit after Asp.Net application start, and end when Asp.Net application shutdown.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>采用Istio实现灰度发布(金丝雀发布)</title>
-      <link>http://localhost:1313/2017/11/08/istio-canary-release/</link>
-      <pubDate>Wed, 08 Nov 2017 15:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2017/11/08/istio-canary-release/</guid>
-      <description>&lt;h2 id=&#34;灰度发布又名金丝雀发布介绍&#34;&gt;灰度发布（又名金丝雀发布）介绍&lt;/h2&gt;&#xA;&lt;p&gt;当应用上线以后，运维面临的一大挑战是如何能够在不影响已上线业务的情况下进行升级。做过产品的同学都清楚，不管在发布前做过多么完备的自动化和人工测试，在发布后都会出现或多或少的故障。根据墨菲定律，可能会出错的版本发布一定会出错。&lt;/p&gt;</description>
+      <title>Build resilient applications accessing Azure services with no code.</title>
+      <link>http://localhost:1313/post/2023_03_11_build_resilient_applications_azure/</link>
+      <pubDate>Sat, 11 Mar 2023 18:44:55 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_03_11_build_resilient_applications_azure/</guid>
+      <description>&lt;p&gt;When working on distributed system like systems that are running on the cloud, and microservices, then you should anticipate transient faults like temporary loss of network connection, or temporary unavailability of a service, or a service is busy.&lt;br&gt;&#xA;This is why in cloud application, the term &lt;strong&gt;Building for resiliency&lt;/strong&gt; become a pattern in building application, and it means properly handling these transient faults in the code.&lt;/p&gt;&#xA;&lt;p&gt;There are two common used patterns that we can use in our code, that can help build resilience application.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>使用Istio实现应用流量转移</title>
-      <link>http://localhost:1313/2017/11/07/istio-traffic-shifting/</link>
-      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2017/11/07/istio-traffic-shifting/</guid>
-      <description>&lt;p&gt;关于Istio的更多内容请参考&lt;a href=&#34;http://istio.doczh.cn/&#34;&gt;istio中文文档&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;原文参见&lt;a href=&#34;https://istio.io/docs/tasks/traffic-management/traffic-shifting.html&#34;&gt;Traffic Shifting&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;本任务将演示如何将应用流量逐渐从旧版本的服务迁移到新版本。通过Istio，可以使用一系列不同权重的规则（10%，20%，··· 100%）将流量平缓地从旧版本服务迁移到新版本服务。&lt;/p&gt;</description>
+      <title>Buy Custom Domain With Azure for your App Service.</title>
+      <link>http://localhost:1313/post/2023_03_05_buy_custom_domain_with_azure/</link>
+      <pubDate>Sat, 04 Mar 2023 21:44:55 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_03_05_buy_custom_domain_with_azure/</guid>
+      <description>&lt;p&gt;If you googled how to buy a domain name on Azure, you might get answers saying that Azure doesn&amp;rsquo;t provide domain name registrar, like &lt;a href=&#34;https://learn.microsoft.com/en-us/answers/questions/10805/use-azure-as-a-domain-registrar-for-a-domain-curre?orderby=helpful&#34;&gt;the following answer&lt;/a&gt;, or &lt;a href=&#34;https://feedback.azure.com/d365community/idea/9e9f97ea-8526-ec11-b6e6-000d3a4f0789&#34;&gt;the following discussion&lt;/a&gt;.&lt;br&gt;&#xA;Not even those answers, even the book &lt;a href=&#34;https://www.microsoftpressstore.com/store/exam-ref-az-900-microsoft-azure-fundamentals-9780137955145&#34;&gt;Exam Ref AZ-900&lt;/a&gt; which is a Microsoft book says the following about &lt;code&gt;Azure DNS Zone&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;If you want to purchase your own domain name, you go to a domain registrar, and they register the domain to you. &amp;hellip;.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Istio及Bookinfo示例程序安装试用笔记</title>
-      <link>http://localhost:1313/2017/11/04/istio-install_and_example/</link>
-      <pubDate>Sat, 04 Nov 2017 12:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2017/11/04/istio-install_and_example/</guid>
-      <description>&lt;h2 id=&#34;服务网格简介&#34;&gt;服务网格简介&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;服务网格&lt;/strong&gt;（Service Mesh）是为解决微服务的通信和治理而出现的一种&lt;strong&gt;架构模式&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;服务网格将服务间通讯以及与此相关的管理控制功能从业务程序中下移到一个基础设施层，从而彻底隔离了业务逻辑和服务通讯两个关注点。采用服务网格后，应用开发者只需要关注并实现应用业务逻辑。服务之间的通信，包括服务发现，通讯的可靠性，通讯的安全性，服务路由等由服务网格层进行处理，并对应用程序透明。&lt;/p&gt;</description>
+      <title>Everything you need to know about telemetry for your Asp.NET application on Azure.</title>
+      <link>http://localhost:1313/post/2023_02_24_application_insights_on_azure/</link>
+      <pubDate>Fri, 24 Feb 2023 21:44:55 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_24_application_insights_on_azure/</guid>
+      <description>&lt;p&gt;All of the services that Azure offers for the instrumentation and observability (monitoring) of applications are grouped under Azure Monitor.&lt;/p&gt;&#xA;&lt;p&gt;Three services fall under the banner of Azure Monitor:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Azure Monitor itself, which offers the observability component to track your apps.&lt;/li&gt;&#xA;&lt;li&gt;Application Insights, or its substitute OpenTelemetry, which offers the instrumentation and telemetry components&lt;/li&gt;&#xA;&lt;li&gt;The analytics component is provided by Log Analytics.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;We will emphasise the instrumentation component in this post.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Welcome to Zhaohuabing Blog</title>
-      <link>http://localhost:1313/2017/11/03/hello-world/</link>
-      <pubDate>Sat, 04 Nov 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2017/11/03/hello-world/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;“Yeah It&amp;rsquo;s on. ”&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;hello-world&#34;&gt;Hello World!&lt;/h2&gt;</description>
+      <title>Check performance bottleneck with Azure Application Insights.</title>
+      <link>http://localhost:1313/post/2023_02_22_azure_application_insight_performance/</link>
+      <pubDate>Wed, 22 Feb 2023 21:44:55 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_22_azure_application_insight_performance/</guid>
+      <description>&lt;p&gt;If you have Application Insights enabled for your azure app service, then it is a piece of cake to get the performance bottleneck in your app, and even it check external dependencies like database queries or any other external dependencies.&lt;/p&gt;&#xA;&lt;p&gt;I have a Web API application, that is accessing Azure Sql Server, and Azure blob storage.&lt;/p&gt;&#xA;&lt;p&gt;By going into the performance blade under &lt;code&gt;Investigate&lt;/code&gt;:&lt;br&gt;&#xA;&#xA;  &lt;img src=&#34;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0mr3srn55zc4vebhm1ik.png&#34; alt=&#34;Image description&#34;&gt;&#xA;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;You will see the average time for each API call, sorted descending by time:&#xA;&#xA;  &lt;img src=&#34;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ir4wnbet13t5m4875maz.png&#34; alt=&#34;Image description&#34;&gt;&#xA;&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Azure Key Vault to retrieve secured parameters during  Azure deployment.</title>
+      <link>http://localhost:1313/post/2023_02_04_azure_keyvault_deployment/</link>
+      <pubDate>Sat, 04 Feb 2023 20:42:03 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_04_azure_keyvault_deployment/</guid>
+      <description>&lt;p&gt;You have an ARM template to deploy, and you need to pass secure parameters. Instead of storing secure values in the parameter file, you can just retrieve these values from Key Vault.&lt;/p&gt;&#xA;&lt;p&gt;To be able to access the key vault by the resource manager you need to change access policy to allow &amp;ldquo;Azure Resource Manager for template deployment&amp;rdquo;, as shown here.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e693x90rrx04ul7bpd5e.jpg&#34; alt=&#34;Image description&#34;&gt;&#xA;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;Or you can do it from Powershell:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// to update an existing key vault&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Set-AzKeyVaultAccessPolicy&lt;/span&gt; -VaultName MyVaultName -EnabledForTemplateDeployment&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// to create a new key vault with this feature enabled&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;New-AzKeyVault&lt;/span&gt; `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -VaultName MyVaultName `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -resourceGroupName myresourcegroup `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -Location centralus `&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -EnabledForTemplateDeployment&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;how-to-use-it&#34;&gt;How to use it?&lt;/h2&gt;&#xA;&lt;p&gt;in the deployment parameter file specify the location of the secured string to be the &lt;code&gt;keyvault&lt;/code&gt; as follows:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Parse Azure SAS token using regular expression</title>
+      <link>http://localhost:1313/post/2023_02_03_parse_sas_token_regex/</link>
+      <pubDate>Fri, 03 Feb 2023 20:40:37 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_03_parse_sas_token_regex/</guid>
+      <description>&lt;p&gt;If you have an Azure SAS token that is not working, it is good idea to parse it and understand what permissions and values it contains.&lt;/p&gt;&#xA;&lt;p&gt;This is a JavaScript code that uses Regular Expression to parse he SAS token, and an running example where you can try your own SAS token.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;var&lt;/span&gt; paramNames &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sig&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;cryptographic signature&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  st&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;start time&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  se&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;end time&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  spr&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;protocol&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  srt&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;resource types&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sv&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;version&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sp&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;permissions&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ss&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;services&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; valueLookups &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sp &lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     r&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;read&amp;#39;&lt;/span&gt;, d&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;, w&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;write&amp;#39;&lt;/span&gt;, l&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;, a&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    c&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;create&amp;#39;&lt;/span&gt;, u&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;update&amp;#39;&lt;/span&gt;, p&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;process&amp;#39;&lt;/span&gt;, f&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;filter&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  srt&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;service&amp;#39;&lt;/span&gt;, c&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;container&amp;#39;&lt;/span&gt;, o&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;object&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ss &lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    b&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;blob&amp;#39;&lt;/span&gt;, f&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;, q&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;queue&amp;#39;&lt;/span&gt;, t&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;table&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; valueConvertor &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (key, inputValue) =&amp;gt; &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      valueLookups[key] &lt;span style=&#34;color:#ff79c6&#34;&gt;?&lt;/span&gt; [...inputValue].map(x =&amp;gt; valueLookups[key][x] &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; x)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; inputValue;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;function&lt;/span&gt; parseData(sasToken) {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;let&lt;/span&gt; regExpressionPattern &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;/[?&amp;amp;]([a-z]*)=([^\&amp;amp;]*)/g&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;var&lt;/span&gt; parameters &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [...sasToken.matchAll(regExpressionPattern)];&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; finalObject &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; parameters.reduce((acc, row) =&amp;gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; {...acc, [paramNames[row[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]] &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; row[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;]]&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; valueConvertor(row[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;], row[&lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;])}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}, {});&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;var&lt;/span&gt; outputObject &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ParseData(inputSasToken);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// The output object will be in the format&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;{&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;2021-06-08&amp;#34;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;services&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;blob&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;queue&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;table&amp;#34;&lt;/span&gt;],&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;resource types&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;service&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;container&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;object&amp;#34;&lt;/span&gt;],&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;permissions&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;read&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;write&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;delete&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;list&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;add&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;create&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;update&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;process&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;i&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;y&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;t&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;filter&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;x&amp;#34;&lt;/span&gt;],&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;end time&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;2023-02-04T03:03:37Z&amp;#34;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;start time&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;2023-02-03T19:03:37Z&amp;#34;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;protocol&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;https&amp;#34;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;cryptographic signature&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;..jhh&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Try it for yourself:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Implement a watchdog for your microservices using off-the-shelf ASP.Net Healthcheck UI.</title>
+      <link>http://localhost:1313/post/2023_02_02_aspnet_watchdog/</link>
+      <pubDate>Thu, 02 Feb 2023 20:22:20 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_02_aspnet_watchdog/</guid>
+      <description>&lt;h2 id=&#34;what-is-a-watchdog&#34;&gt;What is a watchdog&lt;/h2&gt;&#xA;&lt;p&gt;A watchdog is a service that monitor other services and take actions when it detect a service is failing.&lt;br&gt;&#xA;ASP.NET starting from Core 5 has a built in UI module to monitor other services, and in few line of code you can build a watchdog for your services.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-to-hook-it-up-with-your-services&#34;&gt;How to hook it up with your services:&lt;/h2&gt;&#xA;&lt;p&gt;Your microservices should implement health check endpoints to be monitored by the orchestration service (Kubernetes, docker storm, &amp;hellip; etc).&lt;br&gt;&#xA;&lt;a href=&#34;https://dev.to/gkarwchan/prepare-net-core-microservice-to-be-monitored-by-kubernetes-4pgn&#34;&gt;I explained in previous post&lt;/a&gt; on how to use built-in ASP.NET health check features to achieve build these endpoints.&lt;br&gt;&#xA;I recommend reading that article because there I talked about the Microsoft package &lt;a href=&#34;https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks&#34;&gt;AspNetCore.Diagnostics.HealthChecks&lt;/a&gt;. This package contains all the middleware for build-in health checks, and as well in the same repository has a UI module that with few line of code build a UI to monitor all integrated services and monitor their health check endpoints.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducing Kudu, the engine that handle all web application deployment to Azure App Service.</title>
+      <link>http://localhost:1313/post/2023_02_01_introducing_kudu/</link>
+      <pubDate>Wed, 01 Feb 2023 20:20:40 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_02_01_introducing_kudu/</guid>
+      <description>&lt;p&gt;If you follow any tutorials on Azure App Service, you will find that they use one of five options to deploy a web application to the Azure.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Using Azure DevOps&lt;/li&gt;&#xA;&lt;li&gt;Using Github actions and webhooks.&lt;/li&gt;&#xA;&lt;li&gt;FTP&lt;/li&gt;&#xA;&lt;li&gt;Zip Deploy.&lt;/li&gt;&#xA;&lt;li&gt;MSDeploy (Microsoft Web Deploy tool).&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;But behind the scenes, all these options are using the same back engine, which is &lt;a href=&#34;https://github.com/projectkudu/kudu&#34;&gt;Kudu&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;When we use FTP, Zip, or MSDeploy, we are actually calling Kudu REST API for deployment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Azure Networking Recipes - Connect Azure Database and an Azure App Service using Virtual Network.</title>
+      <link>http://localhost:1313/post/2023_01_10_azure_networking_reciep_one/</link>
+      <pubDate>Tue, 10 Jan 2023 20:00:24 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_01_10_azure_networking_reciep_one/</guid>
+      <description>&lt;p&gt;If your application is connecting to Azure database, or any other resources, then connecting them through Virtual Network (VNet) will enhance the performance (assuming the app service and the resources are in the same region), as well it enhance the security and we can lock the resources to have private endpoint, and not accessed publicly.&#xA;I am going to go through a walk-through tutorial, using Azure Sql Server as an example, but this can work with any database on Azure, or even any resources like blob storage.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A developer introduction to cloud networking</title>
+      <link>http://localhost:1313/post/2023_01_09_introduction_azure_networking/</link>
+      <pubDate>Sun, 08 Jan 2023 20:07:36 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_01_09_introduction_azure_networking/</guid>
+      <description>&lt;p&gt;As a developer who dealt with the cloud, either to create a virtual machine, or to deploy a website that connect to a database, then most probabely you had to deal even in short with a private network.&#xA;And most of us developers don&amp;rsquo;t know a lot about networking, because it is either the job of dev-ops or system administrator. But on the cloud you find that you have to take some decisions related to the networking.&#xA;This post is an introduction for developers who know very little about the cloud, and will cover enough information to help you understand how to take better decisions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SPA routing and how to handle it with Azure Static Web app.</title>
+      <link>http://localhost:1313/post/2023_01_08_azure_static_webapp_routing/</link>
+      <pubDate>Sun, 08 Jan 2023 19:58:31 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_01_08_azure_static_webapp_routing/</guid>
+      <description>&lt;p&gt;If you built a SPA application using one of the modern SPA frameworks like React, Vue, Angular&amp;hellip;, then you must be using their router to define your client side routing.&lt;br&gt;&#xA;But you need to make a small adjustment on the server that serve your static application in order to deal with client routing gracefully, and this small adjustment is to tell the server to have a fall back on any route that is not recognized by the server to the root of the application.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Calling HTTP API and Socket Exhaustion problem</title>
+      <link>http://localhost:1313/post/2023_01_08_http_and_socket_exhaustion/</link>
+      <pubDate>Sun, 08 Jan 2023 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2023_01_08_http_and_socket_exhaustion/</guid>
+      <description>&lt;p&gt;You definitely had to write code to communicate to an API service. Regardless of the language you use, or the framework you use, there is a two major problems when you want to do lots of calls. They are:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Socket Exhaustion&lt;/li&gt;&#xA;&lt;li&gt;DNS Rotation&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;I am going to use C# and ASP.NET as an example and show you what .NET world has a solution for that, but there are solutions in every language and framework.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deploy A Single Page Application to Azure Static Webapp using TeamCity, Jenkins or any CI, or command line</title>
+      <link>http://localhost:1313/post/2023_01_03_azure_static_webapp_deployment/</link>
+      <pubDate>Tue, 03 Jan 2023 19:56:30 -0700</pubDate>
+      <guid>http://localhost:1313/post/2023_01_03_azure_static_webapp_deployment/</guid>
+      <description>&lt;p&gt;I was trying to setup a deployment for an SPA application to an Azure Static Web app using TeamCity, but most of the tutorials I found was doing the deployment through CI/CD of Github&amp;rsquo;s Actions by monitoring a specific branch of a Github repository and deploy automatically whenever we check in into that branch, or the other alternative is using Azure DevOps pipeline.&#xA;But what if we don&amp;rsquo;t want to use neither, and instead we need to do it on demand from TeamCity, or any other CI/CD tool?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Take your development environment anywhere and on any machine with Dev Containers</title>
+      <link>http://localhost:1313/post/2022_12_29_devcontainer/</link>
+      <pubDate>Thu, 29 Dec 2022 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_29_devcontainer/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://containers.dev/&#34;&gt;Dev containers&lt;/a&gt; provides a fantastic way to onboard a new developer up and running in matter of just clone the git repository.&lt;/p&gt;&#xA;&lt;p&gt;Dev containers allow you to create a docker container that will host all the development tools and libraries you use in your projects, and run it inside the container, and if you have an editor compatible then you can make the IDE connect to the containers and you can run or debug your code inside the containers.  And even if you don&amp;rsquo;t have a compatible IDE, then you can run it inside &lt;a href=&#34;https://github.com/features/codespaces&#34;&gt;github&amp;rsquo;s codespaces&lt;/a&gt;, which is compatible with Dev container.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Prepare .NET core Microservice to be monitored by Kubernetes</title>
+      <link>http://localhost:1313/post/2022-12-28_prepare_aspnet_api_monitored_by_k8s/</link>
+      <pubDate>Tue, 27 Dec 2022 19:47:05 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022-12-28_prepare_aspnet_api_monitored_by_k8s/</guid>
+      <description>&lt;h2 id=&#34;kubernetes-monitoring&#34;&gt;Kubernetes Monitoring:&lt;/h2&gt;&#xA;&lt;p&gt;Kubernetes monitors the deployed microservices and check if any failure or a deadlock that makes the service not responding in order to restart the hosting container.&lt;br&gt;&#xA;Kubernetes achieve this by calling three different probes that determine the status of the container/pod. The three probes are:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;liveness&lt;/strong&gt;: which monitor any deadlock, or the service is down, and Kubernetes will remove the dead container and restart another one.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;startup&lt;/strong&gt;: Your service might need time at startup to wait for all its dependencies to be ready. Your service will implement this probe to tell Kubernetes that your service is ready or not to receive calls.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;readiness&lt;/strong&gt;: Will tell if your service is ready or not. it is different from liveness that Kubernetes won&amp;rsquo;t restart a new container, but just remove it from the load balancer.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;We create on our microservices three end points that correspond to the three Kubernetes probes, and define it in the deployment config file.&lt;br&gt;&#xA;As an example:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to fix common error using Azure Kubernetes AKS from WSL2</title>
+      <link>http://localhost:1313/post/2022_12_27_fix_common_error_kubernets_wsl2/</link>
+      <pubDate>Tue, 27 Dec 2022 19:43:59 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_27_fix_common_error_kubernets_wsl2/</guid>
+      <description>&lt;p&gt;When you use Kubernetes CLI tool: &lt;code&gt;kubectl&lt;/code&gt; that is installed while you installed Docker Desktop for Windows, there is a small glitch that it will fail the &lt;code&gt;kubectl&lt;/code&gt; commands, because of Kubeconfig file.&lt;/p&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s supposed you want to create a new cluster on AKS, as follows:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az aks create --resource-group MyResourceGropu --name MyMicroserviceCluster --node-count &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt; --enable-addons http_application_routing --generate-ssh-keys&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And then you need to set that new cluster as your default cluster to work on, so you use&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Some thoughts about ASP.NET Minimal API and Minimal Hosting Model</title>
+      <link>http://localhost:1313/post/2022_12_19_aspnet_minimal_api/</link>
+      <pubDate>Mon, 19 Dec 2022 19:15:28 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_12_19_aspnet_minimal_api/</guid>
+      <description>&lt;h2 id=&#34;why-this-post&#34;&gt;Why this post?&lt;/h2&gt;&#xA;&lt;p&gt;ASP.NET 6&amp;rsquo;s minimal hosting model made me compare it to ASP.NET 2 and wonder if Microsoft is going back to some old concepts. I was curious about the potential benefit of migration, so I intend to explain and compare ASP.NET 6, 5 and 2.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-new-webapplication-builder-and-some-history-of-aspnet&#34;&gt;The new &lt;strong&gt;WebApplication&lt;/strong&gt; builder and some history of ASP.NET:&lt;/h2&gt;&#xA;&lt;p&gt;Let us generate a new webapi application in .net 6 using webapi template:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dotnet new webapi -n tutorial.webapi&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You will see that we only have one file &lt;strong&gt;&lt;code&gt;program.cs&lt;/code&gt;&lt;/strong&gt;, and there is no more &lt;strong&gt;&lt;code&gt;startup.cs&lt;/code&gt;&lt;/strong&gt; and the code as follows:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Secret Manager for Configuration in .NET</title>
+      <link>http://localhost:1313/post/2022_11_28_use_secret_manager_in_dotnet/</link>
+      <pubDate>Mon, 28 Nov 2022 19:41:04 -0700</pubDate>
+      <guid>http://localhost:1313/post/2022_11_28_use_secret_manager_in_dotnet/</guid>
+      <description>&lt;p&gt;It is critical not to store passwords or API keys in our code.&lt;br&gt;&#xA;For all environments for the development process: (QA, UAT, Pre-Production, and Production), it is easier to place it in a safe place (Azure Key Vault for example), and access it during deployment.&lt;br&gt;&#xA;For developer machines, we can use &lt;code&gt;Secret Manager&lt;/code&gt;, or sometimes called &lt;code&gt;User Secrets&lt;/code&gt;, which has a built-in support in &lt;code&gt;ASP.NET&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;h2 id=&#34;enable-secret-storage&#34;&gt;Enable Secret Storage:&lt;/h2&gt;&#xA;&lt;p&gt;In the project you want to add a secret run this command:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>No More JavaScript Transpiler</title>
+      <link>http://localhost:1313/post/2020_12_23_no_more_js_transpiler/</link>
+      <pubDate>Wed, 23 Dec 2020 16:02:54 -0700</pubDate>
+      <guid>http://localhost:1313/post/2020_12_23_no_more_js_transpiler/</guid>
+      <description>&lt;p&gt;With modern browsers supporting ES6 modules, and Edge is adopting Chromium which align the major browsers to use latest EcmaScript features, we don&amp;rsquo;t need to use transpilers like Webpack or Gulp.&lt;br&gt;&#xA;This will make it easier on many areas, and enhance the performance of our applications.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Memoization in Python and JavaScript</title>
+      <link>http://localhost:1313/post/2020_09_20_memoization_python_javascript/</link>
+      <pubDate>Sun, 20 Sep 2020 09:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020_09_20_memoization_python_javascript/</guid>
+      <description>&lt;p&gt;Memoization is a technique that is used a lot in Dynamic Programming and in general to speed up algorithms.&lt;br&gt;&#xA;Memoization is the same as caching but in functional programming. The Caching mechanism will store the data into a cache store, and that data can be from anywhere (HTTP page, REST call, &amp;hellip; etc) , where memoization is specific to cache the results of a function, and it create and maintain the store inside the function itself (so the function will be pure function) and send the store as a parameter into the function arguments.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Regular expression: Extract HTML Links</title>
+      <link>http://localhost:1313/post/2020_09_11_regular_expression_extract_html_links/</link>
+      <pubDate>Fri, 11 Sep 2020 09:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020_09_11_regular_expression_extract_html_links/</guid>
+      <description>&lt;p&gt;Explain advanced concepts of Regular Expressions through practical recipes:&lt;br&gt;&#xA;In this recipe we are going to cover:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Negated Character class&lt;/li&gt;&#xA;&lt;li&gt;Non-capturing group&lt;/li&gt;&#xA;&lt;li&gt;Non-Greedy quantifier.&lt;/li&gt;&#xA;&lt;li&gt;Python&amp;rsquo;s &lt;code&gt;findall&lt;/code&gt;, and JavaScript&amp;rsquo;s &lt;code&gt;exec&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Regular expression: Extract Domain Names</title>
+      <link>http://localhost:1313/post/2020_05_08_regular_expression_extract_domain_names/</link>
+      <pubDate>Fri, 08 May 2020 09:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020_05_08_regular_expression_extract_domain_names/</guid>
+      <description>&lt;p&gt;Explain advanced concepts of Regular Expressions through practical recipes:&lt;br&gt;&#xA;In this recipe we are going to cover:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Anchors&lt;/li&gt;&#xA;&lt;li&gt;Non-capturing group&lt;/li&gt;&#xA;&lt;li&gt;Python&amp;rsquo;s &lt;code&gt;findall&lt;/code&gt;, and JavaScript&amp;rsquo;s &lt;code&gt;exec&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Regular expression: Extract Comments From Code</title>
+      <link>http://localhost:1313/post/2020_05_07_regular_expression_extract_comments_from_code/</link>
+      <pubDate>Thu, 07 May 2020 09:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020_05_07_regular_expression_extract_comments_from_code/</guid>
+      <description>&lt;p&gt;Explain advanced concepts of Regular Expressions through practical receipes:&lt;br&gt;&#xA;In this recipe we are going to cover:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Capturing Group&lt;/li&gt;&#xA;&lt;li&gt;Negated Character Class&lt;/li&gt;&#xA;&lt;li&gt;Greedy / non-greedy quantifier.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Advanced Regular Expression Recipes - Introduction.</title>
+      <link>http://localhost:1313/post/2020_05_06_advanced_regular_expression_by_examples/</link>
+      <pubDate>Wed, 06 May 2020 09:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020_05_06_advanced_regular_expression_by_examples/</guid>
+      <description>&lt;p&gt;Regular expressions are implemented by many languages, and they can be used for different purposes. Mainly they are used for text processing, as well they are important tools to write an efficient algorithms, and as well they can be used by data science specially in cleaning and scrapping the data to prepare it for modeling.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Advanced HTTP</title>
+      <link>http://localhost:1313/post/2017_09_26_advanced_https/</link>
+      <pubDate>Tue, 26 Sep 2017 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2017_09_26_advanced_https/</guid>
+      <description>&lt;p&gt;Adding an SSL Certificate and enabling HTTPS on your web site is not the end of the road for securing your website, and securing the communication to your website.&lt;br&gt;&#xA;It is just the start, and you need to do more steps related to HTTPS to guarantee your site safety, and your visitor safety.&lt;br&gt;&#xA;In this post I am going to describe:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;TLS and its algorithms in more depth.&lt;/li&gt;&#xA;&lt;li&gt;Insecure protocols, and algorithm.&lt;/li&gt;&#xA;&lt;li&gt;Best algorithm combination.&lt;/li&gt;&#xA;&lt;li&gt;Redirect from HTTP using HSTS.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If you want to learn more about HTTPS and its basic concepts, I wrote two posts about:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Build emails with attachments using SMTP, MIME standard (AWS SES Case)</title>
+      <link>http://localhost:1313/post/2016_12_08_send_email_with_attachments_using_aws_ses/</link>
+      <pubDate>Thu, 08 Dec 2016 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2016_12_08_send_email_with_attachments_using_aws_ses/</guid>
+      <description>&lt;p&gt;To send an email with AWS SES service, there are two options:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Connecting directly to the AWS SMTP server with SMTP protocols.&lt;/li&gt;&#xA;&lt;li&gt;Or call AWS API over HTTPS.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The SMTP is easier, but then you have to open SMTP ports (587 or 25 usually).&lt;/p&gt;&#xA;&lt;h2 id=&#34;using-aws-ses-api&#34;&gt;Using AWS SES API:&lt;/h2&gt;&#xA;&lt;p&gt;AWS SES API has two options to send emails as described in the documentation:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Send simple text only formatted email.&lt;/li&gt;&#xA;&lt;li&gt;Send email with attachments as &lt;strong&gt;raw&lt;/strong&gt; formatted email.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;If you are sending text-only email, then your life is easy, and the API is simple straight forward.&lt;br&gt;&#xA;But sending email with attachments is not going to be straightforward, and I am going to describe the process here.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Token Based Authentication and JWT.</title>
+      <link>http://localhost:1313/post/2016_04_29_token_based_authentication_jwt/</link>
+      <pubDate>Fri, 29 Apr 2016 12:41:54 -0600</pubDate>
+      <guid>http://localhost:1313/post/2016_04_29_token_based_authentication_jwt/</guid>
+      <description>&lt;p&gt;HTTP protocol specified only two standard authentication mechanisms, which are implemented in every browser, the [HTTP basic authentication]({% post_url 2016-03-31-web-security-basic-authentication %}), and the Digest authentication which is obsolete now because it is not secure anymore.&lt;br&gt;&#xA;Because they are limited and work only on user name/password idea, the development communities in every web development platform came up with their better customized solutions.&lt;br&gt;&#xA;JWT is one of the most promising and smart authentication ideas that is taking famous recently.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Making sense of SSL, RSA, X509 and CSR</title>
+      <link>http://localhost:1313/post/2016_04_18_making_sense_of_ssl_rsa_x509_and_csr/</link>
+      <pubDate>Mon, 18 Apr 2016 23:42:00 -0600</pubDate>
+      <guid>http://localhost:1313/post/2016_04_18_making_sense_of_ssl_rsa_x509_and_csr/</guid>
+      <description>&lt;p&gt;This is the second part of learning about SSL/TLS.&lt;br&gt;&#xA;&lt;a href=&#34;https://www.ghassan.page/posts/2016_03_11_secure_your_application_with_ssl&#34;&gt;The first part was how to protect the site with SSL&lt;/a&gt;.&lt;br&gt;&#xA;This part is about explaining more the terms, technologies, protocols, standards used in SSL.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-ssltls&#34;&gt;What is SSL/TLS:&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;SSL&lt;/code&gt; is the standard protocol to secure the communication between a web server and a browser, by creating an encrypted link between the two.&lt;br&gt;&#xA;&lt;code&gt;SSL&lt;/code&gt; last version was 3.0, and TLS  succeeds SSL, and become the new standard. But still some components of the protocols have the name SSL, like SSL certificate for example, so when you see the name SSL it most probably means the new TLS, because SSL is rarely used any more.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Secure your web site with SSL/TLS</title>
+      <link>http://localhost:1313/post/2016_03_11_secure_your_application_with_ssl/</link>
+      <pubDate>Fri, 11 Mar 2016 08:59:00 -0700</pubDate>
+      <guid>http://localhost:1313/post/2016_03_11_secure_your_application_with_ssl/</guid>
+      <description>&lt;p&gt;SSL (Secure Sockets Layer) and its successor, TLS (Transport Layer Security), are cryptographic protocols that secure internet communication by encrypting data between a client (like a browser) and a server.&lt;/p&gt;&#xA;&lt;h1 id=&#34;how-ssltls-works&#34;&gt;How SSL/TLS works?&lt;/h1&gt;&#xA;&lt;p&gt;SSL/TLS secure communication by:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Encryption: Ensures that data transmitted between the client and server cannot be read by third parties.&lt;/li&gt;&#xA;&lt;li&gt;Authentication: Verifies the identity of the server (and sometimes the client), establishing trust.&lt;/li&gt;&#xA;&lt;li&gt;Data Integrity: Guarantees that data has not been altered during transmission.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;how-to-do-it&#34;&gt;How to do it?&lt;/h1&gt;&#xA;&lt;p&gt;In order to secure the web site with SSL, you first need to buy a certificate.&lt;br&gt;&#xA;A certificate is a document that your website will send back to the browsers as an &lt;strong&gt;&lt;code&gt;Official identification&lt;/code&gt;&lt;/strong&gt; for your web site, and your business.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ajax, CORS, JSONP and the battle with Same-Origin Policy</title>
+      <link>http://localhost:1313/post/2015_12_16_ajax_cors/</link>
+      <pubDate>Wed, 16 Dec 2015 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2015_12_16_ajax_cors/</guid>
+      <description>&lt;p&gt;All modern browsers have a built-in security policy called &lt;code&gt;Same-origin policy&lt;/code&gt;, which help mitigate many vulnerabilities and security flaws. This policy means the browser can only pull data from the same site.&lt;br&gt;&#xA;Same site means pages that share the scheme (http, ftp, https&amp;hellip;), and the host name and the port.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-clash-between-same-origin-policy-and-ajax&#34;&gt;The clash between Same-Origin Policy and Ajax&lt;/h2&gt;&#xA;&lt;p&gt;This policy was useful for a while to protect against XSS, but with the advance of ajax, and requesting data and resources from different domains and sites, then this policy become an obstacle.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CSS Fonts</title>
+      <link>http://localhost:1313/post/2015_11_26_css_fonts/</link>
+      <pubDate>Thu, 26 Nov 2015 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2015_11_26_css_fonts/</guid>
+      <description>&lt;p&gt;The simplist way to use different fonts in your web site is using fonts from the &amp;ldquo;Web-Safe&amp;rdquo; fonts&lt;a href=&#34;https://en.wikipedia.org/wiki/Core_fonts_for_the_Web&#34;&gt;[1]&lt;/a&gt;  &lt;a href=&#34;https://www.w3schools.com/cssref/css_websafe_fonts.php&#34;&gt;[2]&lt;/a&gt;.&lt;br&gt;&#xA;But, no impressive design will depend only on these web-safe fonts, and designers add their own preferable fonts to the web site they are building.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-to-add-your-preferable-fonts&#34;&gt;How to add your preferable fonts?&lt;/h2&gt;&#xA;&lt;p&gt;Fonts comes as files that you have to upload to the site, and then reference them in the CSS file.&lt;br&gt;&#xA;Usually font vendors provide fonts with different formats in order to be consumable by many different browsers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CSS Reset</title>
+      <link>http://localhost:1313/post/2015_11_18_css_reset/</link>
+      <pubDate>Wed, 18 Nov 2015 19:51:56 -0700</pubDate>
+      <guid>http://localhost:1313/post/2015_11_18_css_reset/</guid>
+      <description>&lt;p&gt;Every web developer had an experience where he test his web site on Chrome, IE and FireFox, to find out that the experience is a little bit different, because browsers have their own default implementation and rendering for the HTML elements.&#xA;Which means if you don&amp;rsquo;t overwrite the default implementation with your own CSS rules, then the browser will use its own implementation.&lt;br&gt;&#xA;If you are very keen on making the exact same user experience between all browsers even with the smallest details, then the community came up with a technique called &amp;ldquo;CSS Reset&amp;rdquo;.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

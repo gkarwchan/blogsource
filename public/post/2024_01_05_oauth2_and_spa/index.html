@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Ghassan&#39;s page">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://localhost:1313//img/home-bg.jpg">
+    <meta property="twitter:image" content="http://localhost:1313//img/home-bg.jpg" />
+    
+
+    
+    <meta name="title" content="How Single Page Application call a secure your API with OAuth2" />
+    <meta property="og:title" content="How Single Page Application call a secure your API with OAuth2" />
+    <meta property="twitter:title" content="How Single Page Application call a secure your API with OAuth2" />
+    
+
+    
+    <meta name="description" content="Blog by Ghassan Karwchan">
+    <meta property="og:description" content="Blog by Ghassan Karwchan" />
+    <meta property="twitter:description" content="Blog by Ghassan Karwchan" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="blog, .net, c#, programming, javascript, microservices">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>How Single Page Application call a secure your API with OAuth2 | Ghassan Karwchan blog</title>
+
+    <link rel="canonical" href="/post/2024_01_05_oauth2_and_spa/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ghassan&#39;s page</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes//">NOTES</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        <a class="tag" href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                    </div>
+                    <h1>How Single Page Application call a secure your API with OAuth2</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Ghassan&#39;s page
+                             
+                            on 
+                            Friday, January 5, 2024
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>When a public SPA needs to authenticate through OAuth 2.0, it faces a big challenge.<br>
+The challenge is you cannot store any type of secrets of credentials in your code. This is why OAuth provided a special flow to be used by SPA: Authorization Code Grant &amp; PKCE. We are going to describe this flow in details here.</p>
+<h2 id="summary-of-the-process">Summary of the process:</h2>
+<p>To describe the flow briefly, when the SPA requires to get a token it will direct the application to an Authorization Server (AS), which will use that server login page and UI, and the user will run the login process on the AS server website, then that server will return back to the original client website using a callback url passing the token to the SPA.<br>
+So the client SPA has no idea about the credentials and the client cannot intercept those credentials because the login run on Authorization Server website.</p>
+<h4 id="so-what-is-authorization-code-grant--pkce">So what is Authorization Code Grant &amp; PKCE</h4>
+<p>On SPA and mobile apps, because it is open code and can be interpreted by anyone, it is essential to not to exchange the token directly.<br>
+So, the laternative is the <code>AS</code> will return a encrypted code, hence the PKCE, and that encrypted code will be sent again by the client to get the token. And only the client that initiated the first login request will be able to call with code.<br>
+<code>PKCE</code> (pronounced &lsquo;pixy&rsquo;), provides an encryption mechanism for the communication between SPA and the <code>AS</code>.</p>
+<h2 id="how-to-configure-auth0">How to configure Auth0</h2>
+<p>Before we start writing code, we should configure our API and our SPA application on Auth0.<br>
+I am not going to show the details on how to do it in Auth0, and assume you know how to do it.</p>
+<ol>
+<li>Create an API in Auth0, and configure its audience to be something like : <code>https://myapiserver.com&quot;</code></li>
+<li>Create an SPA application and get its <code>Client Id</code>.</li>
+</ol>
+<p>From Auth0 we need two values:</p>
+<ul>
+<li>the audience you used to create the API.</li>
+<li>the Client Id for the SPA application.</li>
+</ul>
+<h2 id="details-of-the-oauth-authorization-code-flow">Details of the OAuth Authorization Code flow:</h2>
+<p>Here are the steps to achieve getting token from Authorization Code flow.</p>
+<h3 id="step-1-call-authorize-endpoint">Step 1: call authorize endpoint</h3>
+<p>The process start when the SPA application will find it needs a token to access the remote resource, so it start the process by navigating to the Authorize end point: <code>https://&lt;your-tenant-id&gt;.us.auth0.com/authorize</code> passing the following information to this end point:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span>GET /authorize?
+</span></span><span style="display:flex;"><span>response_type=code
+</span></span><span style="display:flex;"><span>&amp; client_id=&lt;client_id&gt;
+</span></span><span style="display:flex;"><span>&amp; state=&lt;state&gt;
+</span></span><span style="display:flex;"><span>&amp; scope=&lt;scope&gt;
+</span></span><span style="display:flex;"><span>&amp; redirect_uri=&lt;callback uri&gt;
+</span></span><span style="display:flex;"><span>&amp; resource=&lt;API identifier&gt;
+</span></span><span style="display:flex;"><span>&amp; code_challenge=&lt;PKCE code_challenge&gt;
+</span></span><span style="display:flex;"><span>&amp; code_challenge_method=S256 HTTP/1.1
+</span></span><span style="display:flex;"><span>Host: authorizationserver.com
+</span></span></code></pre></div><p>The parameters are as follows:</p>
+<ul>
+<li>client_id: it is the application (SPA) you create on Auth0.</li>
+<li>audience: is the audience used in configuring API in Auth0. Other OAuth providers use the term <code>resource</code> instead of audience, but it play the same function.</li>
+<li>redirect_uri: the callback URL to your application. This call back should be one of the allowed url registered in your SPA Auth0 application.</li>
+<li>scope: this setting could be use to define the scope or permissions requested by the client. In OpenID Connect it can be only the value <code>openid profile</code>, and in OAuth 2.0 usually it is the list: <code>openid profile email offline_access</code>.</li>
+<li>response_type: should be &ldquo;code&rdquo; because Authorization Code flow * response_mode: should be &ldquo;query&rdquo; which means the code will return as query parameter.</li>
+<li>code_challenge: a value generated by PKCE code verifier to protect the code.
+code_challenge_method: S256, it is the recommended encryption to use.</li>
+<li>state: is an encrypted auto-generated string used to track calls during authorization process.</li>
+</ul>
+<h3 id="step-2">Step 2:</h3>
+<p>The Authorization Server find there is no valid token for this session, so it redirect it to its own login UI page:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span>GET /login?state=&lt;state&gt;
+</span></span></code></pre></div><h3 id="step-3">Step 3:</h3>
+<p>You provide your credentials in the login screen, and the Authorization server might take you to a consent page.<br>
+After <code>Submit</code> login, the page will do a post call to login as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span>POST /login?state=&lt;state&gt;
+</span></span></code></pre></div><p>Inside the post there is a form of the credentials:</p>
+<ul>
+<li>username</li>
+<li>password</li>
+</ul>
+<h3 id="step-4">Step 4:</h3>
+<p>The Authorization server will call back your SPA with the callback url you provided with the code as query parameter</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#ff79c6">HTTP</span><span style="color:#ff79c6">/</span><span style="color:#bd93f9">1.1</span> <span style="color:#bd93f9">302</span> Found
+</span></span><span style="display:flex;"><span>Location<span style="color:#ff79c6">:</span> https://clientapplication.com/callback?
+</span></span><span style="display:flex;"><span>code=&lt;authorization code&gt;
+</span></span><span style="display:flex;"><span>&amp; state=&lt;state&gt;
+</span></span></code></pre></div><h3 id="last-step-step-5-generate-token">Last Step Step 5: generate token</h3>
+<p>Last step is you call the Authorization Server <code>token</code> endpoint with <code>POST</code> with the authorization code that generated from pervious step:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#50fa7b">POST</span> /token <span style="color:#ff79c6">HTTP</span><span style="color:#ff79c6">/</span><span style="color:#bd93f9">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#ff79c6">:</span> &lt;auth0 tenant authorization url&gt;
+</span></span><span style="display:flex;"><span>Content-Type<span style="color:#ff79c6">:</span> application/x-www-form-urlencoded
+</span></span><span style="display:flex;"><span>grant_type=authorization_code
+</span></span><span style="display:flex;"><span>&amp; code=&lt;authorization_code&gt;
+</span></span><span style="display:flex;"><span>&amp; client_id=&lt;client id&gt;
+</span></span><span style="display:flex;"><span>&amp; code_verifier=&lt;code verifier&gt;
+</span></span><span style="display:flex;"><span>&amp; redirect_uri=&lt;callback URI&gt;
+</span></span></code></pre></div><p>The server will response with json with the token and refresh token, and maybe id_token (in case of OpenID Connect):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;access_token&#34;</span>:<span style="color:#f1fa8c">&#34;&lt;refresh token&gt;&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;token_type&#34;</span>: <span style="color:#f1fa8c">&#34;Bearer&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;expires_in&#34;</span>:&lt;token expiration&gt;,
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#34;refresh_token&#34;</span>:<span style="color:#f1fa8c">&#34;&lt;refresh_token&gt;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;id_token&#34;</span>: <span style="color:#f1fa8c">&#34;&lt;id token&gt;&#34;</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;scope&#34;</span>: <span style="color:#f1fa8c">&#34;openid profile email&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="how-to-use-auth0-js-client">How to use Auth0 JS client:</h2>
+<p>As I meantioned before, if you use an off-the-shelf authentication service, it will hide the complexity for you, and you don&rsquo;t have to work with previous http workflow.</p>
+<p>From the Auth0 JavaScript client: <a href="https://github.com/auth0/auth0-spa-js">Auth0-SPA-JS</a>.<br>
+You have to do only four steps:</p>
+<ol>
+<li>create an auth0 client:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> { createAuth0Client } from <span style="color:#f1fa8c">&#39;@auth0/auth0-spa-js&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//with async/await
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">const</span> auth0 <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> createAuth0Client({
+</span></span><span style="display:flex;"><span>  domain<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;&lt;AUTH0_DOMAIN&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>  clientId<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;&lt;AUTH0_CLIENT_ID&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>  authorizationParams<span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>    redirect_uri<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;&lt;MY_CALLBACK_URL&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><ol start="2">
+<li>call login, with will do authorize / login API call</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> auth0.loginWithRedirect();
+</span></span></code></pre></div><ol start="3">
+<li>in the redirect url, write a handler:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> redirectResult <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> auth0.handleRedirectCallback();
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">//logged in. you can get the user profile like this:
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">const</span> user <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> auth0.getUser();
+</span></span></code></pre></div><ol start="4">
+<li>get the token:<br>
+Any time you need to call an API to authenticate you can get the token</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> accessToken <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> auth0.getTokenSilently();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> fetch(<span style="color:#f1fa8c">&#39;&lt;my api url&gt;&#39;</span>, {
+</span></span><span style="display:flex;"><span>  headers<span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>    Authorization<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">`Bearer </span><span style="color:#f1fa8c">${</span>accessToken<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> data <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> result.json();
+</span></span></code></pre></div><h3 id="a-word-about-scopes">A word about scopes:</h3>
+<p>An API can define a set of permissions that can be used to divide the functionality of that API into smaller chunks. When a API&rsquo;s functionality is chunked into small permission sets, third-party apps can be built to request only the permissions that they need to perform their function. Users and administrators can know what data the app can access.<br>
+In OAuth 2.0, these types of permission sets are called scopes, and they are presented as string values.<br>
+The values can be something like this as examples:  financial:read, financial:write, admin, user:write&hellip;<br>
+For the simpler protocol OpenID Connect, it uses only three predefined scopes:</p>
+<ul>
+<li>openid: indicate the request could be used in OIDC for authentication. It will return the user ID in <code>id_token</code>, or <code>sub</code></li>
+<li>profile: return profile information like first name, last name, &hellip;</li>
+<li>email: return the email</li>
+</ul>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://localhost:1313/"><img src="/img/favicon.png" />Ghassan&#39;s page</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2023_12_8_azureappservice_ssl_certificate/" data-toggle="tooltip" data-placement="top" title="Different options to add SSL certificate to you Azure App Service">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2024_01_14_managedidentity/" data-toggle="tooltip" data-placement="top" title="Using Azure Managed Identity to skip sharing credentials">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+
+<link href="https://xxx.xxx.com/dist/Artalk.css" rel="stylesheet" />
+<script src="https://xxx.xxx.com/dist/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+    Artalk.init({
+        el: '#Comments',
+        pageKey: 'http:\/\/localhost:1313\/post\/2024_01_05_oauth2_and_spa\/',
+        pageTitle: 'How Single Page Application call a secure your API with OAuth2',
+        server: 'https:\/\/xxx.xxx.com',
+        site: 'xxx blog',
+    })
+</script>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/asp.net" title="asp.net">
+                            asp.net
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/azure" title="azure">
+                            azure
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/container" title="container">
+                            container
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/css" title="css">
+                            css
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dev-tools" title="dev tools">
+                            dev tools
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                            devops
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/networking" title="networking">
+                            networking
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/performance" title="performance">
+                            performance
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Ghassan&#39;s page" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Ghassan&#39;s page 2025
+                    
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow" title="' + t + '">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>
